@@ -5,7 +5,6 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import AccountPage from 'routes/AccountPage';
 import Auth from 'routes/Auth';
 import Home from 'routes/Home';
-import Nav from './Nav';
 
 export default function AppRouter({ isLoggedIn, userObject }) {
 	return (
@@ -15,12 +14,10 @@ export default function AppRouter({ isLoggedIn, userObject }) {
 					<Auth isLoggedIn={isLoggedIn} />
 				</Route>
 				<Route exact path="/home">
-					<Nav userObject={userObject} />
 					<Home isLoggedIn={isLoggedIn} userObject={userObject} />
 				</Route>
 				<Route path="/user/:username">
-					<Nav userObject={userObject} />
-					<AccountPage isLoggedIn={isLoggedIn} />
+					<AccountPage isLoggedIn={isLoggedIn} userObject={userObject} />
 				</Route>
 			</Switch>
 		</Router>

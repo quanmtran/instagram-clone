@@ -7,6 +7,7 @@ import { collection, query, onSnapshot, orderBy } from 'firebase/firestore';
 // Import components
 import Tweet from 'components/Tweet';
 import TweetInput from 'components/TweetInput';
+import Nav from 'components/Nav';
 
 export default function Home({ isLoggedIn, userObject }) {
 	const [tweetObjects, setTweetObjects] = useState([]);
@@ -30,6 +31,7 @@ export default function Home({ isLoggedIn, userObject }) {
 
 	return isLoggedIn ? (
 		<>
+			<Nav userObject={userObject} />
 			<img src={userObject.photoURL} height="20px" />
 			{/* <div style={{ backgroundImage: userObject.photURL }}></div> */}
 			<TweetInput userObject={userObject} tweetCollection={tweetCollection} />
