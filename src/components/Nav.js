@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { authService } from 'fbase';
 import { signOut } from 'firebase/auth';
 
-export default function Nav({ userObject }) {
+export default function Nav({ currentUserObject }) {
 	const handleSignOut = () => {
 		signOut(authService);
 	};
@@ -15,7 +15,7 @@ export default function Nav({ userObject }) {
 					<Link to="/">Home</Link>
 				</li>
 				<li>
-					<Link to={`/user/${userObject.displayName}`}>Profile</Link>
+					<Link to={`/user/${currentUserObject.username}`}>Profile</Link>
 				</li>
 			</ul>
 			<button onClick={handleSignOut}>Log Out</button>

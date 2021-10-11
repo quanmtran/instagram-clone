@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import { databaseService } from 'fbase';
+import { postCollection } from 'fbase';
 
-import { collection, query, onSnapshot, orderBy } from 'firebase/firestore';
+import { query, onSnapshot, orderBy } from 'firebase/firestore';
 
 // Import components
-import Tweet from 'components/Tweet';
-import TweetInput from 'components/TweetInput';
+import Post from 'components/Post';
+import PostInput from 'components/PostInput';
 import Nav from 'components/Nav';
 
-export default function Home({ isLoggedIn, userObject }) {
-	const [tweetObjects, setTweetObjects] = useState([]);
-	const tweetCollection = collection(databaseService, 'tweets');
+export default function Home({ isLoggedIn, currentUserObject }) {
+	const [postObjects, setPostObjects] = useState([]);
 
+	// Display all posts on mount
 	useEffect(() => {
-		const q = query(tweetCollection, orderBy('tweetedAt', 'desc'));
+		const q = query(postCollection, orderBy('postedAt', 'desc'));
 		const unsubscribe = onSnapshot(q, (querySnapshot) => {
-			const tweets = querySnapshot.docs.map((doc) => ({
+			const posts = querySnapshot.docs.map((doc) => ({
 				id: doc.id,
 				...doc.data(),
 			}));
-
-			setTweetObjects(tweets);
+			setPostObjects(posts);
 		});
 
 		return () => {
@@ -31,12 +30,12 @@ export default function Home({ isLoggedIn, userObject }) {
 
 	return isLoggedIn ? (
 		<>
-			<Nav userObject={userObject} />
-			<img src={userObject.photoURL} height="20px" />
+			<Nav currentUserObject={currentUserObject} />
+			{/* <img src={userObject.photoURL} height="20px" /> */}
 			{/* <div style={{ backgroundImage: userObject.photURL }}></div> */}
-			<TweetInput userObject={userObject} tweetCollection={tweetCollection} />
-			{tweetObjects.map((tweetObject) => (
-				<Tweet key={tweetObject.id} tweetObject={tweetObject} currentUserObject={userObject} />
+			<PostInput currentUserObject={currentUserObject} postCollection={postCollection} />
+			{postObjects.map((postObject) => (
+				<Post key={postObject.id} postObject={postObject} currentUserObject={currentUserObject} />
 			))}
 		</>
 	) : (

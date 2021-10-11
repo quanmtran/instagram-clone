@@ -6,7 +6,7 @@ import AccountPage from 'routes/AccountPage';
 import Auth from 'routes/Auth';
 import Home from 'routes/Home';
 
-export default function AppRouter({ isLoggedIn, userObject }) {
+export default function AppRouter({ isLoggedIn, currentUserObject }) {
 	return (
 		<Router>
 			<Switch>
@@ -14,10 +14,10 @@ export default function AppRouter({ isLoggedIn, userObject }) {
 					<Auth isLoggedIn={isLoggedIn} />
 				</Route>
 				<Route exact path="/home">
-					<Home isLoggedIn={isLoggedIn} userObject={userObject} />
+					<Home isLoggedIn={isLoggedIn} currentUserObject={currentUserObject} />
 				</Route>
 				<Route path="/user/:username">
-					<AccountPage isLoggedIn={isLoggedIn} userObject={userObject} />
+					<AccountPage isLoggedIn={isLoggedIn} currentUserObject={currentUserObject} />
 				</Route>
 			</Switch>
 		</Router>

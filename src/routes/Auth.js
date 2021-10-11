@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import { authService, storageService } from 'fbase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { ref, getDownloadURL } from 'firebase/storage';
+import { authService, userCollection } from 'fbase';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 import { Redirect } from 'react-router-dom';
 
 export default function Auth({ isLoggedIn }) {
-	const [loginState, setLoginState] = useState(true);
+	// States
+	const [isLoginState, setIsLoginState] = useState(true);
 	const [emailInput, setEmailInput] = useState('');
 	const [passwordInput, setPasswordInput] = useState('');
-	const [errorMessage, setErrorMessage] = useState('');
 	const [usernameInput, setUsernameInput] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
 
 	const newAccountToggle = () => {
-		setLoginState((prev) => !prev);
+		setIsLoginState((prev) => !prev);
 	};
 
 	const handleInputChange = (e) => {
@@ -37,15 +38,19 @@ export default function Auth({ isLoggedIn }) {
 		e.preventDefault();
 
 		try {
-			if (loginState) {
+			if (isLoginState) {
 				await signInWithEmailAndPassword(authService, emailInput, passwordInput);
 			} else {
 				const userCredential = await createUserWithEmailAndPassword(authService, emailInput, passwordInput);
-				const DEFAULT_PROFILE_PIC_URL = await getDownloadURL(ref(storageService, 'default-profile-pic.jpg'));
-				await updateProfile(userCredential.user, {
-					displayName: usernameInput,
-					photoURL: DEFAULT_PROFILE_PIC_URL,
-				});
+
+				const userId = userCredential.user.uid;
+				const userObject = {
+					userId: userId,
+					username: usernameInput,
+					profilePictureUrl: '',
+				};
+
+				await setDoc(doc(userCollection, userId), userObject);
 			}
 		} catch (error) {
 			setErrorMessage(error.message);
@@ -69,7 +74,7 @@ export default function Auth({ isLoggedIn }) {
 						<input name="password" type="password" value={passwordInput} placeholder="Password" onChange={handleInputChange} required />
 					</label>
 				</div>
-				{!loginState && (
+				{!isLoginState && (
 					<div>
 						<label>
 							Username
@@ -79,11 +84,11 @@ export default function Auth({ isLoggedIn }) {
 				)}
 
 				<div>
-					<input type="submit" value={loginState ? 'Log in' : 'Sign up'} />
+					<input type="submit" value={isLoginState ? 'Log in' : 'Sign up'} />
 					{errorMessage}
 				</div>
 			</form>
-			<button onClick={newAccountToggle}>{loginState ? 'I am new here' : 'I already have an account'}</button>
+			<button onClick={newAccountToggle}>{isLoginState ? 'I am new here' : 'I already have an account'}</button>
 		</div>
 	);
 }

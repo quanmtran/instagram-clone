@@ -1,39 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { databaseService } from 'fbase';
+import { postCollection, userCollection } from 'fbase';
 import { useParams, Redirect } from 'react-router-dom';
-import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestore';
+import { query, getDocs, where, orderBy, onSnapshot } from 'firebase/firestore';
 
 // Import components
-import Tweet from 'components/Tweet';
+import Post from 'components/Post';
 import Nav from 'components/Nav';
 
-export default function AccountPage({ isLoggedIn, userObject }) {
-	let { username } = useParams();
-	const [tweetObjects, setTweetObjects] = useState([]);
-	const tweetCollection = collection(databaseService, 'tweets');
+export default function AccountPage({ isLoggedIn, currentUserObject }) {
+	// States
+	const [postObjects, setPostObjects] = useState([]);
 
-	useEffect(() => {
-		const q = query(tweetCollection, where('ownerUsername', '==', username), orderBy('tweetedAt', 'desc'));
+	// Constants
+	const currentUsername = useParams().username;
+
+	useEffect(async () => {
+		const currentUserId = await getUserId();
+		const q = query(postCollection, where('ownerUserId', '==', currentUserId), orderBy('postedAt', 'desc'));
 		const unsubscribe = onSnapshot(q, (querySnapshot) => {
-			const tweets = querySnapshot.docs.map((doc) => ({
+			const posts = querySnapshot.docs.map((doc) => ({
 				id: doc.id,
 				...doc.data(),
 			}));
 
-			setTweetObjects(tweets);
+			setPostObjects(posts);
 		});
 
 		return () => {
 			unsubscribe();
 		};
-	}, [username]);
+	}, [currentUsername]);
+	
+	const getUserId = async () => {
+		try {
+			const q = query(userCollection, where('username', '==', currentUsername));
+			const querySnapshot = await getDocs(q);
+
+			return querySnapshot.docs[0].data().userId;
+		} catch (error) {
+			console.log(error);
+			return '';
+		}
+	};
 
 	return isLoggedIn ? (
 		<>
-			<Nav userObject={userObject} />
-			<h1>@{username}</h1>
-			{tweetObjects.map((tweetObject) => (
-				<Tweet key={tweetObject.id} tweetObject={tweetObject} currentUserObject={userObject} />
+			<Nav currentUserObject={currentUserObject} />
+			<h1>{currentUsername}</h1>
+			{postObjects.map((postObject) => (
+				<Post key={postObject.id} postObject={postObject} currentUserObject={currentUserObject} />
 			))}
 		</>
 	) : (
