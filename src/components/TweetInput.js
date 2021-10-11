@@ -48,6 +48,7 @@ export default function TweetInput({ userObject, tweetCollection }) {
 				ownerUsername: userObject.displayName,
 				ownerProfilePicURL: userObject.photoURL,
 				imgId: imgId,
+				likedByUserIds: [],
 			};
 
 			await addDoc(tweetCollection, tweetObject);

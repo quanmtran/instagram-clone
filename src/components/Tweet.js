@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { doc, deleteDoc, setDoc } from 'firebase/firestore';
+import { doc, deleteDoc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
 import { databaseService, storageService } from 'fbase';
 import { ref, getDownloadURL, deleteObject } from 'firebase/storage';
 
-export default function Tweet({ tweetObject, isOwner }) {
+export default function Tweet({ tweetObject, currentUserObject }) {
 	const [firebaseImgUrl, setFirebaseImgUrl] = useState('');
 	const [isEditting, setIsEditting] = useState(false);
 	const [editText, setEditText] = useState(tweetObject.text);
 	const userStorageRef = ref(storageService, `${tweetObject.ownerId}`);
+	const tweetDocRef = doc(databaseService, 'tweets', tweetObject.id);
+	const likeCount = tweetObject.likedByUserIds.length;
+	const tweetLikedArray = tweetObject.likedByUserIds;
+	const currentUserId = currentUserObject.uid;
+	const hasLiked = tweetLikedArray.includes(currentUserId);
 
 	const imgId = tweetObject.imgId;
 
@@ -18,13 +23,9 @@ export default function Tweet({ tweetObject, isOwner }) {
 	const handleEditSubmit = async (e) => {
 		e.preventDefault();
 
-		await setDoc(
-			doc(databaseService, 'tweets', tweetObject.id),
-			{
-				text: editText,
-			},
-			{ merge: true }
-		);
+		await updateDoc(tweetDocRef, {
+			text: editText,
+		});
 
 		setIsEditting(false);
 	};
@@ -52,6 +53,22 @@ export default function Tweet({ tweetObject, isOwner }) {
 			} catch (error) {
 				console.log(error);
 			}
+		}
+	};
+
+	const handleLikeClick = async () => {
+		try {
+			if (hasLiked) {
+				await updateDoc(tweetDocRef, {
+					likedByUserIds: arrayRemove(currentUserId),
+				});
+			} else {
+				await updateDoc(tweetDocRef, {
+					likedByUserIds: arrayUnion(currentUserId),
+				});
+			}
+		} catch (error) {
+			console.log(error);
 		}
 	};
 
@@ -94,15 +111,18 @@ export default function Tweet({ tweetObject, isOwner }) {
 					<div>
 						<img src={tweetObject.ownerProfilePicURL} height="20px" /> @{tweetObject.ownerUsername} - <span>{getTimeAgo(tweetObject.tweetedAt)}</span>
 					</div>
-
-					<div>{tweetObject.text}</div>
-					{firebaseImgUrl && <img src={firebaseImgUrl} height="100px" />}
-					{isOwner && (
+					{currentUserObject.uid === tweetObject.ownerId && (
 						<div>
 							<button onClick={editToggle}>Edit</button>
 							<button onClick={handleDelete}>Delete</button>
 						</div>
 					)}
+					<div>{tweetObject.text}</div>
+					{firebaseImgUrl && <img src={firebaseImgUrl} height="100px" />}
+					<div>
+						{`${likeCount} like${likeCount > 1 ? 's' : ''}`}
+						<button onClick={handleLikeClick}>Like{hasLiked ? 'd' : ''}</button>
+					</div>
 				</>
 			)}
 		</div>

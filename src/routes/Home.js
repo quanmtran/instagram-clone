@@ -36,7 +36,7 @@ export default function Home({ isLoggedIn, userObject }) {
 			{/* <div style={{ backgroundImage: userObject.photURL }}></div> */}
 			<TweetInput userObject={userObject} tweetCollection={tweetCollection} />
 			{tweetObjects.map((tweetObject) => (
-				<Tweet key={tweetObject.id} tweetObject={tweetObject} isOwner={userObject.uid === tweetObject.ownerId} />
+				<Tweet key={tweetObject.id} tweetObject={tweetObject} currentUserObject={userObject} />
 			))}
 		</>
 	) : (
