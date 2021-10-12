@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { authService, userCollection } from 'fbase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
+import { getDownloadURL } from 'firebase/storage';
 import { Redirect } from 'react-router-dom';
 
 export default function Auth({ isLoggedIn }) {
@@ -47,7 +48,12 @@ export default function Auth({ isLoggedIn }) {
 				const userObject = {
 					userId: userId,
 					username: usernameInput,
-					profilePictureUrl: '',
+					profilePictureUrl:
+						'https://firebasestorage.googleapis.com/v0/b/instagram-clone-dcbd6.appspot.com/o/images%2Fdefault-profile-pic.jpg?alt=media&token=fa16ab95-2b26-43f4-9bea-c410bdac6623',
+					name: 'Your name',
+					bio: 'Your bio',
+					followers: [],
+					followings: [],
 				};
 
 				await setDoc(doc(userCollection, userId), userObject);

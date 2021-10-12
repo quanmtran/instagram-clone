@@ -5,14 +5,13 @@ import { postCollection } from 'fbase';
 import { query, onSnapshot, orderBy } from 'firebase/firestore';
 
 // Import components
-import Post from 'components/Post';
+import HomepagePost from 'components/HomepagePost';
 import PostInput from 'components/PostInput';
-import Nav from 'components/Nav';
+import Header from 'components/Header';
 
 export default function Home({ isLoggedIn, currentUserObject }) {
 	const [postObjects, setPostObjects] = useState([]);
 
-	// Display all posts on mount
 	useEffect(() => {
 		const q = query(postCollection, orderBy('postedAt', 'desc'));
 		const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -30,13 +29,15 @@ export default function Home({ isLoggedIn, currentUserObject }) {
 
 	return isLoggedIn ? (
 		<>
-			<Nav currentUserObject={currentUserObject} />
-			{/* <img src={userObject.photoURL} height="20px" /> */}
-			{/* <div style={{ backgroundImage: userObject.photURL }}></div> */}
-			<PostInput currentUserObject={currentUserObject} postCollection={postCollection} />
-			{postObjects.map((postObject) => (
-				<Post key={postObject.id} postObject={postObject} currentUserObject={currentUserObject} />
-			))}
+			<Header currentUserObject={currentUserObject} />
+			<div className="homepage-container">
+				<PostInput currentUserObject={currentUserObject} postCollection={postCollection} />
+				<div className="homepage-content">
+					{postObjects.map((postObject) => (
+						<HomepagePost key={postObject.id} postObject={postObject} currentUserObject={currentUserObject} />
+					))}
+				</div>
+			</div>
 		</>
 	) : (
 		<Redirect to="/" />

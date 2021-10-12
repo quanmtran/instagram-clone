@@ -46,7 +46,8 @@ export default function PostInput({ currentUserObject, postCollection }) {
 					ownerUserId: currentUserObject.userId,
 					imgId: imgId,
 					imgUrl: imgFirebaseUrl,
-					likedByUserIds: [],
+					likedBy: [],
+					comments: [],
 				};
 
 				await addDoc(postCollection, postObject);

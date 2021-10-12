@@ -1,0 +1,396 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap');
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+// Colors
+$white: white;
+$blue: rgb(0, 132, 255);
+$grey: rgb(120, 120, 120);
+$light-grey: rgba(0, 0, 0, 0.2);
+$dark-grey: rgb(60, 60, 60);
+
+// Constants
+$header-height: 50px;
+$homepage-container-max-width: 600px;
+$user-page-container-max-width: 950px;
+$margin-left-right: 20px;
+$bio-padding-left: 20px;
+
+@mixin border-bottom {
+	border-bottom: 1px solid $light-grey;
+}
+
+@mixin flex-box($direction, $justify, $align, $gap) {
+	display: flex;
+	flex-direction: $direction;
+	justify-content: $justify;
+	align-items: $align;
+	gap: $gap;
+}
+
+i.material-icons {
+	font-size: 29px;
+}
+
+a {
+	text-decoration: none;
+
+	&:link,
+	&:visited,
+	&:hover,
+	&:active {
+		color: inherit;
+	}
+}
+
+#root {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: $white;
+	color: $dark-grey;
+	min-height: 100vh;
+	@include flex-box(column, flex-start, center, 0);
+	padding-bottom: 50px;
+}
+
+header {
+	@include border-bottom();
+	@include flex-box(row, center, center, 0);
+	position: fixed;
+	height: $header-height;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+	background-color: $white;
+
+	.header-container {
+		@include flex-box(row, space-between, center, 0);
+		width: 100%;
+		max-width: $user-page-container-max-width;
+		margin: 0 $margin-left-right;
+
+		.insta-logo {
+			font-family: 'Lobster Two', cursive;
+			font-size: 1.7rem;
+			font-weight: 600;
+		}
+
+		.nav-container-header {
+			@include flex-box(row, space-between, center, 0);
+			width: 200px;
+
+			.profile-picture {
+				width: 24px;
+				aspect-ratio: 1/1;
+				background-position: center;
+				background-size: cover;
+				background-repeat: no-repeat;
+				border-radius: 50%;
+			}
+		}
+	}
+}
+
+// Homepage
+.homepage-container {
+	margin-top: $header-height;
+	width: 100%;
+	max-width: $homepage-container-max-width;
+
+	.homepage-content {
+		@include flex-box(column, flex-start, stretch, 20px);
+
+		.homepage-post {
+			border: 1px solid $light-grey;
+			border-radius: 0.3em;
+			font-size: 0.9rem;
+			@include flex-box(column, stretch, stretch, 10px);
+			padding: 10px 0;
+
+			.username {
+				font-weight: 700;
+			}
+
+			& > div:not(.post-pic) {
+				margin: 0 10px;
+			}
+
+			.post-header {
+				@include flex-box(row, flex-start, center, 10px);
+
+				.profile-pic {
+					width: 30px;
+					aspect-ratio: 1/1;
+					background-position: center;
+					background-size: cover;
+					background-repeat: no-repeat;
+					border-radius: 50%;
+				}
+			}
+
+			.post-pic {
+				img {
+					width: 100%;
+				}
+			}
+
+			.post-interactive-btns {
+			}
+
+			.post-like-count {
+			}
+
+			.post-caption {
+			}
+
+			.posted-at {
+				font-size: 0.8em;
+			}
+		}
+	}
+}
+
+// User page
+.user-page-container {
+	margin-top: $header-height;
+	width: 100%;
+	max-width: $user-page-container-max-width;
+
+	.user-info {
+		@include border-bottom();
+		width: 100%;
+		display: grid;
+		grid-template-columns: 120px 1fr;
+		grid-template-rows: repeat(3, 1f);
+		grid-template-areas:
+			'profile-pic username-and-btns'
+			'bio bio'
+			'stats stats';
+
+		.profile-picture-container {
+			@include flex-box(row, center, flex-start, 0);
+			grid-area: profile-pic;
+
+			.profile-picture {
+				width: 100%;
+				aspect-ratio: 1 / 1;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+				transform: scale(0.7);
+				border: 1px solid $light-grey;
+				border-radius: 50%;
+			}
+		}
+
+		.username-and-btns {
+			grid-area: username-and-btns;
+			@include flex-box(column, center, flex-start, (10px 0));
+			padding-left: $bio-padding-left;
+
+			.username {
+				font-size: 1.8rem;
+				font-weight: 100;
+			}
+
+			.account-interactive-btns {
+				@include flex-box(row, flex-start, center, 0);
+				height: 30px;
+
+				div {
+					height: 100%;
+					width: 200px;
+					font-weight: 500;
+					border-radius: 3px;
+					cursor: pointer;
+					@include flex-box(row, center, center, 0);
+
+					&.follow-btn {
+						background-color: $blue;
+						color: $white;
+					}
+
+					&.edit-profile-btn {
+						background-color: $white;
+						color: $dark-grey;
+						border: 1px solid $light-grey;
+					}
+				}
+			}
+		}
+
+		.bio {
+			grid-area: bio;
+			padding-left: $bio-padding-left;
+			padding-top: 15px;
+			padding-bottom: 15px;
+			@include border-bottom();
+			@include flex-box(column, flex-start, stretch, 5px);
+
+			.bio-name {
+				font-weight: 600;
+			}
+		}
+
+		.stats {
+			grid-area: stats;
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			font-size: 0.9rem;
+			padding: 10px 0;
+
+			& > div {
+				@include flex-box(column, center, center, 0);
+
+				& > div:first-child {
+					font-weight: 600;
+				}
+
+				& > div:last-child {
+					color: $grey;
+				}
+			}
+		}
+	}
+
+	.content {
+		font-size: 1rem;
+
+		.nav-container-content {
+			height: 50px;
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+
+			& > div {
+				@include flex-box(row, center, center, 5px);
+				color: $grey;
+
+				div {
+					display: none;
+				}
+			}
+		}
+
+		.content-container {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 4px;
+
+			.user-page-pic-container {
+				position: relative;
+				aspect-ratio: 1 / 1;
+				overflow: hidden;
+
+				img {
+					object-fit: cover;
+					width: 100%;
+					height: 100%;
+				}
+
+				.pic-stats {
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					color: $white;
+					@include flex-box(column, center, center, 10px);
+					background-color: rgba(0, 0, 0, 0.3);
+					visibility: hidden;
+
+					& > div {
+						@include flex-box(row, center, center, 8px);
+					}
+				}
+
+				&:hover {
+					cursor: pointer;
+
+					.pic-stats {
+						visibility: visible;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (min-width: 730px) {
+	.user-page-container {
+		margin-left: $margin-left-right;
+		margin-right: $margin-left-right;
+
+		.user-info {
+			grid-template-columns: 1fr 2fr;
+			grid-template-rows: repeat(3, fit-content);
+			grid-template-areas:
+				'profile-pic username-and-btns'
+				'profile-pic stats'
+				'profile-pic bio';
+
+			.profile-picture-container .profile-picture {
+				width: 200px;
+			}
+
+			.username-and-btns {
+				@include flex-box(row, flex-start, center, (0 20px));
+				padding-top: 20px;
+
+				.account-interactive-btns {
+					div {
+						width: 100px;
+					}
+				}
+			}
+
+			.stats {
+				@include flex-box(row, flex-start, center, 50px);
+				padding-left: $bio-padding-left;
+				padding-top: 20px;
+				padding-bottom: 20px;
+				font-size: 1rem;
+
+				& > div {
+					@include flex-box(row, center, center, 5px);
+				}
+			}
+
+			.bio {
+				border: none;
+			}
+		}
+
+		.content {
+			.nav-container-content {
+				@include flex-box(row, center, center, 0);
+
+				& > div {
+					width: 100px;
+					.material-icons {
+						font-size: 18px;
+					}
+
+					div {
+						display: initial;
+						font-size: 0.8rem;
+						text-transform: uppercase;
+					}
+				}
+			}
+
+			.content-container {
+				gap: 25px;
+
+				.user-page-pic-container .pic-stats {
+					@include flex-box(row, center, center, 30px);
+				}
+			}
+		}
+	}
+}

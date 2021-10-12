@@ -3,6 +3,7 @@ import AppRouter from './AppRouter';
 import { authService, userCollection } from 'fbase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
+import 'App.css'
 
 function App() {
 	const [isFirebaseReady, setIsFirebaseReady] = useState(false);

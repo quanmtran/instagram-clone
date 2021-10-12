@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { doc, getDoc, deleteDoc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
 import { storageService, postCollection, userCollection } from 'fbase';
-import { ref, getDownloadURL, deleteObject } from 'firebase/storage';
+import { ref, deleteObject } from 'firebase/storage';
 import { Link } from 'react-router-dom';
 
-export default function Post({ postObject, currentUserObject }) {
+export default function UserPagePost({ postObject, currentUserObject }) {
 	// States
 	const [isEditting, setIsEditting] = useState(false);
-	const [editText, setEditText] = useState(postObject.text);
+	const [editCaption, setEditCaption] = useState(postObject.caption);
 	const [postOwnerObject, setPostOwnerObject] = useState({});
 	const [isLikeListDisplayed, setIsLikeListDisplayed] = useState(false);
 	const [likeList, setLikeList] = useState([]);
 
 	// Firebase database references
 	const postDocRef = doc(postCollection, postObject.id);
-	
+
 	// Firebase storage references
 	const userStorageRef = ref(storageService, `${postObject.ownerUserId}`);
 
 	// Constants
-	const postLikedArray = postObject.likedByUserIds;
+	const postLikedArray = postObject.likedBy;
 	const likeCount = postLikedArray.length;
+	const commentCount = postObject.comments.length;
 	const currentUserId = currentUserObject.userId;
 	const hasCurrentUserLiked = postLikedArray.includes(currentUserId);
 	const imgId = postObject.imgId;
@@ -37,15 +38,15 @@ export default function Post({ postObject, currentUserObject }) {
 	};
 
 	// Handlers
-	const handleEditChange = (e) => {
-		setEditText(e.target.value);
+	const handleEditCaptionChange = (e) => {
+		setEditCaption(e.target.value);
 	};
 
 	const handleEditSubmit = async (e) => {
 		e.preventDefault();
 
 		await updateDoc(postDocRef, {
-			text: editText,
+			caption: editCaption,
 		});
 
 		setIsEditting(false);
@@ -70,7 +71,7 @@ export default function Post({ postObject, currentUserObject }) {
 	const handleLikeCountClick = async () => {
 		toggleLikeListDisplayed();
 
-		const likersArray = await Promise.all(postObject.likedByUserIds.map((userId) => getUsernameFromUserId(userId)));
+		const likersArray = await Promise.all(postObject.likedBy.map((userId) => getUsernameFromUserId(userId)));
 		setLikeList(likersArray);
 	};
 
@@ -78,11 +79,11 @@ export default function Post({ postObject, currentUserObject }) {
 		try {
 			if (hasCurrentUserLiked) {
 				await updateDoc(postDocRef, {
-					likedByUserIds: arrayRemove(currentUserId),
+					likedBy: arrayRemove(currentUserId),
 				});
 			} else {
 				await updateDoc(postDocRef, {
-					likedByUserIds: arrayUnion(currentUserId),
+					likedBy: arrayUnion(currentUserId),
 				});
 			}
 		} catch (error) {
@@ -107,55 +108,38 @@ export default function Post({ postObject, currentUserObject }) {
 		const DAYS_MULTIPLIER = HOURS_MULTIPLIER * 24;
 
 		const alphaTime = Date.now() - postedAt;
-		let result;
+		let timeDigit;
+		let timeUnit;
 		if (alphaTime / DAYS_MULTIPLIER >= 1) {
-			result = `${Math.floor(alphaTime / DAYS_MULTIPLIER)}d`;
+			timeDigit = `${Math.floor(alphaTime / DAYS_MULTIPLIER)}`;
+			timeUnit = 'DAY';
 		} else if (alphaTime / HOURS_MULTIPLIER >= 1) {
-			result = `${Math.floor(alphaTime / HOURS_MULTIPLIER)}h`;
+			timeDigit = `${Math.floor(alphaTime / HOURS_MULTIPLIER)}`;
+			timeUnit = 'HOUR';
 		} else if (alphaTime / MINUTES_MULTIPLIER >= 1) {
-			result = `${Math.floor(alphaTime / MINUTES_MULTIPLIER)}m`;
+			timeDigit = `${Math.floor(alphaTime / MINUTES_MULTIPLIER)}`;
+			timeUnit = 'MINUTE';
 		} else {
-			result = `${Math.floor(alphaTime / SECONDS_MULTIPLIER)}s`;
+			timeDigit = `${Math.floor(alphaTime / SECONDS_MULTIPLIER)}`;
+			timeUnit = 'SECOND';
 		}
 
-		return `${result} ago`;
+		return `${timeDigit} ${timeUnit}${timeDigit > 1 ? 'S' : ''} AGO`;
 	};
 
 	return (
-		<div>
-			{isEditting ? (
-				<form onSubmit={handleEditSubmit}>
-					<input type="text" value={editText} onChange={handleEditChange} />
-					<input type="button" value="Cancel" onClick={handleEditToggle} />
-					<input type="submit" value="Save" />
-				</form>
-			) : (
-				<>
-					<br />
-					<div>
-						<img src={postObject.ownerProfilePicURL} height="20px" />
-						<Link to={`/user/${postOwnerObject.username}`}>{postOwnerObject.username}</Link> - <span>{getTimeAgo(postObject.postedAt)}</span>
-					</div>
-
-					{currentUserObject.userId === postObject.ownerUserId && (
-						<div>
-							<button onClick={handleEditToggle}>Edit</button>
-							<button onClick={handleDelete}>Delete</button>
-						</div>
-					)}
-
-					<div>{postObject.caption}</div>
-					<img src={postObject.imgUrl} height="100px" />
-
-					<div>
-						<span onClick={handleLikeCountClick}>{likeCount}</span>
-						{` like${likeCount > 1 ? 's' : ''}`}
-						<button onClick={handleLikeClick}>Like{hasCurrentUserLiked ? 'd' : ''}</button>
-					</div>
-
-					{isLikeListDisplayed && <div>Liked by {likeList.join(', ')}</div>}
-				</>
-			)}
+		<div className="user-page-pic-container">
+			<img src={postObject.imgUrl} />
+			<div class="pic-stats">
+				<div class="pic-likes">
+					<i class="material-icons">favorite</i>
+					<div>{likeCount}</div>
+				</div>
+				<div class="pic-comments">
+					<i class="material-icons">chat_bubble</i>
+					<div>{commentCount}</div>
+				</div>
+			</div>
 		</div>
 	);
 }
