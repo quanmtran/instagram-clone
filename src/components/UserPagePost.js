@@ -130,13 +130,13 @@ export default function UserPagePost({ postObject, currentUserObject }) {
 	return (
 		<div className="user-page-pic-container">
 			<img src={postObject.imgUrl} />
-			<div class="pic-stats">
-				<div class="pic-likes">
-					<i class="material-icons">favorite</i>
+			<div className="pic-stats">
+				<div className="pic-likes">
+					<i className="material-icons">favorite</i>
 					<div>{likeCount}</div>
 				</div>
-				<div class="pic-comments">
-					<i class="material-icons">chat_bubble</i>
+				<div className="pic-comments">
+					<i className="material-icons">chat_bubble</i>
 					<div>{commentCount}</div>
 				</div>
 			</div>

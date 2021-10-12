@@ -214,6 +214,12 @@ header {
 					&.follow-btn {
 						background-color: $blue;
 						color: $white;
+
+						&.following {
+							background-color: $white;
+							color: $dark-grey;
+							border: 1px solid $light-grey;
+						}
 					}
 
 					&.edit-profile-btn {

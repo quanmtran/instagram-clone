@@ -327,6 +327,12 @@ header .header-container .nav-container-header .profile-picture {
   color: white;
 }
 
+.user-page-container .user-info .username-and-btns .account-interactive-btns div.follow-btn.following {
+  background-color: white;
+  color: #3c3c3c;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
 .user-page-container .user-info .username-and-btns .account-interactive-btns div.edit-profile-btn {
   background-color: white;
   color: #3c3c3c;
