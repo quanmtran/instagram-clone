@@ -164,7 +164,7 @@ header .header-container .nav-container-header .profile-picture {
 }
 
 .homepage-container .homepage-content .homepage-post .username {
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .homepage-container .homepage-content .homepage-post > div:not(.post-pic),
@@ -203,6 +203,120 @@ header .header-container .nav-container-header .profile-picture {
 
 .homepage-container .homepage-content .homepage-post .post-pic img {
   width: 100%;
+}
+
+.homepage-container .homepage-content .homepage-post .post-edit-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: stretch;
+      -ms-flex-pack: stretch;
+          justify-content: stretch;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.homepage-container .homepage-content .homepage-post .post-edit-form input {
+  border: none;
+}
+
+.homepage-container .homepage-content .homepage-post .post-edit-form input[type='text'] {
+  outline: none;
+  width: 100%;
+}
+
+.homepage-container .homepage-content .homepage-post .post-edit-form input:not([type='text']) {
+  background-color: unset;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  color: #458eff;
+}
+
+.homepage-container .homepage-content .homepage-post .post-interactive-btns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1em;
+}
+
+.homepage-container .homepage-content .homepage-post .post-interactive-btns > div:last-child {
+  position: relative;
+}
+
+.homepage-container .homepage-content .homepage-post .post-interactive-btns > div:last-child .post-more-btn {
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0;
+}
+
+.homepage-container .homepage-content .homepage-post .post-interactive-btns > div:last-child .post-more-options {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: 10em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: stretch;
+      -ms-flex-pack: stretch;
+          justify-content: stretch;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  gap: 0;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.homepage-container .homepage-content .homepage-post .post-interactive-btns > div:last-child .post-more-options button {
+  border: none;
+  background-color: white;
+  padding: 0.4em;
+  cursor: pointer;
+}
+
+.homepage-container .homepage-content .homepage-post .post-interactive-btns > div:last-child .post-more-options button:hover {
+  background-color: #f2f2f2;
+}
+
+.homepage-container .homepage-content .homepage-post .post-interactive-btns > div:last-child .post-more-options button:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .homepage-container .homepage-content .homepage-post .comment {

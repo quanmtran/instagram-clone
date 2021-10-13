@@ -113,7 +113,7 @@ header {
 			@include flex-box(column, stretch, stretch, 0);
 
 			.username {
-				font-weight: 700;
+				font-weight: 500;
 			}
 
 			& > div:not(.post-pic),
@@ -143,7 +143,66 @@ header {
 				}
 			}
 
+			.post-edit-form {
+				@include flex-box(row, stretch, center, 0.5em);
+				padding-top: 1em;
+				padding-bottom: 1em;
+
+				input {
+					border: none;
+
+					&[type='text'] {
+						outline: none;
+						width: 100%;
+					}
+
+					&:not([type='text']) {
+						background-color: unset;
+						border: none;
+						cursor: pointer;
+						font-weight: 600;
+						color: $blue;
+					}
+				}
+			}
+
 			.post-interactive-btns {
+				@include flex-box(row, space-between, center, 1em);
+
+				& > div:last-child {
+					position: relative;
+
+					.post-more-btn {
+						cursor: pointer;
+						@include flex-box(row, center, center, 0);
+					}
+
+					.post-more-options {
+						position: absolute;
+						right: 0;
+						top: 100%;
+						width: 10em;
+						@include flex-box(column, stretch, stretch, 0);
+						border: 1px solid $light-grey;
+						border-radius: 5px;
+						overflow: hidden;
+
+						button {
+							border: none;
+							background-color: $white;
+							padding: 0.4em;
+							cursor: pointer;
+
+							&:hover {
+								background-color: darken($white, 5%);
+							}
+
+							&:not(:last-child) {
+								@include border-bottom;
+							}
+						}
+					}
+				}
 			}
 
 			.post-like-count {

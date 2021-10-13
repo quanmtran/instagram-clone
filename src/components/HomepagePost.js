@@ -5,17 +5,20 @@ import { ref, deleteObject } from 'firebase/storage';
 import { Link } from 'react-router-dom';
 
 // Import functions
-import { getUsername } from 'Functions';
+import { getUsername, getTimeAgo } from 'Functions';
 
 // Import components
 import Comment from './Comment';
 import CommentInput from './CommentInput';
+import PostHeader from './PostHeader';
+import PostMoreOptions from './PostMoreOptions';
 
 export default function HomepagePost({ postObject, currentUserObject }) {
 	// States
 	const [isEditting, setIsEditting] = useState(false);
 	const [editCaption, setEditCaption] = useState(postObject.caption);
 	const [postOwnerObject, setPostOwnerObject] = useState({});
+	const [isMoreOptionsDisplayed, setIsMoreOptionsDisplayed] = useState(false);
 	const [isLikeListDisplayed, setIsLikeListDisplayed] = useState(false);
 	const [likeList, setLikeList] = useState([]);
 
@@ -60,6 +63,8 @@ export default function HomepagePost({ postObject, currentUserObject }) {
 
 	const handleEditToggle = () => {
 		setIsEditting((prev) => !prev);
+		setIsMoreOptionsDisplayed(false);
+		setEditCaption(postObject.caption);
 	};
 
 	const handleDelete = async () => {
@@ -97,72 +102,49 @@ export default function HomepagePost({ postObject, currentUserObject }) {
 		}
 	};
 
+	const handleMoreClick = () => {
+		setIsMoreOptionsDisplayed((prev) => !prev);
+	};
+
 	// Other functions
 	const toggleLikeListDisplayed = () => {
 		setIsLikeListDisplayed((prev) => !prev);
 	};
 
-	const getTimeAgo = (postedAt) => {
-		const SECONDS_MULTIPLIER = 1000;
-		const MINUTES_MULTIPLIER = SECONDS_MULTIPLIER * 60;
-		const HOURS_MULTIPLIER = MINUTES_MULTIPLIER * 60;
-		const DAYS_MULTIPLIER = HOURS_MULTIPLIER * 24;
-
-		const alphaTime = Date.now() - postedAt;
-		let timeDigit;
-		let timeUnit;
-		if (alphaTime / DAYS_MULTIPLIER >= 1) {
-			timeDigit = `${Math.floor(alphaTime / DAYS_MULTIPLIER)}`;
-			timeUnit = 'DAY';
-		} else if (alphaTime / HOURS_MULTIPLIER >= 1) {
-			timeDigit = `${Math.floor(alphaTime / HOURS_MULTIPLIER)}`;
-			timeUnit = 'HOUR';
-		} else if (alphaTime / MINUTES_MULTIPLIER >= 1) {
-			timeDigit = `${Math.floor(alphaTime / MINUTES_MULTIPLIER)}`;
-			timeUnit = 'MINUTE';
-		} else {
-			timeDigit = `${Math.floor(alphaTime / SECONDS_MULTIPLIER)}`;
-			timeUnit = 'SECOND';
-		}
-
-		return `${timeDigit} ${timeUnit}${timeDigit > 1 ? 'S' : ''} AGO`;
-	};
-
 	return (
-		<div>
+		<div className="homepage-post">
+			<PostHeader
+				postOwnerObject={postOwnerObject}
+				currentUserObject={currentUserObject}
+				postObject={postObject}
+				handleEditToggle={handleEditToggle}
+				handleDelete={handleDelete}
+				handleMoreClick={handleMoreClick}
+				isMoreOptionsDisplayed={isMoreOptionsDisplayed}
+			/>
+
+			<div className="post-pic">
+				<img src={postObject.imgUrl} />
+			</div>
+
 			{isEditting ? (
-				<form onSubmit={handleEditSubmit}>
-					<input type="text" value={editCaption} onChange={handleEditCaptionChange} />
+				<form onSubmit={handleEditSubmit} className="post-edit-form">
+					<input type="text" value={editCaption} placeholder="Edit caption..." onChange={handleEditCaptionChange} />
 					<input type="button" value="Cancel" onClick={handleEditToggle} />
 					<input type="submit" value="Save" />
 				</form>
 			) : (
-				<div className="homepage-post">
-					<div className="post-header">
-						<div>
-							<Link to={`/user/${postOwnerObject.username}`}>
-								<div className="profile-pic" style={{ backgroundImage: `url(${postOwnerObject.profilePictureUrl})` }} />
-							</Link>
-						</div>
-						<div>
-							<Link to={`/user/${postOwnerObject.username}`}>
-								<div className="username">{postOwnerObject.username}</div>
-							</Link>
-						</div>
-						{currentUserObject.userId === postObject.ownerUserId && (
-							<div>
-								<button onClick={handleEditToggle}>Edit</button>
-								<button onClick={handleDelete}>Delete</button>
-							</div>
-						)}
-					</div>
-
-					<div className="post-pic">
-						<img src={postObject.imgUrl} />
-					</div>
-
+				<>
 					<div className="post-interactive-btns">
 						<button onClick={handleLikeClick}>Like{hasCurrentUserLiked ? 'd' : ''}</button>
+						{currentUserObject.userId === postObject.ownerUserId && (
+							<PostMoreOptions
+								handleEditToggle={handleEditToggle}
+								handleDelete={handleDelete}
+								handleMoreClick={handleMoreClick}
+								isMoreOptionsDisplayed={isMoreOptionsDisplayed}
+							/>
+						)}
 					</div>
 
 					<div className="post-like-count">
@@ -184,7 +166,7 @@ export default function HomepagePost({ postObject, currentUserObject }) {
 					<div className="posted-at">{getTimeAgo(postObject.postedAt)}</div>
 
 					<CommentInput currentUserObject={currentUserObject} postDocRef={postDocRef} />
-				</div>
+				</>
 			)}
 		</div>
 	);
