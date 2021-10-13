@@ -160,16 +160,17 @@ header .header-container .nav-container-header .profile-picture {
   -webkit-box-align: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
-  gap: 10px;
-  padding: 10px 0;
+  gap: 0;
 }
 
 .homepage-container .homepage-content .homepage-post .username {
   font-weight: 700;
 }
 
-.homepage-container .homepage-content .homepage-post > div:not(.post-pic) {
-  margin: 0 10px;
+.homepage-container .homepage-content .homepage-post > div:not(.post-pic),
+.homepage-container .homepage-content .homepage-post form {
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .homepage-container .homepage-content .homepage-post .post-header {
@@ -186,7 +187,9 @@ header .header-container .nav-container-header .profile-picture {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 10px;
+  gap: 1em;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 .homepage-container .homepage-content .homepage-post .post-header .profile-pic {
@@ -202,8 +205,75 @@ header .header-container .nav-container-header .profile-picture {
   width: 100%;
 }
 
+.homepage-container .homepage-content .homepage-post .comment {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5em;
+}
+
+.homepage-container .homepage-content .homepage-post .comment .username-and-text {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.homepage-container .homepage-content .homepage-post .comment .delete-comment-btn {
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
 .homepage-container .homepage-content .homepage-post .posted-at {
   font-size: 0.8em;
+}
+
+.homepage-container .homepage-content .homepage-post .comment-input-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: stretch;
+      -ms-flex-pack: stretch;
+          justify-content: stretch;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  gap: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.homepage-container .homepage-content .homepage-post .comment-input-container input {
+  border: none;
+  outline: none;
+  background-color: unset;
+  width: 100%;
+}
+
+.homepage-container .homepage-content .homepage-post .comment-input-container input[type='submit'] {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  color: #abccff;
+  font-weight: 600;
+}
+
+.homepage-container .homepage-content .homepage-post .comment-input-container input[type='submit'].active {
+  color: #458eff;
+  cursor: pointer;
 }
 
 .user-page-container {
@@ -323,7 +393,7 @@ header .header-container .nav-container-header .profile-picture {
 }
 
 .user-page-container .user-info .username-and-btns .account-interactive-btns div.follow-btn {
-  background-color: #0084ff;
+  background-color: #458eff;
   color: white;
 }
 

@@ -4,6 +4,13 @@ import { storageService, postCollection, userCollection } from 'fbase';
 import { ref, deleteObject } from 'firebase/storage';
 import { Link } from 'react-router-dom';
 
+// Import functions
+import { getUsername } from 'Functions';
+
+// Import components
+import Comment from './Comment';
+import CommentInput from './CommentInput';
+
 export default function HomepagePost({ postObject, currentUserObject }) {
 	// States
 	const [isEditting, setIsEditting] = useState(false);
@@ -70,7 +77,7 @@ export default function HomepagePost({ postObject, currentUserObject }) {
 	const handleLikeCountClick = async () => {
 		toggleLikeListDisplayed();
 
-		const likersArray = await Promise.all(postObject.likedBy.map((userId) => getUsernameFromUserId(userId)));
+		const likersArray = await Promise.all(postObject.likedBy.map((userId) => getUsername(userId)));
 		setLikeList(likersArray);
 	};
 
@@ -93,11 +100,6 @@ export default function HomepagePost({ postObject, currentUserObject }) {
 	// Other functions
 	const toggleLikeListDisplayed = () => {
 		setIsLikeListDisplayed((prev) => !prev);
-	};
-
-	const getUsernameFromUserId = async (userId) => {
-		const docSnap = await getDoc(doc(userCollection, userId));
-		return docSnap.data().username;
 	};
 
 	const getTimeAgo = (postedAt) => {
@@ -175,7 +177,13 @@ export default function HomepagePost({ postObject, currentUserObject }) {
 						{postObject.caption}
 					</div>
 
+					{postObject.comments.map((comment) => (
+						<Comment key={comment.id} postDocRef={postDocRef} postObject={postObject} comment={comment} currentUserObject={currentUserObject} />
+					))}
+
 					<div className="posted-at">{getTimeAgo(postObject.postedAt)}</div>
+
+					<CommentInput currentUserObject={currentUserObject} postDocRef={postDocRef} />
 				</div>
 			)}
 		</div>

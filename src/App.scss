@@ -10,7 +10,7 @@
 
 // Colors
 $white: white;
-$blue: rgb(0, 132, 255);
+$blue: #458eff;
 $grey: rgb(120, 120, 120);
 $light-grey: rgba(0, 0, 0, 0.2);
 $dark-grey: rgb(60, 60, 60);
@@ -110,19 +110,22 @@ header {
 			border: 1px solid $light-grey;
 			border-radius: 0.3em;
 			font-size: 0.9rem;
-			@include flex-box(column, stretch, stretch, 10px);
-			padding: 10px 0;
+			@include flex-box(column, stretch, stretch, 0);
 
 			.username {
 				font-weight: 700;
 			}
 
-			& > div:not(.post-pic) {
-				margin: 0 10px;
+			& > div:not(.post-pic),
+			form {
+				padding-left: 1em;
+				padding-right: 1em;
 			}
 
 			.post-header {
-				@include flex-box(row, flex-start, center, 10px);
+				@include flex-box(row, flex-start, center, 1em);
+				padding-top: 1em;
+				padding-bottom: 1em;
 
 				.profile-pic {
 					width: 30px;
@@ -149,8 +152,47 @@ header {
 			.post-caption {
 			}
 
+			.comment {
+				@include flex-box(row, space-between, center, 0.5em);
+
+				.username-and-text {
+					word-wrap: break-word;
+					word-break: break-all;
+				}
+
+				.delete-comment-btn {
+					font-size: 1.2em;
+					cursor: pointer;
+				}
+			}
+
 			.posted-at {
 				font-size: 0.8em;
+			}
+
+			.comment-input-container {
+				@include flex-box(row, stretch, stretch, 0);
+				border-top: 1px solid $light-grey;
+				padding-top: 1em;
+				padding-bottom: 1em;
+
+				input {
+					border: none;
+					outline: none;
+					background-color: unset;
+					width: 100%;
+
+					&[type='submit'] {
+						width: fit-content;
+						color: lighten($blue, 20%);
+						font-weight: 600;
+
+						&.active {
+							color: $blue;
+							cursor: pointer;
+						}
+					}
+				}
 			}
 		}
 	}

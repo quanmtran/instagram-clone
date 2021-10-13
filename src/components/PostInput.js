@@ -63,7 +63,7 @@ export default function PostInput({ currentUserObject, postCollection }) {
 	return (
 		<form onSubmit={handlePostSubmit}>
 			<div>
-				<input type="text" placeholder="Caption" value={captionInput} onChange={handleCaptionInputChange} />
+				<input type="text" placeholder="Write a caption" value={captionInput} onChange={handleCaptionInputChange} />
 			</div>
 			<div>
 				<input type="file" accept="image/*" onChange={handleFileChange} />
