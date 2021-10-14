@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { authService } from 'fbase';
-import { signOut } from 'firebase/auth';
+import ProfileOptions from './ProfileOptions';
 
 export default function Header({ currentUserObject }) {
-	const handleSignOut = () => {
-		signOut(authService);
+	const [isProfileOptionsDisplayed, setIsProfileOptionsDisplayed] = useState(false);
+
+	const handleToggleProfileOptions = () => {
+		setIsProfileOptionsDisplayed((prev) => !prev);
 	};
 
 	return (
@@ -15,15 +16,17 @@ export default function Header({ currentUserObject }) {
 					<div className="insta-logo">Isn'tagram</div>
 				</Link>
 				<div className="nav-container-header">
-					<i className="material-icons" onClick={handleSignOut}>
-						home
-					</i>
+					<i className="material-icons">home</i>
 					<i className="material-icons">chat</i>
 					<i className="material-icons">explore</i>
 					<i className="material-icons">favorite</i>
-					<Link to={`/user/${currentUserObject.username}`}>
-						<div className="profile-picture" style={{ backgroundImage: `url(${currentUserObject.profilePictureUrl})` }} />
-					</Link>
+					<div
+						className="profile-picture"
+						onClick={handleToggleProfileOptions}
+						style={{ backgroundImage: `url(${currentUserObject.profilePictureUrl})` }}
+					>
+						{isProfileOptionsDisplayed && <ProfileOptions currentUserObject={currentUserObject} />}
+					</div>
 				</div>
 			</div>
 		</header>

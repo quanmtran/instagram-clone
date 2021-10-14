@@ -1,28 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { doc, updateDoc, arrayUnion, arrayRemove, onSnapshot } from 'firebase/firestore';
+import React, { useState } from 'react';
+import { doc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
 import { userCollection } from 'fbase';
+import { Link } from 'react-router-dom';
 
 export default function UserInfo({ userObject, postObjects, currentUserObject }) {
 	// States
-	const [pageOwner, setPageOwner] = useState(userObject);
-	const [isCurrentUserFollowing, setIsCurrentUserFollowing] = useState(pageOwner.followers.includes(currentUserObject.userId));
+	const [isCurrentUserFollowing, setIsCurrentUserFollowing] = useState(userObject.followers.includes(currentUserObject.userId));
+	const [followerCount, setFollowerCount] = useState(userObject.followers.length);
 
 	// Constant
-	const isCurrentUserPageOwner = Boolean(currentUserObject.userId === pageOwner.userId);
-
-	useEffect(() => {
-		const unsubscribe = onSnapshot(doc(userCollection, pageOwner.userId), (doc) => {
-			setPageOwner(doc.data());
-		});
-
-		return () => {
-			unsubscribe();
-		};
-	}, []);
+	const isCurrentUserPageOwner = Boolean(currentUserObject.userId === userObject.userId);
 
 	const handleFollowClick = async () => {
 		// Firestore references
-		const userDocRef = doc(userCollection, pageOwner.userId);
+		const userDocRef = doc(userCollection, userObject.userId);
 		const currentUserDocRef = doc(userCollection, currentUserObject.userId);
 
 		try {
@@ -34,8 +25,10 @@ export default function UserInfo({ userObject, postObjects, currentUserObject })
 
 				// Remove user's id from current user's followings
 				await updateDoc(currentUserDocRef, {
-					followings: arrayRemove(pageOwner.userId),
+					followings: arrayRemove(userObject.userId),
 				});
+
+				setFollowerCount((prev) => prev - 1);
 			} else {
 				// Add current user's id to user's followers
 				await updateDoc(userDocRef, {
@@ -44,8 +37,10 @@ export default function UserInfo({ userObject, postObjects, currentUserObject })
 
 				// Add user's id to current user's followings
 				await updateDoc(currentUserDocRef, {
-					followings: arrayUnion(pageOwner.userId),
+					followings: arrayUnion(userObject.userId),
 				});
+
+				setFollowerCount((prev) => prev + 1);
 			}
 
 			setIsCurrentUserFollowing((prev) => !prev);
@@ -57,23 +52,23 @@ export default function UserInfo({ userObject, postObjects, currentUserObject })
 	return (
 		<div className="user-info">
 			<div className="profile-picture-container">
-				<div className="profile-picture" style={{ backgroundImage: `url(${pageOwner.profilePictureUrl})` }}></div>
+				<div className="profile-picture" style={{ backgroundImage: `url(${userObject.profilePictureUrl})` }}></div>
 			</div>
 			<div className="username-and-btns">
-				<div className="username">{pageOwner.username}</div>
-				<div className="account-interactive-btns">
-					{isCurrentUserPageOwner ? (
-						<div className="edit-profile-btn">Edit Profile</div>
-					) : (
-						<div onClick={handleFollowClick} className={`follow-btn ${isCurrentUserFollowing && 'following'}`}>
-							Follow{isCurrentUserFollowing && 'ing'}
-						</div>
-					)}
-				</div>
+				<div className="username">{userObject.username}</div>
+				{isCurrentUserPageOwner ? (
+					<Link to={`/account/edit`}>
+						<div className="account-interactive-btn edit-profile-btn">Edit Profile</div>
+					</Link>
+				) : (
+					<div onClick={handleFollowClick} className={`account-interactive-btn follow-btn ${isCurrentUserFollowing && 'following'}`}>
+						Follow{isCurrentUserFollowing && 'ing'}
+					</div>
+				)}
 			</div>
 			<div className="bio">
-				<div className="bio-name">{pageOwner.name}</div>
-				<div className="bio-text">{pageOwner.bio}</div>
+				<div className="bio-name">{userObject.name}</div>
+				<div className="bio-text">{userObject.bio}</div>
 			</div>
 			<div className="stats">
 				<div>
@@ -81,11 +76,11 @@ export default function UserInfo({ userObject, postObjects, currentUserObject })
 					<div>post{postObjects.length > 1 && 's'}</div>
 				</div>
 				<div>
-					<div className="follower-count">{pageOwner.followers.length}</div>
-					<div>follower{pageOwner.followers.length > 1 && 's'}</div>
+					<div className="follower-count">{followerCount}</div>
+					<div>follower{userObject.followers.length > 1 && 's'}</div>
 				</div>
 				<div>
-					<div className="following-count">{pageOwner.followings.length}</div>
+					<div className="following-count">{userObject.followings.length}</div>
 					<div>following</div>
 				</div>
 			</div>

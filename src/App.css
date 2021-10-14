@@ -118,6 +118,47 @@ header .header-container .nav-container-header .profile-picture {
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
+header .header-container .nav-container-header .profile-picture .profile-options {
+  position: absolute;
+  right: 0;
+  top: 150%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  width: 12em;
+}
+
+header .header-container .nav-container-header .profile-picture .profile-options div {
+  padding: 0.5em 0.8em;
+  cursor: pointer;
+  background-color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5em;
+}
+
+header .header-container .nav-container-header .profile-picture .profile-options div:hover {
+  background-color: #fafafa;
+}
+
+header .header-container .nav-container-header .profile-picture .profile-options div:last-child {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .homepage-container {
@@ -302,6 +343,8 @@ header .header-container .nav-container-header .profile-picture {
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   overflow: hidden;
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 }
 
 .homepage-container .homepage-content .homepage-post .post-interactive-btns > div:last-child .post-more-options button {
@@ -466,26 +509,8 @@ header .header-container .nav-container-header .profile-picture {
   font-weight: 100;
 }
 
-.user-page-container .user-info .username-and-btns .account-interactive-btns {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  gap: 0;
-  height: 30px;
-}
-
-.user-page-container .user-info .username-and-btns .account-interactive-btns div {
-  height: 100%;
+.user-page-container .user-info .username-and-btns .account-interactive-btn {
+  padding: 0.5em 0;
   width: 200px;
   font-weight: 500;
   border-radius: 3px;
@@ -506,18 +531,18 @@ header .header-container .nav-container-header .profile-picture {
   gap: 0;
 }
 
-.user-page-container .user-info .username-and-btns .account-interactive-btns div.follow-btn {
+.user-page-container .user-info .username-and-btns .account-interactive-btn.follow-btn {
   background-color: #458eff;
   color: white;
 }
 
-.user-page-container .user-info .username-and-btns .account-interactive-btns div.follow-btn.following {
+.user-page-container .user-info .username-and-btns .account-interactive-btn.follow-btn.following {
   background-color: white;
   color: #3c3c3c;
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.user-page-container .user-info .username-and-btns .account-interactive-btns div.edit-profile-btn {
+.user-page-container .user-info .username-and-btns .account-interactive-btn.edit-profile-btn {
   background-color: white;
   color: #3c3c3c;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -695,6 +720,143 @@ header .header-container .nav-container-header .profile-picture {
   visibility: visible;
 }
 
+.account-edit-container {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  padding: 2em;
+  margin-top: 50px;
+  width: 100%;
+  max-width: 600px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  gap: 1em;
+}
+
+.account-edit-container .form-header,
+.account-edit-container .form-control {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: stretch;
+      -ms-flex-pack: stretch;
+          justify-content: stretch;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  gap: 1.5em;
+}
+
+.account-edit-container .form-header .profile-pic-container {
+  min-width: 5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0;
+  height: 2em;
+}
+
+.account-edit-container .form-header .profile-pic-container .pic {
+  height: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.account-edit-container .form-header .username {
+  font-weight: 600;
+  font-size: 1.2em;
+}
+
+.account-edit-container .form-control label {
+  min-width: 5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0;
+  font-weight: 500;
+}
+
+.account-edit-container .form-control .form-input {
+  width: 100%;
+  padding: 1ch;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.account-edit-container .form-control textarea {
+  resize: vertical;
+  font-family: inherit;
+}
+
+.account-edit-container .submit-btn-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1em;
+}
+
+.account-edit-container .submit-btn-container .submit-btn {
+  border: none;
+  background-color: #abccff;
+  color: white;
+  padding: 0.5em 1em;
+  font-weight: 600;
+  border-radius: 3px;
+}
+
+.account-edit-container .submit-btn-container .submit-btn.active {
+  background-color: #458eff;
+  cursor: pointer;
+}
+
 @media (min-width: 730px) {
   .user-page-container {
     margin-left: 20px;
@@ -728,7 +890,7 @@ header .header-container .nav-container-header .profile-picture {
     gap: 0 20px;
     padding-top: 20px;
   }
-  .user-page-container .user-info .username-and-btns .account-interactive-btns div {
+  .user-page-container .user-info .username-and-btns .account-interactive-btn {
     width: 100px;
   }
   .user-page-container .user-info .stats {
