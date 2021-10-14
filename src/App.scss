@@ -124,6 +124,157 @@ header {
 	}
 }
 
+// Post container
+.post-container {
+	border: 1px solid $light-grey;
+	border-radius: 0.3em;
+	font-size: 0.9rem;
+
+	.username {
+		font-weight: 500;
+	}
+
+	& > div:not(.post-pic),
+	form {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+
+	.post-header {
+		@include flex-box(row, flex-start, center, 1em);
+		padding-top: 1em;
+		padding-bottom: 1em;
+
+		.profile-pic {
+			width: 30px;
+			aspect-ratio: 1/1;
+			background-position: center;
+			background-size: cover;
+			background-repeat: no-repeat;
+			border-radius: 50%;
+		}
+	}
+
+	.post-pic {
+		img {
+			width: 100%;
+		}
+	}
+
+	.post-edit-form {
+		@include flex-box(row, stretch, center, 0.5em);
+		padding-top: 1em;
+		padding-bottom: 1em;
+
+		input {
+			border: none;
+
+			&[type='text'] {
+				outline: none;
+				width: 100%;
+			}
+
+			&:not([type='text']) {
+				background-color: unset;
+				border: none;
+				cursor: pointer;
+				font-weight: 600;
+				color: $blue;
+			}
+		}
+	}
+
+	.post-interactive-btns {
+		@include flex-box(row, space-between, center, 1em);
+
+		& > div:last-child {
+			position: relative;
+
+			.post-more-btn {
+				cursor: pointer;
+				@include flex-box(row, center, center, 0);
+			}
+
+			.post-more-options {
+				position: absolute;
+				right: 0;
+				top: 100%;
+				width: 10em;
+				@include flex-box(column, stretch, stretch, 0);
+				border: 1px solid $light-grey;
+				border-radius: 5px;
+				overflow: hidden;
+				box-shadow: 0 1px 5px $light-grey;
+
+				button {
+					border: none;
+					background-color: $white;
+					padding: 0.4em;
+					cursor: pointer;
+
+					&:hover {
+						background-color: darken($white, 5%);
+					}
+
+					&:not(:last-child) {
+						@include border-bottom;
+					}
+				}
+			}
+		}
+	}
+
+	.post-like-count {
+		@include flex-box(row, flex-start, center, 0);
+	}
+
+	.post-caption-and-comments {
+		.comment {
+			@include flex-box(row, space-between, center, 0.5em);
+
+			.username-and-text {
+				word-wrap: break-word;
+				word-break: break-all;
+			}
+
+			.delete-comment-btn {
+				font-size: 1.2em;
+				cursor: pointer;
+			}
+		}
+	}
+
+	.posted-at {
+		font-size: 0.8em;
+		@include flex-box(row, flex-start, center, 0);
+	}
+
+	.comment-input-container {
+		@include flex-box(row, stretch, stretch, 0);
+		border-top: 1px solid $light-grey;
+		padding-top: 1em;
+		padding-bottom: 1em;
+
+		input {
+			border: none;
+			outline: none;
+			background-color: unset;
+			width: 100%;
+
+			&[type='submit'] {
+				width: fit-content;
+				color: lighten($blue, 20%);
+				font-weight: 600;
+
+				&.active {
+					color: $blue;
+					cursor: pointer;
+				}
+			}
+		}
+	}
+}
+
 // Homepage
 .homepage-container {
 	margin-top: $header-height;
@@ -133,154 +284,8 @@ header {
 	.homepage-content {
 		@include flex-box(column, flex-start, stretch, 20px);
 
-		.homepage-post {
-			border: 1px solid $light-grey;
-			border-radius: 0.3em;
-			font-size: 0.9rem;
+		.post-container {
 			@include flex-box(column, stretch, stretch, 0);
-
-			.username {
-				font-weight: 500;
-			}
-
-			& > div:not(.post-pic),
-			form {
-				padding-left: 1em;
-				padding-right: 1em;
-			}
-
-			.post-header {
-				@include flex-box(row, flex-start, center, 1em);
-				padding-top: 1em;
-				padding-bottom: 1em;
-
-				.profile-pic {
-					width: 30px;
-					aspect-ratio: 1/1;
-					background-position: center;
-					background-size: cover;
-					background-repeat: no-repeat;
-					border-radius: 50%;
-				}
-			}
-
-			.post-pic {
-				img {
-					width: 100%;
-				}
-			}
-
-			.post-edit-form {
-				@include flex-box(row, stretch, center, 0.5em);
-				padding-top: 1em;
-				padding-bottom: 1em;
-
-				input {
-					border: none;
-
-					&[type='text'] {
-						outline: none;
-						width: 100%;
-					}
-
-					&:not([type='text']) {
-						background-color: unset;
-						border: none;
-						cursor: pointer;
-						font-weight: 600;
-						color: $blue;
-					}
-				}
-			}
-
-			.post-interactive-btns {
-				@include flex-box(row, space-between, center, 1em);
-
-				& > div:last-child {
-					position: relative;
-
-					.post-more-btn {
-						cursor: pointer;
-						@include flex-box(row, center, center, 0);
-					}
-
-					.post-more-options {
-						position: absolute;
-						right: 0;
-						top: 100%;
-						width: 10em;
-						@include flex-box(column, stretch, stretch, 0);
-						border: 1px solid $light-grey;
-						border-radius: 5px;
-						overflow: hidden;
-						box-shadow: 0 1px 5px $light-grey;
-
-						button {
-							border: none;
-							background-color: $white;
-							padding: 0.4em;
-							cursor: pointer;
-
-							&:hover {
-								background-color: darken($white, 5%);
-							}
-
-							&:not(:last-child) {
-								@include border-bottom;
-							}
-						}
-					}
-				}
-			}
-
-			.post-like-count {
-			}
-
-			.post-caption {
-			}
-
-			.comment {
-				@include flex-box(row, space-between, center, 0.5em);
-
-				.username-and-text {
-					word-wrap: break-word;
-					word-break: break-all;
-				}
-
-				.delete-comment-btn {
-					font-size: 1.2em;
-					cursor: pointer;
-				}
-			}
-
-			.posted-at {
-				font-size: 0.8em;
-			}
-
-			.comment-input-container {
-				@include flex-box(row, stretch, stretch, 0);
-				border-top: 1px solid $light-grey;
-				padding-top: 1em;
-				padding-bottom: 1em;
-
-				input {
-					border: none;
-					outline: none;
-					background-color: unset;
-					width: 100%;
-
-					&[type='submit'] {
-						width: fit-content;
-						color: lighten($blue, 20%);
-						font-weight: 600;
-
-						&.active {
-							color: $blue;
-							cursor: pointer;
-						}
-					}
-				}
-			}
 		}
 	}
 }
@@ -523,6 +528,69 @@ header {
 				background-color: $blue;
 				cursor: pointer;
 			}
+		}
+	}
+}
+
+// Post page
+.post-page-container {
+	margin-top: $header-height;
+	width: 100%;
+	max-width: $homepage-container-max-width;
+
+	.post-container {
+		height: 500px;
+		overflow: hidden;
+		display: grid;
+		grid-template-columns: 3fr 2fr;
+		grid-template-rows: 4em auto repeat(3, 2em) 4em;
+		grid-template-areas:
+			'pic header'
+			'pic caption-and-comments'
+			'pic interactive-btns'
+			'pic like-count'
+			'pic posted-at'
+			'pic comment-input';
+
+		.post-header {
+			grid-area: header;
+		}
+
+		.post-pic {
+			grid-area: pic;
+			width: 100%;
+			height: inherit;
+			@include flex-box(row, center, center, 0);
+			border-right: 1px solid $light-grey;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: contain;
+			}
+		}
+
+		.post-interactive-btns {
+			grid-area: interactive-btns;
+		}
+
+		.post-like-count {
+			grid-area: like-count;
+		}
+
+		.post-caption-and-comments {
+			grid-area: caption-and-comments;
+			border-top: 1px solid $light-grey;
+			border-bottom: 1px solid $light-grey;
+			overflow-y: auto;
+		}
+
+		.posted-at {
+			grid-area: posted-at;
+		}
+
+		.comment-input-container {
+			grid-area: comment-input;
 		}
 	}
 }

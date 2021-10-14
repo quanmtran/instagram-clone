@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { updateDoc, arrayRemove } from 'firebase/firestore';
 import { getUsername } from 'Functions';
+import { Link } from 'react-router-dom';
 
 export default function Comment({ postDocRef, postObject, comment, currentUserObject }) {
 	const [username, setUsername] = useState('');
@@ -23,7 +24,10 @@ export default function Comment({ postDocRef, postObject, comment, currentUserOb
 	) : (
 		<div className="comment">
 			<div className="username-and-text">
-				<span className="username">{username}</span> <span>{comment.text}</span>
+				<span className="username">
+					<Link to={`/user/${username}`}>{username}</Link>
+				</span>{' '}
+				<span>{comment.text}</span>
 			</div>
 			{(currentUserObject.userId === comment.ownerUserId || currentUserObject.userId === postObject.ownerUserId) && (
 				<span className="material-icons delete-comment-btn" onClick={handleDeleteClick}>

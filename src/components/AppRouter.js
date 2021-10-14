@@ -6,6 +6,7 @@ import UserPage from 'routes/UserPage';
 import Auth from 'routes/Auth';
 import Home from 'routes/Home';
 import AccountEdit from 'routes/AccountEditPage';
+import PostPage from 'routes/PostPage';
 
 export default function AppRouter({ isLoggedIn, currentUserObject, refreshCurrentUserObject }) {
 	return (
@@ -22,6 +23,9 @@ export default function AppRouter({ isLoggedIn, currentUserObject, refreshCurren
 				</Route>
 				<Route path="/account/edit">
 					<AccountEdit isLoggedIn={isLoggedIn} currentUserObject={currentUserObject} refreshCurrentUserObject={refreshCurrentUserObject} />
+				</Route>
+				<Route path="/post/:postId">
+					<PostPage isLoggedIn={isLoggedIn} currentUserObject={currentUserObject} />
 				</Route>
 			</Switch>
 		</Router>

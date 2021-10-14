@@ -13,7 +13,7 @@ import CommentInput from './CommentInput';
 import PostHeader from './PostHeader';
 import PostMoreOptions from './PostMoreOptions';
 
-export default function HomepagePost({ postObject, currentUserObject }) {
+export default function Post({ postObject, currentUserObject }) {
 	// States
 	const [isEditting, setIsEditting] = useState(false);
 	const [editCaption, setEditCaption] = useState(postObject.caption);
@@ -112,7 +112,7 @@ export default function HomepagePost({ postObject, currentUserObject }) {
 	};
 
 	return (
-		<div className="homepage-post">
+		<div className="post-container">
 			<PostHeader
 				postOwnerObject={postOwnerObject}
 				currentUserObject={currentUserObject}
@@ -152,16 +152,18 @@ export default function HomepagePost({ postObject, currentUserObject }) {
 						{` like${likeCount > 1 ? 's' : ''}`}
 					</div>
 
-					<div className="post-caption">
-						<span className="username">
-							<Link to={`/user/${postOwnerObject.username}`}>{postOwnerObject.username}</Link>
-						</span>{' '}
-						{postObject.caption}
-					</div>
+					<div className="post-caption-and-comments">
+						<div className="post-caption">
+							<span className="username">
+								<Link to={`/user/${postOwnerObject.username}`}>{postOwnerObject.username}</Link>
+							</span>{' '}
+							{postObject.caption}
+						</div>
 
-					{postObject.comments.map((comment) => (
-						<Comment key={comment.id} postDocRef={postDocRef} postObject={postObject} comment={comment} currentUserObject={currentUserObject} />
-					))}
+						{postObject.comments.map((comment) => (
+							<Comment key={comment.id} postDocRef={postDocRef} postObject={postObject} comment={comment} currentUserObject={currentUserObject} />
+						))}
+					</div>
 
 					<div className="posted-at">{getTimeAgo(postObject.postedAt)}</div>
 

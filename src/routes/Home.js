@@ -5,7 +5,7 @@ import { postCollection } from 'fbase';
 import { query, onSnapshot, orderBy } from 'firebase/firestore';
 
 // Import components
-import HomepagePost from 'components/HomepagePost';
+import Post from 'components/Post';
 import PostInput from 'components/PostInput';
 import Header from 'components/Header';
 
@@ -34,7 +34,7 @@ export default function Home({ isLoggedIn, currentUserObject }) {
 				<PostInput currentUserObject={currentUserObject} postCollection={postCollection} />
 				<div className="homepage-content">
 					{postObjects.map((postObject) => (
-						<HomepagePost key={postObject.id} postObject={postObject} currentUserObject={currentUserObject} />
+						<Post key={postObject.id} postObject={postObject} currentUserObject={currentUserObject} />
 					))}
 				</div>
 			</div>
