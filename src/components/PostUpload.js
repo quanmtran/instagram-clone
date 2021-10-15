@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 // Import components
 
-export default function PostUpload({ currentUserObject, handlePostUploadToggle }) {
+export default function PostUpload({ currentUserObject }) {
 	// States
 	const [captionInput, setCaptionInput] = useState('');
 	const [imgUrl, setImgUrl] = useState('');
@@ -29,6 +29,10 @@ export default function PostUpload({ currentUserObject, handlePostUploadToggle }
 
 			reader.readAsDataURL(file);
 		}
+	};
+
+	const handleCancelImg = () => {
+		setImgUrl('');
 	};
 
 	const handlePostSubmit = async (e) => {
@@ -63,25 +67,23 @@ export default function PostUpload({ currentUserObject, handlePostUploadToggle }
 	};
 
 	return (
-		<div className="post-upload-container">
-			<form onSubmit={handlePostSubmit} className="post-upload-form">
-				<div>
-					Create post
-					<span className="material-icons" onClick={handlePostUploadToggle}>
-						cancel
-					</span>
-				</div>
-				<div>
-					<textarea placeholder="Write a caption..." value={captionInput} onChange={handleCaptionInputChange} />
-				</div>
-				<div className="drag-and-drop-area">
+		<form onSubmit={handlePostSubmit} className="post-upload-form">
+			<div className="drag-and-drop-container">
+				<label className="drag-and-drop-area" style={{ visibility: `${imgUrl ? 'hidden' : ''}` }}>
+					<span>Add a photo</span>
+					<span>or drag and drop</span>
 					<input type="file" accept="image/*" onChange={handleFileChange} />
-					{imgUrl && <img src={imgUrl} height="100px" />}
-				</div>
-				<div>
-					<input type="submit" value="Post" />
-				</div>
-			</form>
-		</div>
+				</label>
+				{imgUrl && (
+					<div className="image-preview" style={{ backgroundImage: `url(${imgUrl})` }}>
+						<span className="material-icons" onClick={handleCancelImg}>
+							cancel
+						</span>
+					</div>
+				)}
+			</div>
+			<textarea placeholder="Write a caption..." value={captionInput} onChange={handleCaptionInputChange} />
+			<input type="submit" value="Post" />
+		</form>
 	);
 }

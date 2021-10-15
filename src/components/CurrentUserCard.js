@@ -2,14 +2,13 @@ import React from 'react';
 
 // Import components
 import PostHeader from './PostHeader';
+import PostUpload from './PostUpload';
 
-export default function CurrentUserCard({ currentUserObject, handlePostUploadToggle }) {
+export default function CurrentUserCard({ currentUserObject }) {
 	return (
 		<div className="current-user-card">
 			<PostHeader postOwnerObject={currentUserObject} />
-			<div onClick={handlePostUploadToggle} className="post-click">
-				Create post
-			</div>
+			<PostUpload currentUserObject={currentUserObject} />
 		</div>
 	);
 }
