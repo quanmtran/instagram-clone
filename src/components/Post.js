@@ -113,15 +113,7 @@ export default function Post({ postObject, currentUserObject }) {
 
 	return (
 		<div className="post-container">
-			<PostHeader
-				postOwnerObject={postOwnerObject}
-				currentUserObject={currentUserObject}
-				postObject={postObject}
-				handleEditToggle={handleEditToggle}
-				handleDelete={handleDelete}
-				handleMoreClick={handleMoreClick}
-				isMoreOptionsDisplayed={isMoreOptionsDisplayed}
-			/>
+			<PostHeader postOwnerObject={postOwnerObject} />
 
 			<div className="post-pic">
 				<img src={postObject.imgUrl} />

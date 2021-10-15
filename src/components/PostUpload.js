@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { storageService } from 'fbase';
+import { storageService, postCollection } from 'fbase';
 import { addDoc } from 'firebase/firestore';
 import { ref, uploadString, getDownloadURL } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 
-export default function PostInput({ currentUserObject, postCollection }) {
+// Import components
+
+export default function PostUpload({ currentUserObject, handlePostUploadToggle }) {
 	// States
 	const [captionInput, setCaptionInput] = useState('');
 	const [imgUrl, setImgUrl] = useState('');
@@ -61,17 +63,25 @@ export default function PostInput({ currentUserObject, postCollection }) {
 	};
 
 	return (
-		<form onSubmit={handlePostSubmit}>
-			<div>
-				<input type="text" placeholder="Write a caption" value={captionInput} onChange={handleCaptionInputChange} />
-			</div>
-			<div>
-				<input type="file" accept="image/*" onChange={handleFileChange} />
-				{imgUrl && <img src={imgUrl} height="100px" />}
-			</div>
-			<div>
-				<input type="submit" value="Post" />
-			</div>
-		</form>
+		<div className="post-upload-container">
+			<form onSubmit={handlePostSubmit} className="post-upload-form">
+				<div>
+					Create post
+					<span className="material-icons" onClick={handlePostUploadToggle}>
+						cancel
+					</span>
+				</div>
+				<div>
+					<textarea placeholder="Write a caption..." value={captionInput} onChange={handleCaptionInputChange} />
+				</div>
+				<div className="drag-and-drop-area">
+					<input type="file" accept="image/*" onChange={handleFileChange} />
+					{imgUrl && <img src={imgUrl} height="100px" />}
+				</div>
+				<div>
+					<input type="submit" value="Post" />
+				</div>
+			</form>
+		</div>
 	);
 }
