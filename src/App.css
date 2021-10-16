@@ -8,6 +8,11 @@
   padding: 0;
 }
 
+.insta-logo {
+  font-family: 'Lobster Two', cursive;
+  font-weight: 600;
+}
+
 .material-icons {
   font-size: 1.8rem;
   cursor: pointer;
@@ -40,7 +45,6 @@ a:link, a:visited, a:hover, a:active {
       -ms-flex-align: center;
           align-items: center;
   gap: 0;
-  padding-bottom: 50px;
 }
 
 header {
@@ -89,9 +93,7 @@ header .header-container {
 }
 
 header .header-container .insta-logo {
-  font-family: 'Lobster Two', cursive;
   font-size: 1.7rem;
-  font-weight: 600;
 }
 
 header .header-container .nav-container-header {
@@ -160,6 +162,83 @@ header .header-container .nav-container-header .profile-picture .profile-options
 
 header .header-container .nav-container-header .profile-picture .profile-options div:last-child {
   border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.auth-page {
+  margin-top: 50px;
+  width: 350px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  gap: 1rem;
+}
+
+.auth-page form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: stretch;
+      -ms-flex-pack: stretch;
+          justify-content: stretch;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  gap: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  padding: 2rem;
+}
+
+.auth-page form .insta-logo {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-page form input {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  padding: 0.5em;
+  outline: none;
+}
+
+.auth-page form input[type='submit'] {
+  background-color: #458eff;
+  color: white;
+  font-weight: 600;
+}
+
+.auth-page form input[type='submit']:hover {
+  cursor: pointer;
+  background-color: #2c7fff;
+}
+
+.auth-page > div:last-child {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.auth-page > div:last-child span {
+  color: #458eff;
+  cursor: pointer;
+  font-weight: 500;
 }
 
 .post-header {

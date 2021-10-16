@@ -11,10 +11,16 @@ export default function Auth({ isLoggedIn }) {
 	const [emailInput, setEmailInput] = useState('');
 	const [passwordInput, setPasswordInput] = useState('');
 	const [usernameInput, setUsernameInput] = useState('');
+	const [fullnameInput, setFullnameInput] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
 
 	const newAccountToggle = () => {
 		setIsLoginState((prev) => !prev);
+		setEmailInput('');
+		setPasswordInput('');
+		setUsernameInput('');
+		setFullnameInput('');
+		setErrorMessage('');
 	};
 
 	const handleInputChange = (e) => {
@@ -22,12 +28,17 @@ export default function Auth({ isLoggedIn }) {
 			target: { name, value },
 		} = e;
 
+		setErrorMessage('');
+
 		switch (name) {
 			case 'email':
 				setEmailInput(value);
 				break;
 			case 'password':
 				setPasswordInput(value);
+				break;
+			case 'fullname':
+				setFullnameInput(value);
 				break;
 			case 'username':
 				setUsernameInput(value);
@@ -50,8 +61,8 @@ export default function Auth({ isLoggedIn }) {
 					username: usernameInput,
 					profilePictureUrl:
 						'https://firebasestorage.googleapis.com/v0/b/instagram-clone-dcbd6.appspot.com/o/images%2Fdefault-profile-pic.jpg?alt=media&token=fa16ab95-2b26-43f4-9bea-c410bdac6623',
-					name: 'Your name',
-					bio: 'Your bio',
+					name: fullnameInput,
+					bio: '',
 					followers: [],
 					followings: [],
 				};
@@ -66,35 +77,34 @@ export default function Auth({ isLoggedIn }) {
 	return isLoggedIn ? (
 		<Redirect to="/home" />
 	) : (
-		<div>
+		<div className="auth-page">
 			<form onSubmit={handleSubmit}>
+				<div className="insta-logo">Isn'tagram</div>
 				<div>
-					<label>
-						Email
-						<input name="email" type="text" value={emailInput} placeholder="Email" onChange={handleInputChange} required />
-					</label>
+					<input name="email" type="text" value={emailInput} placeholder="Email" onChange={handleInputChange} required />
 				</div>
 				<div>
-					<label>
-						Password
-						<input name="password" type="password" value={passwordInput} placeholder="Password" onChange={handleInputChange} required />
-					</label>
+					<input name="password" type="password" value={passwordInput} placeholder="Password" onChange={handleInputChange} required />
 				</div>
 				{!isLoginState && (
-					<div>
-						<label>
-							Username
+					<>
+						<div>
+							<input name="fullname" type="text" value={fullnameInput} placeholder="Full Name" onChange={handleInputChange} required />
+						</div>
+						<div>
 							<input name="username" type="text" value={usernameInput} placeholder="Username" onChange={handleInputChange} required />
-						</label>
-					</div>
+						</div>
+					</>
 				)}
-
 				<div>
 					<input type="submit" value={isLoginState ? 'Log in' : 'Sign up'} />
 					{errorMessage}
 				</div>
 			</form>
-			<button onClick={newAccountToggle}>{isLoginState ? 'I am new here' : 'I already have an account'}</button>
+			<div>
+				{isLoginState ? "Don't have an account?" : 'Have an account?'}
+				<span onClick={newAccountToggle}>{isLoginState ? ' Sign up' : ' Log in'}</span>
+			</div>
 		</div>
 	);
 }

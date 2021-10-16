@@ -69,17 +69,18 @@ export default function PostUpload({ currentUserObject }) {
 	return (
 		<form onSubmit={handlePostSubmit} className="post-upload-form">
 			<div className="drag-and-drop-container">
-				<label className="drag-and-drop-area" style={{ visibility: `${imgUrl ? 'hidden' : ''}` }}>
-					<span>Add a photo</span>
-					<span>or drag and drop</span>
-					<input type="file" accept="image/*" onChange={handleFileChange} />
-				</label>
-				{imgUrl && (
+				{imgUrl ? (
 					<div className="image-preview" style={{ backgroundImage: `url(${imgUrl})` }}>
 						<span className="material-icons" onClick={handleCancelImg}>
 							cancel
 						</span>
 					</div>
+				) : (
+					<label className="drag-and-drop-area">
+						<span>Add a photo</span>
+						<span>or drag and drop</span>
+						<input type="file" accept="image/*" onChange={handleFileChange} />
+					</label>
 				)}
 			</div>
 			<textarea placeholder="Write a caption..." value={captionInput} onChange={handleCaptionInputChange} />

@@ -33,6 +33,11 @@ $bio-padding-left: 20px;
 	gap: $gap;
 }
 
+.insta-logo {
+	font-family: 'Lobster Two', cursive;
+	font-weight: 600;
+}
+
 .material-icons {
 	font-size: 1.8rem;
 	cursor: pointer;
@@ -55,7 +60,6 @@ a {
 	color: $dark-grey;
 	min-height: 100vh;
 	@include flex-box(column, flex-start, center, 0);
-	padding-bottom: 50px;
 }
 
 header {
@@ -76,9 +80,7 @@ header {
 		margin: 0 $margin-left-right;
 
 		.insta-logo {
-			font-family: 'Lobster Two', cursive;
 			font-size: 1.7rem;
-			font-weight: 600;
 		}
 
 		.nav-container-header {
@@ -120,6 +122,58 @@ header {
 					}
 				}
 			}
+		}
+	}
+}
+
+// Auth page
+.auth-page {
+	margin-top: $header-height;
+	width: 350px;
+	@include flex-box(column, flex-start, stretch, 1rem);
+
+	form {
+		@include flex-box(column, stretch, stretch, 0.5rem);
+		border: 1px solid $light-grey;
+		border-radius: 3px;
+		padding: 2rem;
+
+		.insta-logo {
+			font-size: 2rem;
+			text-align: center;
+			margin-bottom: 2rem;
+		}
+
+		input {
+			width: 100%;
+			border: 1px solid $light-grey;
+			border-radius: 3px;
+			padding: 0.5em;
+			outline: none;
+
+			&[type='submit'] {
+				background-color: $blue;
+				color: $white;
+				font-weight: 600;
+
+				&:hover {
+					cursor: pointer;
+					background-color: darken($blue, 5%);
+				}
+			}
+		}
+	}
+
+	& > div:last-child {
+		border: 1px solid $light-grey;
+		border-radius: 3px;
+		padding: 1rem;
+		text-align: center;
+
+		span {
+			color: $blue;
+			cursor: pointer;
+			font-weight: 500;
 		}
 	}
 }
