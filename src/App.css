@@ -8,9 +8,25 @@
   padding: 0;
 }
 
+.profile-pic {
+  aspect-ratio: 1/1;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+}
+
 input,
 textarea {
   outline: none;
+}
+
+.username {
+  font-weight: 500;
+}
+
+.username:hover {
+  text-decoration: underline;
 }
 
 .insta-logo {
@@ -29,6 +45,10 @@ a {
 
 a:link, a:visited, a:hover, a:active {
   color: inherit;
+}
+
+body.scroll-locked {
+  overflow: hidden;
 }
 
 #root {
@@ -119,29 +139,23 @@ header .header-container .nav-container-header {
   width: 200px;
 }
 
-header .header-container .nav-container-header .profile-picture {
+header .header-container .nav-container-header .profile-pic {
   width: 24px;
-  aspect-ratio: 1/1;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  border-radius: 50%;
   position: relative;
   cursor: pointer;
 }
 
-header .header-container .nav-container-header .profile-picture .profile-options {
+header .header-container .nav-container-header .profile-pic .profile-options {
   position: absolute;
   right: 0;
-  top: 150%;
+  top: 200%;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
   width: 12em;
+  overflow: hidden;
 }
 
-header .header-container .nav-container-header .profile-picture .profile-options div {
+header .header-container .nav-container-header .profile-pic .profile-options div {
   padding: 0.5em 0.8em;
   cursor: pointer;
   background-color: white;
@@ -161,16 +175,17 @@ header .header-container .nav-container-header .profile-picture .profile-options
   gap: 0.5em;
 }
 
-header .header-container .nav-container-header .profile-picture .profile-options div:hover {
-  background-color: #fafafa;
+header .header-container .nav-container-header .profile-pic .profile-options div:hover {
+  background-color: #f7f7f7;
 }
 
-header .header-container .nav-container-header .profile-picture .profile-options div:last-child {
+header .header-container .nav-container-header .profile-pic .profile-options .log-out-btn {
   border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .auth-page {
-  margin-top: 50px;
+  padding-top: 50px;
+  padding-bottom: 1rem;
   width: 350px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -266,15 +281,6 @@ header .header-container .nav-container-header .profile-picture .profile-options
 
 .post-header .profile-pic {
   width: 30px;
-  aspect-ratio: 1/1;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  border-radius: 50%;
-}
-
-.username {
-  font-weight: 500;
 }
 
 .post-container {
@@ -470,6 +476,11 @@ header .header-container .nav-container-header .profile-picture .profile-options
   gap: 0;
 }
 
+.post-container .post-like-count span {
+  font-weight: 600;
+  cursor: pointer;
+}
+
 .post-container .post-caption-and-comments {
   padding: 0.5rem 0;
 }
@@ -559,8 +570,10 @@ header .header-container .nav-container-header .profile-picture .profile-options
 }
 
 .homepage-container {
-  margin-top: calc(50px + 1rem);
+  padding-top: 50px;
+  padding-bottom: 1rem;
   width: 100%;
+  height: 100%;
   max-width: 950px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -766,7 +779,8 @@ header .header-container .nav-container-header .profile-picture .profile-options
 }
 
 .user-page-container {
-  margin-top: 50px;
+  padding-top: 50px;
+  padding-bottom: 1rem;
   width: 100%;
   max-width: 950px;
 }
@@ -783,7 +797,7 @@ header .header-container .nav-container-header .profile-picture .profile-options
       grid-template-areas: 'profile-pic username-and-btns' 'bio bio' 'stats stats';
 }
 
-.user-page-container .user-info .profile-picture-container {
+.user-page-container .user-info .profile-pic-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -803,16 +817,11 @@ header .header-container .nav-container-header .profile-picture .profile-options
   grid-area: profile-pic;
 }
 
-.user-page-container .user-info .profile-picture-container .profile-picture {
+.user-page-container .user-info .profile-pic-container .profile-pic {
   width: 100%;
-  aspect-ratio: 1 / 1;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
   -webkit-transform: scale(0.7);
           transform: scale(0.7);
   border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 50%;
 }
 
 .user-page-container .user-info .username-and-btns {
@@ -1053,11 +1062,30 @@ header .header-container .nav-container-header .profile-picture .profile-options
 }
 
 .account-edit-container {
+  padding-top: calc(50px + 1rem);
+  padding-bottom: 1rem;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  gap: 0;
+}
+
+.account-edit-container .account-edit-form {
   border: 1px solid rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
           box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
   padding: 2em;
-  margin-top: calc(50px + 1rem);
   width: 100%;
   max-width: 950px;
   display: -webkit-box;
@@ -1076,8 +1104,7 @@ header .header-container .nav-container-header .profile-picture .profile-options
   gap: 1em;
 }
 
-.account-edit-container .form-header,
-.account-edit-container .form-control {
+.account-edit-container .account-edit-form .form-header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1088,13 +1115,13 @@ header .header-container .nav-container-header .profile-picture .profile-options
   -webkit-box-pack: stretch;
       -ms-flex-pack: stretch;
           justify-content: stretch;
-  -webkit-box-align: baseline;
-      -ms-flex-align: baseline;
-          align-items: baseline;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 1.5em;
 }
 
-.account-edit-container .form-header .profile-pic-container {
+.account-edit-container .account-edit-form .form-header .profile-pic-container {
   min-width: 5em;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1113,7 +1140,7 @@ header .header-container .nav-container-header .profile-picture .profile-options
   height: 2em;
 }
 
-.account-edit-container .form-header .profile-pic-container .pic {
+.account-edit-container .account-edit-form .form-header .profile-pic-container .profile-pic {
   height: 100%;
   aspect-ratio: 1/1;
   border-radius: 50%;
@@ -1122,12 +1149,33 @@ header .header-container .nav-container-header .profile-picture .profile-options
   background-position: center;
 }
 
-.account-edit-container .form-header .username {
+.account-edit-container .account-edit-form .form-header .username {
   font-weight: 600;
   font-size: 1.2em;
 }
 
-.account-edit-container .form-control label {
+.account-edit-container .account-edit-form .form-header .username:hover {
+  text-decoration: unset;
+}
+
+.account-edit-container .account-edit-form .form-control {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: stretch;
+      -ms-flex-pack: stretch;
+          justify-content: stretch;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  gap: 1.5em;
+}
+
+.account-edit-container .account-edit-form .form-control label {
   min-width: 5em;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1146,19 +1194,19 @@ header .header-container .nav-container-header .profile-picture .profile-options
   font-weight: 500;
 }
 
-.account-edit-container .form-control .form-input {
+.account-edit-container .account-edit-form .form-control .form-input {
   width: 100%;
   padding: 1ch;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 3px;
 }
 
-.account-edit-container .form-control textarea {
+.account-edit-container .account-edit-form .form-control textarea {
   resize: vertical;
   font-family: inherit;
 }
 
-.account-edit-container .submit-btn-container {
+.account-edit-container .account-edit-form .submit-btn-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1175,7 +1223,7 @@ header .header-container .nav-container-header .profile-picture .profile-options
   gap: 1em;
 }
 
-.account-edit-container .submit-btn-container .submit-btn {
+.account-edit-container .account-edit-form .submit-btn-container .submit-btn {
   border: none;
   background-color: #abccff;
   color: white;
@@ -1184,13 +1232,14 @@ header .header-container .nav-container-header .profile-picture .profile-options
   border-radius: 3px;
 }
 
-.account-edit-container .submit-btn-container .submit-btn.active {
+.account-edit-container .account-edit-form .submit-btn-container .submit-btn.active {
   background-color: #458eff;
   cursor: pointer;
 }
 
 .post-page-container {
-  margin-top: calc(50px + 1rem);
+  padding-top: calc(50px + 1rem);
+  padding-bottom: 1rem;
   width: 100%;
   max-width: 950px;
 }
@@ -1277,8 +1326,104 @@ header .header-container .nav-container-header .profile-picture .profile-options
   grid-area: comment-input;
 }
 
+.like-list-page {
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0;
+}
+
+.like-list-page .like-list-container {
+  background-color: white;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.like-list-page .like-list-container > div:first-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  position: relative;
+  text-align: center;
+  font-weight: 600;
+  padding: 1em;
+}
+
+.like-list-page .like-list-container > div:first-child .material-icons {
+  position: absolute;
+  top: 50%;
+  right: 0.5em;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.like-list-page .like-list-container > div:last-child {
+  max-height: 300px;
+  overflow: auto;
+}
+
+.like-list-page .like-list-container > div:last-child .like-list-user-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.like-list-page .like-list-container > div:last-child .like-list-user-card .profile-pic {
+  width: 2rem;
+}
+
+.like-list-page .like-list-container > div:last-child .like-list-user-card > div:last-child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  gap: 0;
+}
+
+.like-list-page .like-list-container > div:last-child .like-list-user-card > div:last-child .name {
+  color: #787878;
+}
+
 @media (min-width: 730px) {
   .homepage-container {
+    padding-top: calc(50px + 1rem);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1297,8 +1442,8 @@ header .header-container .nav-container-header .profile-picture .profile-options
   .homepage-container .current-user-card {
     position: -webkit-sticky;
     position: sticky;
-    width: 40%;
     top: calc(50px + 1rem);
+    width: 40%;
     padding: 0;
   }
   .homepage-container .homepage-content {
@@ -1316,7 +1461,7 @@ header .header-container .nav-container-header .profile-picture .profile-options
         grid-template-rows: repeat(3, fit-content);
         grid-template-areas: 'profile-pic username-and-btns' 'profile-pic stats' 'profile-pic bio';
   }
-  .user-page-container .user-info .profile-picture-container .profile-picture {
+  .user-page-container .user-info .profile-pic-container .profile-pic {
     width: 200px;
   }
   .user-page-container .user-info .username-and-btns {

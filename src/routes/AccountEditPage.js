@@ -53,26 +53,28 @@ export default function AccountEdit({ isLoggedIn, currentUserObject, refreshCurr
 	return isLoggedIn ? (
 		<>
 			<Header currentUserObject={currentUserObject} />
-			<form onSubmit={handleEditSubmit} className="account-edit-container">
-				<div className="form-header">
-					<div className="profile-pic-container">
-						<div className="pic" style={{ backgroundImage: `url(${currentUserObject.profilePictureUrl})` }} />
+			<div className="account-edit-container">
+				<form onSubmit={handleEditSubmit} className="account-edit-form">
+					<div className="form-header">
+						<div className="profile-pic-container">
+							<div className="profile-pic" style={{ backgroundImage: `url(${currentUserObject.profilePictureUrl})` }} />
+						</div>
+						<span className="username">{currentUserObject.username}</span>
 					</div>
-					<span className="username">{currentUserObject.username}</span>
-				</div>
-				<div className="form-control">
-					<label htmlFor="name">Name</label>
-					<input type="text" name="name" placeholder="Name" className="form-input" value={nameEdit} onChange={handleEditChange} />
-				</div>
-				<div className="form-control">
-					<label htmlFor="bio">Bio</label>
-					<textarea name="bio" placeholder="Bio" className="form-input" value={bioEdit} onChange={handleEditChange} />
-				</div>
-				<div className="submit-btn-container">
-					<input type="submit" className={`submit-btn ${isEditting ? 'active' : ''}`} value="Submit" />
-					{isSubmitted && <div>Profile saved!</div>}
-				</div>
-			</form>
+					<div className="form-control">
+						<label htmlFor="name">Name</label>
+						<input type="text" name="name" placeholder="Name" className="form-input" value={nameEdit} onChange={handleEditChange} />
+					</div>
+					<div className="form-control">
+						<label htmlFor="bio">Bio</label>
+						<textarea name="bio" placeholder="Bio" className="form-input" value={bioEdit} onChange={handleEditChange} />
+					</div>
+					<div className="submit-btn-container">
+						<input type="submit" className={`submit-btn ${isEditting ? 'active' : ''}`} value="Submit" />
+						{isSubmitted && <div>Profile saved!</div>}
+					</div>
+				</form>
+			</div>
 		</>
 	) : (
 		<Redirect to="/" />

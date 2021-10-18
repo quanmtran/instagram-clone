@@ -5,7 +5,7 @@ import { ref, deleteObject } from 'firebase/storage';
 import { Link } from 'react-router-dom';
 
 // Import functions
-import { getUsername, getTimeAgo } from 'Functions';
+import { getTimeAgo } from 'Functions';
 
 // Import components
 import Comment from './Comment';
@@ -13,15 +13,13 @@ import CommentInput from './CommentInput';
 import PostHeader from './PostHeader';
 import PostMoreOptions from './PostMoreOptions';
 
-export default function Post({ postObject, currentUserObject }) {
+export default function Post({ postObject, currentUserObject, toggleLikeListDisplayed, setLikeList }) {
 	// States
 	const [isEditting, setIsEditting] = useState(false);
 	const [editCaption, setEditCaption] = useState(postObject.caption);
 	const [postOwnerObject, setPostOwnerObject] = useState({});
 	const [isMoreOptionsDisplayed, setIsMoreOptionsDisplayed] = useState(false);
 	const [isDoubleTapped, setIsDoubleTapped] = useState(false);
-	const [isLikeListDisplayed, setIsLikeListDisplayed] = useState(false);
-	const [likeList, setLikeList] = useState([]);
 
 	// Firebase database references
 	const postDocRef = doc(postCollection, postObject.id);
@@ -33,7 +31,7 @@ export default function Post({ postObject, currentUserObject }) {
 	const postLikedArray = postObject.likedBy;
 	const likeCount = postLikedArray.length;
 	const currentUserId = currentUserObject.userId;
-	const hasCurrentUserLiked = postLikedArray.includes(currentUserId);
+	const hasCurrentUserLiked = postLikedArray.some((user) => user.userId === currentUserId);
 	const imgId = postObject.imgId;
 
 	useEffect(() => {
@@ -80,22 +78,15 @@ export default function Post({ postObject, currentUserObject }) {
 		}
 	};
 
-	const handleLikeCountClick = async () => {
-		toggleLikeListDisplayed();
-
-		const likersArray = await Promise.all(postObject.likedBy.map((userId) => getUsername(userId)));
-		setLikeList(likersArray);
-	};
-
 	const handleLikeClick = async () => {
 		try {
 			if (hasCurrentUserLiked) {
 				await updateDoc(postDocRef, {
-					likedBy: arrayRemove(currentUserId),
+					likedBy: arrayRemove(currentUserObject),
 				});
 			} else {
 				await updateDoc(postDocRef, {
-					likedBy: arrayUnion(currentUserId),
+					likedBy: arrayUnion(currentUserObject),
 				});
 			}
 		} catch (error) {
@@ -110,7 +101,7 @@ export default function Post({ postObject, currentUserObject }) {
 
 		try {
 			await updateDoc(postDocRef, {
-				likedBy: arrayUnion(currentUserId),
+				likedBy: arrayUnion(currentUserObject),
 			});
 		} catch (error) {
 			console.log(error);
@@ -121,9 +112,9 @@ export default function Post({ postObject, currentUserObject }) {
 		setIsMoreOptionsDisplayed((prev) => !prev);
 	};
 
-	// Other functions
-	const toggleLikeListDisplayed = () => {
-		setIsLikeListDisplayed((prev) => !prev);
+	const handleLikeListClick = () => {
+		setLikeList(postObject.likedBy);
+		toggleLikeListDisplayed();
 	};
 
 	return (
@@ -158,7 +149,17 @@ export default function Post({ postObject, currentUserObject }) {
 					</div>
 
 					<div className="post-like-count">
-						{likeCount ? `Liked by ${likeCount} ${likeCount === 1 ? 'person' : 'people'}.` : 'Be the first person to like this post.'}
+						{likeCount ? (
+							<>
+								Liked by&nbsp;
+								<span onClick={handleLikeListClick}>
+									{likeCount} {likeCount === 1 ? 'person' : 'people'}
+								</span>
+								.
+							</>
+						) : (
+							'Be the first person to like this post.'
+						)}
 					</div>
 
 					<div className="post-caption-and-comments">

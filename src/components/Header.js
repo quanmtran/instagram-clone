@@ -21,7 +21,7 @@ export default function Header({ currentUserObject }) {
 					<i className="material-icons">explore</i>
 					<i className="material-icons">favorite</i>
 					<div
-						className="profile-picture"
+						className="profile-pic"
 						onClick={handleToggleProfileOptions}
 						style={{ backgroundImage: `url(${currentUserObject.profilePictureUrl})` }}
 					>

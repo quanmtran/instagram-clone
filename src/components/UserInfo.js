@@ -51,8 +51,8 @@ export default function UserInfo({ userObject, postObjects, currentUserObject })
 
 	return (
 		<div className="user-info">
-			<div className="profile-picture-container">
-				<div className="profile-picture" style={{ backgroundImage: `url(${userObject.profilePictureUrl})` }}></div>
+			<div className="profile-pic-container">
+				<div className="profile-pic" style={{ backgroundImage: `url(${userObject.profilePictureUrl})` }}></div>
 			</div>
 			<div className="username-and-btns">
 				<div className="username">{userObject.username}</div>

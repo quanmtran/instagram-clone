@@ -20,7 +20,9 @@ export default function ProfileOptions({ currentUserObject }) {
 					<span className="material-icons">settings</span>Settings
 				</div>
 			</Link>
-			<div onClick={handleLogOut}>Log Out</div>
+			<div className="log-out-btn" onClick={handleLogOut}>
+				Log Out
+			</div>
 		</div>
 	);
 }

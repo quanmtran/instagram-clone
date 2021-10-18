@@ -34,9 +34,25 @@ $bio-padding-left: 20px;
 	gap: $gap;
 }
 
+.profile-pic {
+	aspect-ratio: 1/1;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 50%;
+}
+
 input,
 textarea {
 	outline: none;
+}
+
+.username {
+	font-weight: 500;
+
+	&:hover {
+		text-decoration: underline;
+	}
 }
 
 .insta-logo {
@@ -57,6 +73,12 @@ a {
 	&:hover,
 	&:active {
 		color: inherit;
+	}
+}
+
+body {
+	&.scroll-locked {
+		overflow: hidden;
 	}
 }
 
@@ -93,24 +115,19 @@ header {
 			@include flex-box(row, space-between, center, 0);
 			width: 200px;
 
-			.profile-picture {
+			.profile-pic {
 				width: 24px;
-				aspect-ratio: 1/1;
-				background-position: center;
-				background-size: cover;
-				background-repeat: no-repeat;
-				border-radius: 50%;
 				position: relative;
 				cursor: pointer;
 
 				.profile-options {
 					position: absolute;
 					right: 0;
-					top: 150%;
+					top: 200%;
 					border: 1px solid $light-grey;
 					border-radius: 5px;
-					box-shadow: 0 1px 5px $light-grey;
 					width: 12em;
+					overflow: hidden;
 
 					div {
 						padding: 0.5em 0.8em;
@@ -119,12 +136,12 @@ header {
 						@include flex-box(row, flex-start, center, 0.5em);
 
 						&:hover {
-							background-color: darken($white, 2%);
+							background-color: darken($white, 3%);
 						}
+					}
 
-						&:last-child {
-							border-top: 1px solid $light-grey;
-						}
+					.log-out-btn {
+						border-top: 1px solid $light-grey;
 					}
 				}
 			}
@@ -134,7 +151,8 @@ header {
 
 // Auth page
 .auth-page {
-	margin-top: $header-height;
+	padding-top: $header-height;
+	padding-bottom: 1rem;
 	width: 350px;
 	@include flex-box(column, flex-start, stretch, 1rem);
 
@@ -191,16 +209,7 @@ header {
 
 	.profile-pic {
 		width: 30px;
-		aspect-ratio: 1/1;
-		background-position: center;
-		background-size: cover;
-		background-repeat: no-repeat;
-		border-radius: 50%;
 	}
-}
-
-.username {
-	font-weight: 500;
 }
 
 // Post container
@@ -313,6 +322,11 @@ header {
 
 	.post-like-count {
 		@include flex-box(row, flex-start, center, 0);
+
+		span {
+			font-weight: 600;
+			cursor: pointer;
+		}
 	}
 
 	.post-caption-and-comments {
@@ -365,8 +379,10 @@ header {
 
 // Homepage
 .homepage-container {
-	margin-top: calc(#{$header-height} + 1rem);
+	padding-top: $header-height;
+	padding-bottom: 1rem;
 	width: 100%;
+	height: 100%;
 	max-width: $page-container-max-width;
 	@include flex-box(column, flex-start, center, 1em);
 
@@ -483,7 +499,8 @@ header {
 
 // User page
 .user-page-container {
-	margin-top: $header-height;
+	padding-top: $header-height;
+	padding-bottom: 1rem;
 	width: 100%;
 	max-width: $page-container-max-width;
 
@@ -498,19 +515,14 @@ header {
 			'bio bio'
 			'stats stats';
 
-		.profile-picture-container {
+		.profile-pic-container {
 			@include flex-box(row, center, flex-start, 0);
 			grid-area: profile-pic;
 
-			.profile-picture {
+			.profile-pic {
 				width: 100%;
-				aspect-ratio: 1 / 1;
-				background-position: center;
-				background-repeat: no-repeat;
-				background-size: cover;
 				transform: scale(0.7);
 				border: 1px solid $light-grey;
-				border-radius: 50%;
 			}
 		}
 
@@ -649,75 +661,84 @@ header {
 
 // Account edit page
 .account-edit-container {
-	border: 1px solid $light-grey;
-	box-shadow: 0 1px 5px $light-grey;
-	padding: 2em;
-	margin-top: calc(#{$header-height} + 1rem);
+	padding-top: calc(#{$header-height} + 1rem);
+	padding-bottom: 1rem;
 	width: 100%;
-	max-width: $page-container-max-width;
-	@include flex-box(column, center, stretch, 1em);
+	@include flex-box(row, center, flex-start, 0);
 
-	.form-header,
-	.form-control {
-		@include flex-box(row, stretch, baseline, 1.5em);
-	}
+	.account-edit-form {
+		border: 1px solid $light-grey;
+		box-shadow: 0 1px 5px $light-grey;
+		padding: 2em;
+		width: 100%;
+		max-width: $page-container-max-width;
+		@include flex-box(column, center, stretch, 1em);
 
-	.form-header {
-		.profile-pic-container {
-			min-width: 5em;
-			@include flex-box(row, flex-end, center, 0);
-			height: 2em;
+		.form-header {
+			@include flex-box(row, stretch, center, 1.5em);
 
-			.pic {
-				height: 100%;
-				aspect-ratio: 1/1;
-				border-radius: 50%;
-				background-size: cover;
-				background-repeat: no-repeat;
-				background-position: center;
+			.profile-pic-container {
+				min-width: 5em;
+				@include flex-box(row, flex-end, center, 0);
+				height: 2em;
+
+				.profile-pic {
+					height: 100%;
+					aspect-ratio: 1/1;
+					border-radius: 50%;
+					background-size: cover;
+					background-repeat: no-repeat;
+					background-position: center;
+				}
+			}
+
+			.username {
+				font-weight: 600;
+				font-size: 1.2em;
+
+				&:hover {
+					text-decoration: unset;
+				}
 			}
 		}
 
-		.username {
-			font-weight: 600;
-			font-size: 1.2em;
+		.form-control {
+			@include flex-box(row, stretch, baseline, 1.5em);
+
+			label {
+				min-width: 5em;
+				@include flex-box(row, flex-end, center, 0);
+				font-weight: 500;
+			}
+
+			.form-input {
+				width: 100%;
+				padding: 1ch;
+				border: 1px solid $light-grey;
+				border-radius: 3px;
+			}
+
+			textarea {
+				resize: vertical;
+				font-family: inherit;
+			}
 		}
-	}
 
-	.form-control {
-		label {
-			min-width: 5em;
-			@include flex-box(row, flex-end, center, 0);
-			font-weight: 500;
-		}
+		.submit-btn-container {
+			@include flex-box(column, center, center, 1em);
 
-		.form-input {
-			width: 100%;
-			padding: 1ch;
-			border: 1px solid $light-grey;
-			border-radius: 3px;
-		}
+			.submit-btn {
+				border: none;
+				background-color: lighten($blue, 20%);
+				color: $white;
+				padding: 0.5em 1em;
+				font-weight: 600;
+				border-radius: 3px;
 
-		textarea {
-			resize: vertical;
-			font-family: inherit;
-		}
-	}
-
-	.submit-btn-container {
-		@include flex-box(column, center, center, 1em);
-
-		.submit-btn {
-			border: none;
-			background-color: lighten($blue, 20%);
-			color: $white;
-			padding: 0.5em 1em;
-			font-weight: 600;
-			border-radius: 3px;
-
-			&.active {
-				background-color: $blue;
-				cursor: pointer;
+				&.active {
+					background-color: $blue;
+					cursor: pointer;
+				}
 			}
 		}
 	}
@@ -725,7 +746,8 @@ header {
 
 // Post page
 .post-page-container {
-	margin-top: calc(#{$header-height} + 1rem);
+	padding-top: calc(#{$header-height} + 1rem);
+	padding-bottom: 1rem;
 	width: 100%;
 	max-width: $page-container-max-width;
 
@@ -786,14 +808,71 @@ header {
 	}
 }
 
+// Like list
+.like-list-page {
+	background-color: $light-grey;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 100;
+	@include flex-box(row, center, center, 0);
+
+	.like-list-container {
+		background-color: $white;
+		border-radius: 10px;
+		width: 100%;
+		max-width: 400px;
+
+		& > div:first-child {
+			border-bottom: 1px solid $light-grey;
+			position: relative;
+			text-align: center;
+			font-weight: 600;
+			padding: 1em;
+
+			.material-icons {
+				position: absolute;
+				top: 50%;
+				right: 0.5em;
+				transform: translateY(-50%);
+			}
+		}
+
+		& > div:last-child {
+			max-height: 300px;
+			overflow: auto;
+
+			.like-list-user-card {
+				@include flex-box(row, flex-start, center, 1rem);
+				padding: 0.5rem 1rem;
+
+				.profile-pic {
+					width: 2rem;
+				}
+
+				& > div:last-child {
+					@include flex-box(column, center, flex-start, 0);
+
+					.name {
+						color: $grey;
+					}
+				}
+			}
+		}
+	}
+}
+
 @media (min-width: 730px) {
 	.homepage-container {
+		padding-top: calc(#{$header-height} + 1rem);
 		@include flex-box(row-reverse, flex-start, flex-start, 2rem);
 
 		.current-user-card {
 			position: sticky;
-			width: 40%;
 			top: calc(#{$header-height} + 1rem);
+			width: 40%;
 			padding: 0;
 		}
 
@@ -814,7 +893,7 @@ header {
 				'profile-pic stats'
 				'profile-pic bio';
 
-			.profile-picture-container .profile-picture {
+			.profile-pic-container .profile-pic {
 				width: 200px;
 			}
 
