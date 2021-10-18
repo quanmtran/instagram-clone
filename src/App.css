@@ -8,6 +8,11 @@
   padding: 0;
 }
 
+input,
+textarea {
+  outline: none;
+}
+
 .insta-logo {
   font-family: 'Lobster Two', cursive;
   font-weight: 600;
@@ -214,7 +219,6 @@ header .header-container .nav-container-header .profile-picture .profile-options
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 3px;
   padding: 0.5em;
-  outline: none;
 }
 
 .auth-page form input[type='submit'] {
@@ -285,8 +289,39 @@ header .header-container .nav-container-header .profile-picture .profile-options
   padding-right: 1rem;
 }
 
+.post-container .post-pic {
+  position: relative;
+}
+
 .post-container .post-pic img {
   width: 100%;
+}
+
+.post-container .post-pic .material-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0;
+  color: white;
+  font-size: 6em;
+  -webkit-animation: heart-pop 1s forwards;
+          animation: heart-pop 1s forwards;
+  cursor: default;
 }
 
 .post-container .post-edit-form {
@@ -313,7 +348,6 @@ header .header-container .nav-container-header .profile-picture .profile-options
 }
 
 .post-container .post-edit-form input[type='text'] {
-  outline: none;
   width: 100%;
 }
 
@@ -340,6 +374,20 @@ header .header-container .nav-container-header .profile-picture .profile-options
       -ms-flex-align: center;
           align-items: center;
   gap: 1em;
+}
+
+.post-container .post-interactive-btns .like-btn {
+  font-size: 1.8em;
+}
+
+.post-container .post-interactive-btns .like-btn:hover {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.post-container .post-interactive-btns .like-btn.liked {
+  color: #fd1d1d;
+  -webkit-animation: heart-btn-pop 0.3s;
+          animation: heart-btn-pop 0.3s;
 }
 
 .post-container .post-interactive-btns > div:last-child {
@@ -422,6 +470,10 @@ header .header-container .nav-container-header .profile-picture .profile-options
   gap: 0;
 }
 
+.post-container .post-caption-and-comments {
+  padding: 0.5rem 0;
+}
+
 .post-container .post-caption-and-comments .comment {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -436,7 +488,7 @@ header .header-container .nav-container-header .profile-picture .profile-options
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 0.5em;
+  gap: 0.5rem;
 }
 
 .post-container .post-caption-and-comments .comment .username-and-text {
@@ -449,7 +501,8 @@ header .header-container .nav-container-header .profile-picture .profile-options
 }
 
 .post-container .posted-at {
-  font-size: 0.8em;
+  font-size: 0.7em;
+  padding-bottom: 0.5rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -488,7 +541,6 @@ header .header-container .nav-container-header .profile-picture .profile-options
 
 .post-container .comment-input-container input {
   border: none;
-  outline: none;
   background-color: unset;
   width: 100%;
 }
@@ -579,7 +631,6 @@ header .header-container .nav-container-header .profile-picture .profile-options
   height: 5rem;
   font-family: inherit;
   border: none;
-  outline: none;
   font-size: 1.5em;
 }
 
@@ -1372,6 +1423,82 @@ header .header-container .nav-container-header .profile-picture .profile-options
         -ms-flex-align: center;
             align-items: center;
     gap: 30px;
+  }
+}
+
+@-webkit-keyframes heart-btn-pop {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes heart-btn-pop {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@-webkit-keyframes heart-pop {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  20% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+  40% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  60% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+}
+
+@keyframes heart-pop {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  20% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+  40% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  60% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
   }
 }
 /*# sourceMappingURL=App.css.map */

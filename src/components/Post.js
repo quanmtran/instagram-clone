@@ -19,6 +19,7 @@ export default function Post({ postObject, currentUserObject }) {
 	const [editCaption, setEditCaption] = useState(postObject.caption);
 	const [postOwnerObject, setPostOwnerObject] = useState({});
 	const [isMoreOptionsDisplayed, setIsMoreOptionsDisplayed] = useState(false);
+	const [isDoubleTapped, setIsDoubleTapped] = useState(false);
 	const [isLikeListDisplayed, setIsLikeListDisplayed] = useState(false);
 	const [likeList, setLikeList] = useState([]);
 
@@ -102,6 +103,20 @@ export default function Post({ postObject, currentUserObject }) {
 		}
 	};
 
+	const handleDoubleTap = async () => {
+		setIsDoubleTapped(true);
+
+		setTimeout(() => setIsDoubleTapped(false), 1000);
+
+		try {
+			await updateDoc(postDocRef, {
+				likedBy: arrayUnion(currentUserId),
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	const handleMoreClick = () => {
 		setIsMoreOptionsDisplayed((prev) => !prev);
 	};
@@ -115,8 +130,9 @@ export default function Post({ postObject, currentUserObject }) {
 		<div className="post-container">
 			<PostHeader postOwnerObject={postOwnerObject} />
 
-			<div className="post-pic">
+			<div className="post-pic" onDoubleClick={handleDoubleTap}>
 				<img src={postObject.imgUrl} />
+				{isDoubleTapped && <span className="material-icons">favorite</span>}
 			</div>
 
 			{isEditting ? (
@@ -128,7 +144,9 @@ export default function Post({ postObject, currentUserObject }) {
 			) : (
 				<>
 					<div className="post-interactive-btns">
-						<button onClick={handleLikeClick}>Like{hasCurrentUserLiked ? 'd' : ''}</button>
+						<span className={`material-icons like-btn ${hasCurrentUserLiked ? 'liked' : ''}`} onClick={handleLikeClick}>
+							{`favorite${hasCurrentUserLiked ? '' : '_border'}`}
+						</span>
 						{currentUserObject.userId === postObject.ownerUserId && (
 							<PostMoreOptions
 								handleEditToggle={handleEditToggle}
@@ -140,8 +158,7 @@ export default function Post({ postObject, currentUserObject }) {
 					</div>
 
 					<div className="post-like-count">
-						{likeCount}
-						{` like${likeCount > 1 ? 's' : ''}`}
+						{likeCount ? `Liked by ${likeCount} ${likeCount === 1 ? 'person' : 'people'}.` : 'Be the first person to like this post.'}
 					</div>
 
 					<div className="post-caption-and-comments">

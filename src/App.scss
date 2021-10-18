@@ -14,6 +14,7 @@ $blue: #458eff;
 $grey: rgb(120, 120, 120);
 $light-grey: rgba(0, 0, 0, 0.2);
 $dark-grey: rgb(60, 60, 60);
+$red: #fd1d1d;
 
 // Constants
 $header-height: 50px;
@@ -31,6 +32,11 @@ $bio-padding-left: 20px;
 	justify-content: $justify;
 	align-items: $align;
 	gap: $gap;
+}
+
+input,
+textarea {
+	outline: none;
 }
 
 .insta-logo {
@@ -149,7 +155,6 @@ header {
 			border: 1px solid $light-grey;
 			border-radius: 3px;
 			padding: 0.5em;
-			outline: none;
 
 			&[type='submit'] {
 				background-color: $blue;
@@ -211,8 +216,23 @@ header {
 	}
 
 	.post-pic {
+		position: relative;
+
 		img {
 			width: 100%;
+		}
+
+		.material-icons {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			@include flex-box(row, center, center, 0);
+			color: $white;
+			font-size: 6em;
+			animation: heart-pop 1s forwards;
+			cursor: default;
 		}
 	}
 
@@ -225,7 +245,6 @@ header {
 			border: none;
 
 			&[type='text'] {
-				outline: none;
 				width: 100%;
 			}
 
@@ -241,6 +260,19 @@ header {
 
 	.post-interactive-btns {
 		@include flex-box(row, space-between, center, 1em);
+
+		.like-btn {
+			font-size: 1.8em;
+
+			&:hover {
+				color: $light-grey;
+			}
+
+			&.liked {
+				color: $red;
+				animation: heart-btn-pop 0.3s;
+			}
+		}
 
 		& > div:last-child {
 			position: relative;
@@ -284,8 +316,10 @@ header {
 	}
 
 	.post-caption-and-comments {
+		padding: 0.5rem 0;
+
 		.comment {
-			@include flex-box(row, space-between, center, 0.5em);
+			@include flex-box(row, space-between, center, 0.5rem);
 
 			.username-and-text {
 				word-wrap: break-word;
@@ -299,7 +333,8 @@ header {
 	}
 
 	.posted-at {
-		font-size: 0.8em;
+		font-size: 0.7em;
+		padding-bottom: 0.5rem;
 		@include flex-box(row, flex-start, center, 0);
 	}
 
@@ -311,7 +346,6 @@ header {
 
 		input {
 			border: none;
-			outline: none;
 			background-color: unset;
 			width: 100%;
 
@@ -361,7 +395,6 @@ header {
 				height: 5rem;
 				font-family: inherit;
 				border: none;
-				outline: none;
 				font-size: 1.5em;
 
 				&:hover {
@@ -837,5 +870,35 @@ header {
 				}
 			}
 		}
+	}
+}
+
+@keyframes heart-btn-pop {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.2);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes heart-pop {
+	0% {
+		transform: scale(0);
+	}
+	20% {
+		transform: scale(1.2);
+	}
+	40% {
+		transform: scale(1);
+	}
+	60% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(0);
 	}
 }
