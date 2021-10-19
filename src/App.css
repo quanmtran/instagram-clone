@@ -8,12 +8,28 @@
   padding: 0;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
+.text-bold {
+  font-weight: 500;
+}
+
+.color-red {
+  color: #fd1d1d;
+}
+
+.color-blue {
+  color: #458eff;
+}
+
 .profile-pic {
   aspect-ratio: 1/1;
+  border-radius: 50%;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  border-radius: 50%;
 }
 
 input,
@@ -1121,7 +1137,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   gap: 1.5em;
 }
 
-.account-edit-container .account-edit-form .form-header .profile-pic-container {
+.account-edit-container .account-edit-form .form-header > div:first-child {
   min-width: 5em;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1140,22 +1156,41 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   height: 2em;
 }
 
-.account-edit-container .account-edit-form .form-header .profile-pic-container .profile-pic {
-  height: 100%;
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+.account-edit-container .account-edit-form .form-header > div:first-child .profile-pic {
+  width: 40px;
 }
 
-.account-edit-container .account-edit-form .form-header .username {
+.account-edit-container .account-edit-form .form-header > div:last-child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  gap: 0;
+}
+
+.account-edit-container .account-edit-form .form-header > div:last-child .username {
   font-weight: 600;
   font-size: 1.2em;
 }
 
-.account-edit-container .account-edit-form .form-header .username:hover {
+.account-edit-container .account-edit-form .form-header > div:last-child .username:hover {
   text-decoration: unset;
+}
+
+.account-edit-container .account-edit-form .form-header > div:last-child .change-profile-pic-btn {
+  color: #458eff;
+  font-size: 0.9em;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .account-edit-container .account-edit-form .form-control {
@@ -1337,6 +1372,66 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
 
 .user-list-page .user-list-container > div:last-child .user-list-user-card > div:last-child .name {
   color: #787878;
+}
+
+.profile-pic-options-page {
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0;
+}
+
+.profile-pic-options-page .profile-pic-options-container {
+  background-color: white;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.profile-pic-options-page .profile-pic-options-container > div {
+  text-align: center;
+}
+
+.profile-pic-options-page .profile-pic-options-container > div:first-child {
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 2rem;
+}
+
+.profile-pic-options-page .profile-pic-options-container > div:not(:first-child) {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.profile-pic-options-page .profile-pic-options-container > div:not(:first-child):not(.upload-pic-btn) {
+  padding: 1rem;
+}
+
+.profile-pic-options-page .profile-pic-options-container > div label {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  padding: 1rem;
+}
+
+.profile-pic-options-page .profile-pic-options-container > div label input {
+  display: none;
 }
 
 @media (min-width: 730px) {

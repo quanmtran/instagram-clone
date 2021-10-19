@@ -34,12 +34,28 @@ $bio-padding-left: 20px;
 	gap: $gap;
 }
 
+.clickable {
+	cursor: pointer;
+}
+
+.text-bold {
+	font-weight: 500;
+}
+
+.color-red {
+	color: $red;
+}
+
+.color-blue {
+	color: $blue;
+}
+
 .profile-pic {
 	aspect-ratio: 1/1;
+	border-radius: 50%;
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
-	border-radius: 50%;
 }
 
 input,
@@ -677,27 +693,32 @@ header {
 		.form-header {
 			@include flex-box(row, stretch, center, 1.5em);
 
-			.profile-pic-container {
+			& > div:first-child {
 				min-width: 5em;
 				@include flex-box(row, flex-end, center, 0);
 				height: 2em;
 
 				.profile-pic {
-					height: 100%;
-					aspect-ratio: 1/1;
-					border-radius: 50%;
-					background-size: cover;
-					background-repeat: no-repeat;
-					background-position: center;
+					width: 40px;
 				}
 			}
 
-			.username {
-				font-weight: 600;
-				font-size: 1.2em;
+			& > div:last-child {
+				@include flex-box(column, center, flex-start, 0);
+				.username {
+					font-weight: 600;
+					font-size: 1.2em;
 
-				&:hover {
-					text-decoration: unset;
+					&:hover {
+						text-decoration: unset;
+					}
+				}
+
+				.change-profile-pic-btn {
+					color: $blue;
+					font-size: 0.9em;
+					font-weight: 600;
+					cursor: pointer;
 				}
 			}
 		}
@@ -802,6 +823,54 @@ header {
 					.name {
 						color: $grey;
 					}
+				}
+			}
+		}
+	}
+}
+
+// Profile pic options
+.profile-pic-options-page {
+	background-color: $light-grey;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 100;
+	@include flex-box(row, center, center, 0);
+
+	.profile-pic-options-container {
+		background-color: $white;
+		border-radius: 10px;
+		width: 100%;
+		max-width: 400px;
+
+		& > div {
+			text-align: center;
+
+			&:first-child {
+				font-size: 1.2rem;
+				font-weight: 600;
+				padding: 2rem;
+			}
+
+			&:not(:first-child) {
+				border-top: 1px solid $light-grey;
+
+				&:not(.upload-pic-btn) {
+					padding: 1rem;
+				}
+			}
+
+			label {
+				display: inline-block;
+				height: 100%;
+				width: 100%;
+				padding: 1rem;
+
+				input {
+					display: none;
 				}
 			}
 		}

@@ -5,6 +5,7 @@ import { userCollection } from 'fbase';
 
 // Import components
 import Header from 'components/Header';
+import ProfilePicOptions from 'components/ProfilePicOptions';
 
 export default function AccountEdit({ isLoggedIn, currentUserObject, refreshCurrentUserObject }) {
 	const currentUserDocRef = doc(userCollection, currentUserObject.userId);
@@ -14,8 +15,14 @@ export default function AccountEdit({ isLoggedIn, currentUserObject, refreshCurr
 	const [bioEdit, setBioEdit] = useState(currentUserObject.bio);
 	const [isEditting, setIsEditting] = useState(false);
 	const [isSubmitted, setIsSubmitted] = useState(false);
+	const [isProfilePicOptionsDisplayed, setIsProfilePicOptionsDisplayed] = useState(false);
 
 	// Handlers
+	const handleChangeProfilePicToggle = () => {
+		document.body.classList.toggle('scroll-locked');
+		setIsProfilePicOptionsDisplayed((prev) => !prev);
+	};
+
 	const handleEditChange = (e) => {
 		const {
 			target: { name, value },
@@ -56,10 +63,15 @@ export default function AccountEdit({ isLoggedIn, currentUserObject, refreshCurr
 			<div className="account-edit-container">
 				<form onSubmit={handleEditSubmit} className="account-edit-form">
 					<div className="form-header">
-						<div className="profile-pic-container">
+						<div>
 							<div className="profile-pic" style={{ backgroundImage: `url(${currentUserObject.profilePictureUrl})` }} />
 						</div>
-						<span className="username">{currentUserObject.username}</span>
+						<div>
+							<span className="username">{currentUserObject.username}</span>
+							<span className="change-profile-pic-btn" onClick={handleChangeProfilePicToggle}>
+								Change Profile Photo
+							</span>
+						</div>
 					</div>
 					<div className="form-control">
 						<label htmlFor="name">Name</label>
@@ -75,6 +87,14 @@ export default function AccountEdit({ isLoggedIn, currentUserObject, refreshCurr
 					</div>
 				</form>
 			</div>
+			{isProfilePicOptionsDisplayed && (
+				<ProfilePicOptions
+					handleChangeProfilePicToggle={handleChangeProfilePicToggle}
+					currentUserDocRef={currentUserDocRef}
+					refreshCurrentUserObject={refreshCurrentUserObject}
+					currentUserObject={currentUserObject}
+				/>
+			)}
 		</>
 	) : (
 		<Redirect to="/" />

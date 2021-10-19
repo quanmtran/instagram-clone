@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { authService, userCollection } from 'fbase';
+import { authService, userCollection, DEFAULT_PROFILE_PIC_URL } from 'fbase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { getDownloadURL } from 'firebase/storage';
@@ -59,8 +59,7 @@ export default function Auth({ isLoggedIn }) {
 				const userObject = {
 					userId: userId,
 					username: usernameInput,
-					profilePictureUrl:
-						'https://firebasestorage.googleapis.com/v0/b/instagram-clone-dcbd6.appspot.com/o/images%2Fdefault-profile-pic.jpg?alt=media&token=fa16ab95-2b26-43f4-9bea-c410bdac6623',
+					profilePictureUrl: DEFAULT_PROFILE_PIC_URL,
 					name: fullnameInput,
 					bio: '',
 					followers: [],
