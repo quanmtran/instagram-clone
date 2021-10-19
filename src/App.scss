@@ -585,13 +585,14 @@ header {
 
 			& > div {
 				@include flex-box(column, center, center, 0);
+				color: $grey;
 
-				& > div:first-child {
-					font-weight: 600;
+				&:not(:first-child) {
+					cursor: pointer;
 				}
 
-				& > div:last-child {
-					color: $grey;
+				span {
+					font-weight: 600;
 				}
 			}
 		}
@@ -808,8 +809,8 @@ header {
 	}
 }
 
-// Like list
-.like-list-page {
+// User list
+.user-list-page {
 	background-color: $light-grey;
 	position: fixed;
 	top: 0;
@@ -819,7 +820,7 @@ header {
 	z-index: 100;
 	@include flex-box(row, center, center, 0);
 
-	.like-list-container {
+	.user-list-container {
 		background-color: $white;
 		border-radius: 10px;
 		width: 100%;
@@ -844,7 +845,7 @@ header {
 			max-height: 300px;
 			overflow: auto;
 
-			.like-list-user-card {
+			.user-list-user-card {
 				@include flex-box(row, flex-start, center, 1rem);
 				padding: 0.5rem 1rem;
 

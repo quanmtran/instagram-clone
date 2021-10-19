@@ -13,7 +13,7 @@ import CommentInput from './CommentInput';
 import PostHeader from './PostHeader';
 import PostMoreOptions from './PostMoreOptions';
 
-export default function Post({ postObject, currentUserObject, toggleLikeListDisplayed, setLikeList }) {
+export default function Post({ postObject, currentUserObject, toggleUserListDisplayed, setUserList }) {
 	// States
 	const [isEditting, setIsEditting] = useState(false);
 	const [editCaption, setEditCaption] = useState(postObject.caption);
@@ -31,7 +31,7 @@ export default function Post({ postObject, currentUserObject, toggleLikeListDisp
 	const postLikedArray = postObject.likedBy;
 	const likeCount = postLikedArray.length;
 	const currentUserId = currentUserObject.userId;
-	const hasCurrentUserLiked = postLikedArray.some((user) => user.userId === currentUserId);
+	const hasCurrentUserLiked = postLikedArray.includes(currentUserId);
 	const imgId = postObject.imgId;
 
 	useEffect(() => {
@@ -82,11 +82,11 @@ export default function Post({ postObject, currentUserObject, toggleLikeListDisp
 		try {
 			if (hasCurrentUserLiked) {
 				await updateDoc(postDocRef, {
-					likedBy: arrayRemove(currentUserObject),
+					likedBy: arrayRemove(currentUserId),
 				});
 			} else {
 				await updateDoc(postDocRef, {
-					likedBy: arrayUnion(currentUserObject),
+					likedBy: arrayUnion(currentUserId),
 				});
 			}
 		} catch (error) {
@@ -101,7 +101,7 @@ export default function Post({ postObject, currentUserObject, toggleLikeListDisp
 
 		try {
 			await updateDoc(postDocRef, {
-				likedBy: arrayUnion(currentUserObject),
+				likedBy: arrayUnion(currentUserId),
 			});
 		} catch (error) {
 			console.log(error);
@@ -113,8 +113,11 @@ export default function Post({ postObject, currentUserObject, toggleLikeListDisp
 	};
 
 	const handleLikeListClick = () => {
-		setLikeList(postObject.likedBy);
-		toggleLikeListDisplayed();
+		setUserList({
+			listName: 'Likes',
+			users: postObject.likedBy,
+		});
+		toggleUserListDisplayed();
 	};
 
 	return (

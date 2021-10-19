@@ -8,8 +8,9 @@ import UserPagePost from 'components/UserPagePost';
 import Header from 'components/Header';
 import UserInfo from 'components/UserInfo';
 import UserPageContentNav from 'components/UserPageContentNav';
+import UserList from 'components/UserList';
 
-export default function UserPage({ isLoggedIn, currentUserObject }) {
+export default function UserPage({ isLoggedIn, currentUserObject, userList, setUserList, isUserListDisplayed, toggleUserListDisplayed }) {
 	// States
 	const [postObjects, setPostObjects] = useState([]);
 	const [userObject, setUserObject] = useState({});
@@ -60,7 +61,13 @@ export default function UserPage({ isLoggedIn, currentUserObject }) {
 				<>
 					<Header currentUserObject={currentUserObject} />
 					<div className="user-page-container">
-						<UserInfo userObject={userObject} postObjects={postObjects} currentUserObject={currentUserObject} />
+						<UserInfo
+							userObject={userObject}
+							postObjects={postObjects}
+							currentUserObject={currentUserObject}
+							setUserList={setUserList}
+							toggleUserListDisplayed={toggleUserListDisplayed}
+						/>
 						<div className="content">
 							<UserPageContentNav />
 							<div className="content-container">
@@ -70,6 +77,7 @@ export default function UserPage({ isLoggedIn, currentUserObject }) {
 							</div>
 						</div>
 					</div>
+					{isUserListDisplayed && <UserList toggleUserListDisplayed={toggleUserListDisplayed} userList={userList} />}
 				</>
 			)}
 		</>

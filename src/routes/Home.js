@@ -7,13 +7,11 @@ import { query, onSnapshot, orderBy } from 'firebase/firestore';
 import Post from 'components/Post';
 import Header from 'components/Header';
 import CurrentUserCard from 'components/CurrentUserCard';
-import LikeList from 'components/LikeList';
+import UserList from 'components/UserList';
 
-export default function Home({ isLoggedIn, currentUserObject }) {
+export default function Home({ isLoggedIn, currentUserObject, userList, setUserList, isUserListDisplayed, toggleUserListDisplayed }) {
 	const [postObjects, setPostObjects] = useState([]);
 	const [isPageReady, setIsPageReady] = useState(false);
-	const [isLikeListDisplayed, setIsLikeListDisplayed] = useState(false);
-	const [likeList, setLikeList] = useState([]);
 
 	// Get all posts on component mount
 	useEffect(() => {
@@ -33,12 +31,6 @@ export default function Home({ isLoggedIn, currentUserObject }) {
 		};
 	}, []);
 
-	// Other functions
-	const toggleLikeListDisplayed = () => {
-		setIsLikeListDisplayed((prev) => !prev);
-		document.body.classList.toggle('scroll-locked');
-	};
-
 	return isLoggedIn ? (
 		<>
 			{isPageReady ? (
@@ -52,13 +44,13 @@ export default function Home({ isLoggedIn, currentUserObject }) {
 									key={postObject.id}
 									postObject={postObject}
 									currentUserObject={currentUserObject}
-									toggleLikeListDisplayed={toggleLikeListDisplayed}
-									setLikeList={setLikeList}
+									toggleUserListDisplayed={toggleUserListDisplayed}
+									setUserList={setUserList}
 								/>
 							))}
 						</div>
-						{isLikeListDisplayed && <LikeList toggleLikeListDisplayed={toggleLikeListDisplayed} likeList={likeList} />}
 					</div>
+					{isUserListDisplayed && <UserList toggleUserListDisplayed={toggleUserListDisplayed} userList={userList} />}
 				</>
 			) : (
 				'Loading...'

@@ -9,6 +9,13 @@ function App() {
 	const [isFirebaseReady, setIsFirebaseReady] = useState(false);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [currentUserObject, setCurrentUserObject] = useState(null);
+	const [userList, setUserList] = useState({ listName: '', users: [] });
+	const [isUserListDisplayed, setIsUserListDisplayed] = useState(false);
+
+	const toggleUserListDisplayed = () => {
+		setIsUserListDisplayed((prev) => !prev);
+		document.body.classList.toggle('scroll-locked');
+	};
 
 	const refreshCurrentUserObject = async (currentUserId) => {
 		const userDocSnap = await getDoc(doc(userCollection, currentUserId));
@@ -32,7 +39,15 @@ function App() {
 
 	return isFirebaseReady ? (
 		<>
-			<AppRouter isLoggedIn={isLoggedIn} currentUserObject={currentUserObject} refreshCurrentUserObject={refreshCurrentUserObject} />
+			<AppRouter
+				isLoggedIn={isLoggedIn}
+				currentUserObject={currentUserObject}
+				refreshCurrentUserObject={refreshCurrentUserObject}
+				userList={userList}
+				setUserList={setUserList}
+				isUserListDisplayed={isUserListDisplayed}
+				toggleUserListDisplayed={toggleUserListDisplayed}
+			/>
 		</>
 	) : (
 		'Loading...'

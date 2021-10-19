@@ -946,14 +946,15 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
       -ms-flex-align: center;
           align-items: center;
   gap: 0;
-}
-
-.user-page-container .user-info .stats > div > div:first-child {
-  font-weight: 600;
-}
-
-.user-page-container .user-info .stats > div > div:last-child {
   color: #787878;
+}
+
+.user-page-container .user-info .stats > div:not(:first-child) {
+  cursor: pointer;
+}
+
+.user-page-container .user-info .stats > div span {
+  font-weight: 600;
 }
 
 .user-page-container .content {
@@ -1326,7 +1327,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   grid-area: comment-input;
 }
 
-.like-list-page {
+.user-list-page {
   background-color: rgba(0, 0, 0, 0.2);
   position: fixed;
   top: 0;
@@ -1350,14 +1351,14 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   gap: 0;
 }
 
-.like-list-page .like-list-container {
+.user-list-page .user-list-container {
   background-color: white;
   border-radius: 10px;
   width: 100%;
   max-width: 400px;
 }
 
-.like-list-page .like-list-container > div:first-child {
+.user-list-page .user-list-container > div:first-child {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   position: relative;
   text-align: center;
@@ -1365,7 +1366,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   padding: 1em;
 }
 
-.like-list-page .like-list-container > div:first-child .material-icons {
+.user-list-page .user-list-container > div:first-child .material-icons {
   position: absolute;
   top: 50%;
   right: 0.5em;
@@ -1373,12 +1374,12 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
           transform: translateY(-50%);
 }
 
-.like-list-page .like-list-container > div:last-child {
+.user-list-page .user-list-container > div:last-child {
   max-height: 300px;
   overflow: auto;
 }
 
-.like-list-page .like-list-container > div:last-child .like-list-user-card {
+.user-list-page .user-list-container > div:last-child .user-list-user-card {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1396,11 +1397,11 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   padding: 0.5rem 1rem;
 }
 
-.like-list-page .like-list-container > div:last-child .like-list-user-card .profile-pic {
+.user-list-page .user-list-container > div:last-child .user-list-user-card .profile-pic {
   width: 2rem;
 }
 
-.like-list-page .like-list-container > div:last-child .like-list-user-card > div:last-child {
+.user-list-page .user-list-container > div:last-child .user-list-user-card > div:last-child {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1417,7 +1418,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   gap: 0;
 }
 
-.like-list-page .like-list-container > div:last-child .like-list-user-card > div:last-child .name {
+.user-list-page .user-list-container > div:last-child .user-list-user-card > div:last-child .name {
   color: #787878;
 }
 

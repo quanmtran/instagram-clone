@@ -8,7 +8,15 @@ import Home from 'routes/Home';
 import AccountEdit from 'routes/AccountEditPage';
 import PostPage from 'routes/PostPage';
 
-export default function AppRouter({ isLoggedIn, currentUserObject, refreshCurrentUserObject }) {
+export default function AppRouter({
+	isLoggedIn,
+	currentUserObject,
+	refreshCurrentUserObject,
+	userList,
+	setUserList,
+	isUserListDisplayed,
+	toggleUserListDisplayed,
+}) {
 	return (
 		<Router>
 			<Switch>
@@ -16,16 +24,37 @@ export default function AppRouter({ isLoggedIn, currentUserObject, refreshCurren
 					<Auth isLoggedIn={isLoggedIn} />
 				</Route>
 				<Route exact path="/home">
-					<Home isLoggedIn={isLoggedIn} currentUserObject={currentUserObject} />
+					<Home
+						isLoggedIn={isLoggedIn}
+						currentUserObject={currentUserObject}
+						userList={userList}
+						setUserList={setUserList}
+						isUserListDisplayed={isUserListDisplayed}
+						toggleUserListDisplayed={toggleUserListDisplayed}
+					/>
 				</Route>
 				<Route path="/user/:username">
-					<UserPage isLoggedIn={isLoggedIn} currentUserObject={currentUserObject} />
+					<UserPage
+						isLoggedIn={isLoggedIn}
+						currentUserObject={currentUserObject}
+						userList={userList}
+						setUserList={setUserList}
+						isUserListDisplayed={isUserListDisplayed}
+						toggleUserListDisplayed={toggleUserListDisplayed}
+					/>
 				</Route>
 				<Route path="/account/edit">
 					<AccountEdit isLoggedIn={isLoggedIn} currentUserObject={currentUserObject} refreshCurrentUserObject={refreshCurrentUserObject} />
 				</Route>
 				<Route path="/post/:postId">
-					<PostPage isLoggedIn={isLoggedIn} currentUserObject={currentUserObject} />
+					<PostPage
+						isLoggedIn={isLoggedIn}
+						currentUserObject={currentUserObject}
+						userList={userList}
+						setUserList={setUserList}
+						isUserListDisplayed={isUserListDisplayed}
+						toggleUserListDisplayed={toggleUserListDisplayed}
+					/>
 				</Route>
 			</Switch>
 		</Router>

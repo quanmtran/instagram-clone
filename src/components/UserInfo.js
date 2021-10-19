@@ -3,7 +3,7 @@ import { doc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
 import { userCollection } from 'fbase';
 import { Link } from 'react-router-dom';
 
-export default function UserInfo({ userObject, postObjects, currentUserObject }) {
+export default function UserInfo({ userObject, postObjects, currentUserObject, setUserList, toggleUserListDisplayed }) {
 	// States
 	const [isCurrentUserFollowing, setIsCurrentUserFollowing] = useState(userObject.followers.includes(currentUserObject.userId));
 	const [followerCount, setFollowerCount] = useState(userObject.followers.length);
@@ -11,6 +11,7 @@ export default function UserInfo({ userObject, postObjects, currentUserObject })
 	// Constant
 	const isCurrentUserPageOwner = Boolean(currentUserObject.userId === userObject.userId);
 
+	// Handlers
 	const handleFollowClick = async () => {
 		// Firestore references
 		const userDocRef = doc(userCollection, userObject.userId);
@@ -49,6 +50,22 @@ export default function UserInfo({ userObject, postObjects, currentUserObject })
 		}
 	};
 
+	const handleFollowerCountClick = () => {
+		setUserList({
+			listName: 'Followers',
+			users: userObject.followers,
+		});
+		toggleUserListDisplayed();
+	};
+
+	const handleFollowingCountClick = () => {
+		setUserList({
+			listName: 'Following',
+			users: userObject.followings,
+		});
+		toggleUserListDisplayed();
+	};
+
 	return (
 		<div className="user-info">
 			<div className="profile-pic-container">
@@ -72,16 +89,16 @@ export default function UserInfo({ userObject, postObjects, currentUserObject })
 			</div>
 			<div className="stats">
 				<div>
-					<div className="post-count">{postObjects.length}</div>
-					<div>post{postObjects.length > 1 && 's'}</div>
+					<span>{postObjects.length}</span>
+					post{postObjects.length > 1 && 's'}
 				</div>
-				<div>
-					<div className="follower-count">{followerCount}</div>
-					<div>follower{userObject.followers.length > 1 && 's'}</div>
+				<div onClick={handleFollowerCountClick}>
+					<span>{followerCount}</span>
+					follower{userObject.followers.length > 1 && 's'}
 				</div>
-				<div>
-					<div className="following-count">{userObject.followings.length}</div>
-					<div>following</div>
+				<div onClick={handleFollowingCountClick}>
+					<span>{userObject.followings.length}</span>
+					following
 				</div>
 			</div>
 		</div>

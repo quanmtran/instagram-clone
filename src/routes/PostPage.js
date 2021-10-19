@@ -6,14 +6,12 @@ import { doc, onSnapshot } from 'firebase/firestore';
 // Import components
 import Post from 'components/Post';
 import Header from 'components/Header';
-import LikeList from 'components/LikeList';
+import UserList from 'components/UserList';
 
-export default function PostPage({ isLoggedIn, currentUserObject }) {
+export default function PostPage({ isLoggedIn, currentUserObject, userList, setUserList, isUserListDisplayed, toggleUserListDisplayed }) {
 	// States
 	const [isPostDataReady, setIsPostDataReady] = useState(false);
 	const [postObject, setPostObject] = useState({});
-	const [isLikeListDisplayed, setIsLikeListDisplayed] = useState(false);
-	const [likeList, setLikeList] = useState([]);
 
 	// Constants
 	const postId = useParams().postId;
@@ -34,12 +32,6 @@ export default function PostPage({ isLoggedIn, currentUserObject }) {
 		};
 	}, []);
 
-	// Other functions
-	const toggleLikeListDisplayed = () => {
-		setIsLikeListDisplayed((prev) => !prev);
-		document.body.classList.toggle('scroll-locked');
-	};
-
 	return isLoggedIn ? (
 		isPostDataReady ? (
 			<>
@@ -48,11 +40,11 @@ export default function PostPage({ isLoggedIn, currentUserObject }) {
 					<Post
 						postObject={postObject}
 						currentUserObject={currentUserObject}
-						toggleLikeListDisplayed={toggleLikeListDisplayed}
-						setLikeList={setLikeList}
+						toggleUserListDisplayed={toggleUserListDisplayed}
+						setUserList={setUserList}
 					/>
-					{isLikeListDisplayed && <LikeList toggleLikeListDisplayed={toggleLikeListDisplayed} likeList={likeList} />}
 				</div>
+				{isUserListDisplayed && <UserList toggleUserListDisplayed={toggleUserListDisplayed} userList={userList} />}
 			</>
 		) : (
 			'Loading...'
