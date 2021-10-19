@@ -124,7 +124,7 @@ header {
 					position: absolute;
 					right: 0;
 					top: 200%;
-					border: 1px solid $light-grey;
+					box-shadow: 0 1px 10px $light-grey;
 					border-radius: 5px;
 					width: 12em;
 					overflow: hidden;
@@ -297,7 +297,6 @@ header {
 				top: 100%;
 				width: 10em;
 				@include flex-box(column, stretch, stretch, 0);
-				border: 1px solid $light-grey;
 				border-radius: 5px;
 				overflow: hidden;
 				box-shadow: 0 1px 5px $light-grey;
@@ -489,7 +488,7 @@ header {
 	}
 
 	.homepage-content {
-		@include flex-box(column, flex-start, stretch, 20px);
+		@include flex-box(column, flex-start, stretch, 2rem);
 
 		.post-container {
 			@include flex-box(column, stretch, stretch, 0);
@@ -669,7 +668,7 @@ header {
 
 	.account-edit-form {
 		border: 1px solid $light-grey;
-		box-shadow: 0 1px 5px $light-grey;
+		border-radius: 5px;
 		padding: 2em;
 		width: 100%;
 		max-width: $page-container-max-width;
@@ -751,62 +750,6 @@ header {
 	padding-bottom: 1rem;
 	width: 100%;
 	max-width: $page-container-max-width;
-
-	.post-container {
-		height: 500px;
-		overflow: hidden;
-		display: grid;
-		grid-template-columns: 3fr 2fr;
-		grid-template-rows: 4em auto repeat(3, 2em) 4em;
-		grid-template-areas:
-			'pic header'
-			'pic caption-and-comments'
-			'pic interactive-btns'
-			'pic like-count'
-			'pic posted-at'
-			'pic comment-input';
-
-		.post-header {
-			grid-area: header;
-		}
-
-		.post-pic {
-			grid-area: pic;
-			width: 100%;
-			height: inherit;
-			@include flex-box(row, center, center, 0);
-			border-right: 1px solid $light-grey;
-
-			img {
-				width: 100%;
-				height: 100%;
-				object-fit: contain;
-			}
-		}
-
-		.post-interactive-btns {
-			grid-area: interactive-btns;
-		}
-
-		.post-like-count {
-			grid-area: like-count;
-		}
-
-		.post-caption-and-comments {
-			grid-area: caption-and-comments;
-			border-top: 1px solid $light-grey;
-			border-bottom: 1px solid $light-grey;
-			overflow-y: auto;
-		}
-
-		.posted-at {
-			grid-area: posted-at;
-		}
-
-		.comment-input-container {
-			grid-area: comment-input;
-		}
-	}
 }
 
 // User list
@@ -948,6 +891,64 @@ header {
 				.user-page-pic-container .pic-stats {
 					@include flex-box(row, center, center, 30px);
 				}
+			}
+		}
+	}
+
+	.post-page-container {
+		.post-container {
+			height: 500px;
+			overflow: hidden;
+			display: grid;
+			grid-template-columns: 3fr 2fr;
+			grid-template-rows: 4em auto repeat(3, 2em) 4em;
+			grid-template-areas:
+				'pic header'
+				'pic caption-and-comments'
+				'pic interactive-btns'
+				'pic like-count'
+				'pic posted-at'
+				'pic comment-input';
+
+			.post-header {
+				grid-area: header;
+			}
+
+			.post-pic {
+				grid-area: pic;
+				width: 100%;
+				height: inherit;
+				@include flex-box(row, center, center, 0);
+				border-right: 1px solid $light-grey;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: contain;
+				}
+			}
+
+			.post-interactive-btns {
+				grid-area: interactive-btns;
+			}
+
+			.post-like-count {
+				grid-area: like-count;
+			}
+
+			.post-caption-and-comments {
+				grid-area: caption-and-comments;
+				border-top: 1px solid $light-grey;
+				border-bottom: 1px solid $light-grey;
+				overflow-y: auto;
+			}
+
+			.posted-at {
+				grid-area: posted-at;
+			}
+
+			.comment-input-container {
+				grid-area: comment-input;
 			}
 		}
 	}

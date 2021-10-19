@@ -149,7 +149,8 @@ header .header-container .nav-container-header .profile-pic .profile-options {
   position: absolute;
   right: 0;
   top: 200%;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   width: 12em;
   overflow: hidden;
@@ -437,7 +438,6 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
       -ms-flex-align: stretch;
           align-items: stretch;
   gap: 0;
-  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   overflow: hidden;
   -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
@@ -758,7 +758,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   -webkit-box-align: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
-  gap: 20px;
+  gap: 2rem;
 }
 
 .homepage-container .homepage-content .post-container {
@@ -1084,8 +1084,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
 
 .account-edit-container .account-edit-form {
   border: 1px solid rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
   padding: 2em;
   width: 100%;
   max-width: 950px;
@@ -1243,88 +1242,6 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   padding-bottom: 1rem;
   width: 100%;
   max-width: 950px;
-}
-
-.post-page-container .post-container {
-  height: 500px;
-  overflow: hidden;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 3fr 2fr;
-      grid-template-columns: 3fr 2fr;
-  -ms-grid-rows: 4em auto (2em)[3] 4em;
-      grid-template-rows: 4em auto repeat(3, 2em) 4em;
-      grid-template-areas: 'pic header' 'pic caption-and-comments' 'pic interactive-btns' 'pic like-count' 'pic posted-at' 'pic comment-input';
-}
-
-.post-page-container .post-container .post-header {
-  -ms-grid-row: 1;
-  -ms-grid-column: 2;
-  grid-area: header;
-}
-
-.post-page-container .post-container .post-pic {
-  -ms-grid-row: 1;
-  -ms-grid-row-span: 6;
-  -ms-grid-column: 1;
-  grid-area: pic;
-  width: 100%;
-  height: inherit;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  gap: 0;
-  border-right: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-.post-page-container .post-container .post-pic img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
-}
-
-.post-page-container .post-container .post-interactive-btns {
-  -ms-grid-row: 3;
-  -ms-grid-column: 2;
-  grid-area: interactive-btns;
-}
-
-.post-page-container .post-container .post-like-count {
-  -ms-grid-row: 4;
-  -ms-grid-column: 2;
-  grid-area: like-count;
-}
-
-.post-page-container .post-container .post-caption-and-comments {
-  -ms-grid-row: 2;
-  -ms-grid-column: 2;
-  grid-area: caption-and-comments;
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  overflow-y: auto;
-}
-
-.post-page-container .post-container .posted-at {
-  -ms-grid-row: 5;
-  -ms-grid-column: 2;
-  grid-area: posted-at;
-}
-
-.post-page-container .post-container .comment-input-container {
-  -ms-grid-row: 6;
-  -ms-grid-column: 2;
-  grid-area: comment-input;
 }
 
 .user-list-page {
@@ -1569,6 +1486,79 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
         -ms-flex-align: center;
             align-items: center;
     gap: 30px;
+  }
+  .post-page-container .post-container {
+    height: 500px;
+    overflow: hidden;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 3fr 2fr;
+        grid-template-columns: 3fr 2fr;
+    -ms-grid-rows: 4em auto (2em)[3] 4em;
+        grid-template-rows: 4em auto repeat(3, 2em) 4em;
+        grid-template-areas: 'pic header' 'pic caption-and-comments' 'pic interactive-btns' 'pic like-count' 'pic posted-at' 'pic comment-input';
+  }
+  .post-page-container .post-container .post-header {
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+    grid-area: header;
+  }
+  .post-page-container .post-container .post-pic {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 6;
+    -ms-grid-column: 1;
+    grid-area: pic;
+    width: 100%;
+    height: inherit;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    gap: 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  .post-page-container .post-container .post-pic img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: contain;
+       object-fit: contain;
+  }
+  .post-page-container .post-container .post-interactive-btns {
+    -ms-grid-row: 3;
+    -ms-grid-column: 2;
+    grid-area: interactive-btns;
+  }
+  .post-page-container .post-container .post-like-count {
+    -ms-grid-row: 4;
+    -ms-grid-column: 2;
+    grid-area: like-count;
+  }
+  .post-page-container .post-container .post-caption-and-comments {
+    -ms-grid-row: 2;
+    -ms-grid-column: 2;
+    grid-area: caption-and-comments;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+  }
+  .post-page-container .post-container .posted-at {
+    -ms-grid-row: 5;
+    -ms-grid-column: 2;
+    grid-area: posted-at;
+  }
+  .post-page-container .post-container .comment-input-container {
+    -ms-grid-row: 6;
+    -ms-grid-column: 2;
+    grid-area: comment-input;
   }
 }
 
