@@ -40,12 +40,20 @@ export default function PostUpload({ currentUserObject }) {
 
 		try {
 			if (imgUrl) {
+				// Generate random ID
 				const imgId = uuidv4();
+
+				// Create a reference in Storage Service
 				const userStorageRef = ref(storageService, `${currentUserObject.userId}`);
 				const imgStorageRef = ref(userStorageRef, imgId);
+
+				// Upload image to Storage
 				await uploadString(imgStorageRef, imgUrl, 'data_url');
+
+				// Get image URL in Storage Service
 				const imgFirebaseUrl = await getDownloadURL(imgStorageRef);
 
+				// Add post's data as an object to Post collection in Database Service
 				const postObject = {
 					caption: captionInput,
 					postedAt: Date.now(),
@@ -57,13 +65,17 @@ export default function PostUpload({ currentUserObject }) {
 				};
 
 				await addDoc(postCollection, postObject);
+
+				// Clear inputs
+				setCaptionInput('');
+				setImgUrl('');
+
+				// Scroll to the top of the page
+				document.body.scrollTop = document.documentElement.scrollTop = 0;
 			}
 		} catch (error) {
 			console.log(error);
 		}
-
-		setCaptionInput('');
-		setImgUrl('');
 	};
 
 	return (
@@ -83,8 +95,8 @@ export default function PostUpload({ currentUserObject }) {
 					</label>
 				)}
 			</div>
-			<textarea placeholder="Write a caption..." value={captionInput} onChange={handleCaptionInputChange} />
-			<input type="submit" value="Post" />
+			{imgUrl && <textarea placeholder="Write a caption..." value={captionInput} onChange={handleCaptionInputChange} />}
+			<input type="submit" value="Post" className={imgUrl ? 'active' : ''} />
 		</form>
 	);
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { updateDoc, arrayUnion } from 'firebase/firestore';
 
-export default function CommentInput({ currentUserObject, postDocRef }) {
+export default function CommentInput({ postId, currentUserId, postDocRef }) {
 	// States
 	const [commentText, setCommentText] = useState('');
 
@@ -16,8 +16,8 @@ export default function CommentInput({ currentUserObject, postDocRef }) {
 		if (commentText.trim() === '') return;
 
 		const comment = {
-			id: `${currentUserObject.userId}-${Date.now()}`,
-			ownerUserId: currentUserObject.userId,
+			id: `${postId}-${currentUserId}-${Date.now()}`,
+			ownerUserId: currentUserId,
 			postedAt: Date.now(),
 			text: commentText,
 		};
@@ -32,7 +32,7 @@ export default function CommentInput({ currentUserObject, postDocRef }) {
 	return (
 		<form className="comment-input-container" onSubmit={handleCommentSubmit}>
 			<input placeholder="Add a comment..." value={commentText} onChange={handleCommentChange} />
-			<input type="submit" value="Post" className={commentText.trim() && 'active'} />
+			<input type="submit" value="Post" className={commentText.trim() ? 'active' : ''} />
 		</form>
 	);
 }

@@ -24,5 +24,5 @@ export const postCollection = collection(databaseService, 'posts');
 
 // Storage
 export const storageService = getStorage(app);
-export const DEFAULT_PROFILE_PIC_URL =
-	'https://firebasestorage.googleapis.com/v0/b/instagram-clone-dcbd6.appspot.com/o/images%2Fdefault-profile-pic.jpg?alt=media&token=fa16ab95-2b26-43f4-9bea-c410bdac6623';
+export const DEFAULT_PROFILE_IMG_URL =
+	'https://firebasestorage.googleapis.com/v0/b/instagram-clone-dcbd6.appspot.com/o/images%2Fdefault-profile-img.jpg?alt=media&token=db689368-579f-44b2-ab10-07ff8a2bd700';

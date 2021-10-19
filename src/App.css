@@ -24,7 +24,7 @@
   color: #458eff;
 }
 
-.profile-pic {
+.profile-img {
   aspect-ratio: 1/1;
   border-radius: 50%;
   background-position: center;
@@ -155,13 +155,30 @@ header .header-container .nav-container-header {
   width: 200px;
 }
 
-header .header-container .nav-container-header .profile-pic {
+header .header-container .nav-container-header > a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0;
+}
+
+header .header-container .nav-container-header .profile-img {
   width: 24px;
   position: relative;
   cursor: pointer;
 }
 
-header .header-container .nav-container-header .profile-pic .profile-options {
+header .header-container .nav-container-header .profile-img .profile-options {
   position: absolute;
   right: 0;
   top: 200%;
@@ -172,7 +189,7 @@ header .header-container .nav-container-header .profile-pic .profile-options {
   overflow: hidden;
 }
 
-header .header-container .nav-container-header .profile-pic .profile-options div {
+header .header-container .nav-container-header .profile-img .profile-options div {
   padding: 0.5em 0.8em;
   cursor: pointer;
   background-color: white;
@@ -192,11 +209,11 @@ header .header-container .nav-container-header .profile-pic .profile-options div
   gap: 0.5em;
 }
 
-header .header-container .nav-container-header .profile-pic .profile-options div:hover {
+header .header-container .nav-container-header .profile-img .profile-options div:hover {
   background-color: #f7f7f7;
 }
 
-header .header-container .nav-container-header .profile-pic .profile-options .log-out-btn {
+header .header-container .nav-container-header .profile-img .profile-options .log-out-btn {
   border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
 
@@ -256,7 +273,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
 .auth-page form input[type='submit'] {
   background-color: #458eff;
   color: white;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .auth-page form input[type='submit']:hover {
@@ -296,7 +313,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   padding-bottom: 1em;
 }
 
-.post-header .profile-pic {
+.post-header .profile-img {
   width: 30px;
 }
 
@@ -306,21 +323,21 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   font-size: 0.9rem;
 }
 
-.post-container > div:not(.post-pic),
+.post-container > div:not(.post-img),
 .post-container form {
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
-.post-container .post-pic {
+.post-container .post-img {
   position: relative;
 }
 
-.post-container .post-pic img {
+.post-container .post-img img {
   width: 100%;
 }
 
-.post-container .post-pic .material-icons {
+.post-container .post-img .material-icons {
   position: absolute;
   top: 0;
   left: 0;
@@ -378,7 +395,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   background-color: unset;
   border: none;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 500;
   color: #458eff;
 }
 
@@ -493,7 +510,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
 }
 
 .post-container .post-like-count span {
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
 }
 
@@ -577,7 +594,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   width: -moz-fit-content;
   width: fit-content;
   color: #abccff;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .post-container .comment-input-container input[type='submit'].active {
@@ -628,7 +645,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   gap: 0;
 }
 
-.homepage-container .current-user-card .profile-pic {
+.homepage-container .current-user-card .profile-img {
   width: 50px;
 }
 
@@ -746,16 +763,20 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
 }
 
 .homepage-container .current-user-card .post-upload-form input[type='submit'] {
-  background-color: #458eff;
+  background-color: #abccff;
   border: none;
   color: white;
   width: 100%;
   padding: 1em;
   border-radius: 10px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
-.homepage-container .current-user-card .post-upload-form input[type='submit']:hover {
+.homepage-container .current-user-card .post-upload-form input[type='submit'].active {
+  background-color: #458eff;
+}
+
+.homepage-container .current-user-card .post-upload-form input[type='submit'].active:hover {
   cursor: pointer;
   background-color: #2c7fff;
 }
@@ -810,10 +831,10 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
       grid-template-columns: 120px 1fr;
   -ms-grid-rows: (1f)[3];
       grid-template-rows: repeat(3, 1f);
-      grid-template-areas: 'profile-pic username-and-btns' 'bio bio' 'stats stats';
+      grid-template-areas: 'profile-img username-and-btns' 'bio bio' 'stats stats';
 }
 
-.user-page-container .user-info .profile-pic-container {
+.user-page-container .user-info .profile-img-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -830,10 +851,10 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   gap: 0;
   -ms-grid-row: 1;
   -ms-grid-column: 1;
-  grid-area: profile-pic;
+  grid-area: profile-img;
 }
 
-.user-page-container .user-info .profile-pic-container .profile-pic {
+.user-page-container .user-info .profile-img-container .profile-img {
   width: 100%;
   -webkit-transform: scale(0.7);
           transform: scale(0.7);
@@ -931,7 +952,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
 }
 
 .user-page-container .user-info .bio .bio-name {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .user-page-container .user-info .stats {
@@ -970,7 +991,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
 }
 
 .user-page-container .user-info .stats > div span {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .user-page-container .content {
@@ -1015,20 +1036,20 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   gap: 4px;
 }
 
-.user-page-container .content .content-container .user-page-pic-container {
+.user-page-container .content .content-container .user-page-img-container {
   position: relative;
   aspect-ratio: 1 / 1;
   overflow: hidden;
 }
 
-.user-page-container .content .content-container .user-page-pic-container img {
+.user-page-container .content .content-container .user-page-img-container img {
   -o-object-fit: cover;
      object-fit: cover;
   width: 100%;
   height: 100%;
 }
 
-.user-page-container .content .content-container .user-page-pic-container .pic-stats {
+.user-page-container .content .content-container .user-page-img-container .img-stats {
   position: absolute;
   top: 0;
   left: 0;
@@ -1053,7 +1074,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   visibility: hidden;
 }
 
-.user-page-container .content .content-container .user-page-pic-container .pic-stats > div {
+.user-page-container .content .content-container .user-page-img-container .img-stats > div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1070,11 +1091,11 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   gap: 8px;
 }
 
-.user-page-container .content .content-container .user-page-pic-container:hover {
+.user-page-container .content .content-container .user-page-img-container:hover {
   cursor: pointer;
 }
 
-.user-page-container .content .content-container .user-page-pic-container:hover .pic-stats {
+.user-page-container .content .content-container .user-page-img-container:hover .img-stats {
   visibility: visible;
 }
 
@@ -1156,7 +1177,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   height: 2em;
 }
 
-.account-edit-container .account-edit-form .form-header > div:first-child .profile-pic {
+.account-edit-container .account-edit-form .form-header > div:first-child .profile-img {
   width: 40px;
 }
 
@@ -1178,7 +1199,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
 }
 
 .account-edit-container .account-edit-form .form-header > div:last-child .username {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.2em;
 }
 
@@ -1186,10 +1207,10 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   text-decoration: unset;
 }
 
-.account-edit-container .account-edit-form .form-header > div:last-child .change-profile-pic-btn {
+.account-edit-container .account-edit-form .form-header > div:last-child .change-profile-img-btn {
   color: #458eff;
   font-size: 0.9em;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
 }
 
@@ -1263,7 +1284,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   background-color: #abccff;
   color: white;
   padding: 0.5em 1em;
-  font-weight: 600;
+  font-weight: 500;
   border-radius: 3px;
 }
 
@@ -1314,7 +1335,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   position: relative;
   text-align: center;
-  font-weight: 600;
+  font-weight: 500;
   padding: 1em;
 }
 
@@ -1349,7 +1370,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   padding: 0.5rem 1rem;
 }
 
-.user-list-page .user-list-container > div:last-child .user-list-user-card .profile-pic {
+.user-list-page .user-list-container > div:last-child .user-list-user-card .profile-img {
   width: 2rem;
 }
 
@@ -1374,7 +1395,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   color: #787878;
 }
 
-.profile-pic-options-page {
+.profile-img-options-page {
   background-color: rgba(0, 0, 0, 0.2);
   position: fixed;
   top: 0;
@@ -1398,39 +1419,39 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   gap: 0;
 }
 
-.profile-pic-options-page .profile-pic-options-container {
+.profile-img-options-page .profile-img-options-container {
   background-color: white;
   border-radius: 10px;
   width: 100%;
   max-width: 400px;
 }
 
-.profile-pic-options-page .profile-pic-options-container > div {
+.profile-img-options-page .profile-img-options-container > div {
   text-align: center;
 }
 
-.profile-pic-options-page .profile-pic-options-container > div:first-child {
+.profile-img-options-page .profile-img-options-container > div:first-child {
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 500;
   padding: 2rem;
 }
 
-.profile-pic-options-page .profile-pic-options-container > div:not(:first-child) {
+.profile-img-options-page .profile-img-options-container > div:not(:first-child) {
   border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.profile-pic-options-page .profile-pic-options-container > div:not(:first-child):not(.upload-pic-btn) {
+.profile-img-options-page .profile-img-options-container > div:not(:first-child):not(.upload-img-btn) {
   padding: 1rem;
 }
 
-.profile-pic-options-page .profile-pic-options-container > div label {
+.profile-img-options-page .profile-img-options-container > div label {
   display: inline-block;
   height: 100%;
   width: 100%;
   padding: 1rem;
 }
 
-.profile-pic-options-page .profile-pic-options-container > div label input {
+.profile-img-options-page .profile-img-options-container > div label input {
   display: none;
 }
 
@@ -1472,9 +1493,9 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
     -ms-grid-rows: (fit-content)[3];
         grid-template-rows: repeat(3, -webkit-fit-content);
         grid-template-rows: repeat(3, fit-content);
-        grid-template-areas: 'profile-pic username-and-btns' 'profile-pic stats' 'profile-pic bio';
+        grid-template-areas: 'profile-img username-and-btns' 'profile-img stats' 'profile-img bio';
   }
-  .user-page-container .user-info .profile-pic-container .profile-pic {
+  .user-page-container .user-info .profile-img-container .profile-img {
     width: 200px;
   }
   .user-page-container .user-info .username-and-btns {
@@ -1566,7 +1587,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
   .user-page-container .content .content-container {
     gap: 25px;
   }
-  .user-page-container .content .content-container .user-page-pic-container .pic-stats {
+  .user-page-container .content .content-container .user-page-img-container .img-stats {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1591,18 +1612,18 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
         grid-template-columns: 3fr 2fr;
     -ms-grid-rows: 4em auto (2em)[3] 4em;
         grid-template-rows: 4em auto repeat(3, 2em) 4em;
-        grid-template-areas: 'pic header' 'pic caption-and-comments' 'pic interactive-btns' 'pic like-count' 'pic posted-at' 'pic comment-input';
+        grid-template-areas: 'img header' 'img caption-and-comments' 'img interactive-btns' 'img like-count' 'img posted-at' 'img comment-input';
   }
   .post-page-container .post-container .post-header {
     -ms-grid-row: 1;
     -ms-grid-column: 2;
     grid-area: header;
   }
-  .post-page-container .post-container .post-pic {
+  .post-page-container .post-container .post-img {
     -ms-grid-row: 1;
     -ms-grid-row-span: 6;
     -ms-grid-column: 1;
-    grid-area: pic;
+    grid-area: img;
     width: 100%;
     height: inherit;
     display: -webkit-box;
@@ -1621,7 +1642,7 @@ header .header-container .nav-container-header .profile-pic .profile-options .lo
     gap: 0;
     border-right: 1px solid rgba(0, 0, 0, 0.2);
   }
-  .post-page-container .post-container .post-pic img {
+  .post-page-container .post-container .post-img img {
     width: 100%;
     height: 100%;
     -o-object-fit: contain;

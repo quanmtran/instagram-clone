@@ -16,7 +16,7 @@ export default function PostPage({ isLoggedIn, currentUserObject, userList, setU
 	// Constants
 	const postId = useParams().postId;
 
-	useEffect(async () => {
+	useEffect(() => {
 		const unsubscribe = onSnapshot(doc(postCollection, postId), (doc) => {
 			const post = {
 				id: doc.id,

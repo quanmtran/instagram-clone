@@ -16,15 +16,13 @@ export default function Header({ currentUserObject }) {
 					<div className="insta-logo">Isn'tagram</div>
 				</Link>
 				<div className="nav-container-header">
-					<i className="material-icons">home</i>
+					<Link to="/">
+						<i className="material-icons">home</i>
+					</Link>
 					<i className="material-icons">chat</i>
 					<i className="material-icons">explore</i>
 					<i className="material-icons">favorite</i>
-					<div
-						className="profile-pic"
-						onClick={handleToggleProfileOptions}
-						style={{ backgroundImage: `url(${currentUserObject.profilePictureUrl})` }}
-					>
+					<div className="profile-img" onClick={handleToggleProfileOptions} style={{ backgroundImage: `url(${currentUserObject.profileImgUrl})` }}>
 						{isProfileOptionsDisplayed && <ProfileOptions currentUserObject={currentUserObject} />}
 					</div>
 				</div>

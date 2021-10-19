@@ -124,7 +124,7 @@ export default function Post({ postObject, currentUserObject, toggleUserListDisp
 		<div className="post-container">
 			<PostHeader postOwnerObject={postOwnerObject} />
 
-			<div className="post-pic" onDoubleClick={handleDoubleTap}>
+			<div className="post-img" onDoubleClick={handleDoubleTap}>
 				<img src={postObject.imgUrl} />
 				{isDoubleTapped && <span className="material-icons">favorite</span>}
 			</div>
@@ -166,12 +166,14 @@ export default function Post({ postObject, currentUserObject, toggleUserListDisp
 					</div>
 
 					<div className="post-caption-and-comments">
-						<div className="post-caption">
-							<span className="username">
-								<Link to={`/user/${postOwnerObject.username}`}>{postOwnerObject.username}</Link>
-							</span>{' '}
-							{postObject.caption}
-						</div>
+						{postObject.caption && (
+							<div className="post-caption">
+								<span className="username">
+									<Link to={`/user/${postOwnerObject.username}`}>{postOwnerObject.username}</Link>
+								</span>{' '}
+								{postObject.caption}
+							</div>
+						)}
 
 						{postObject.comments.map((comment) => (
 							<Comment key={comment.id} postDocRef={postDocRef} postObject={postObject} comment={comment} currentUserObject={currentUserObject} />
@@ -180,7 +182,7 @@ export default function Post({ postObject, currentUserObject, toggleUserListDisp
 
 					<div className="posted-at">{getTimeAgo(postObject.postedAt)}</div>
 
-					<CommentInput currentUserObject={currentUserObject} postDocRef={postDocRef} />
+					<CommentInput postId={postObject.id} currentUserId={currentUserId} postDocRef={postDocRef} />
 				</>
 			)}
 		</div>

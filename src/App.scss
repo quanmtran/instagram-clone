@@ -11,10 +11,10 @@
 // Colors
 $white: white;
 $blue: #458eff;
+$red: #fd1d1d;
 $grey: rgb(120, 120, 120);
 $light-grey: rgba(0, 0, 0, 0.2);
 $dark-grey: rgb(60, 60, 60);
-$red: #fd1d1d;
 
 // Constants
 $header-height: 50px;
@@ -50,7 +50,7 @@ $bio-padding-left: 20px;
 	color: $blue;
 }
 
-.profile-pic {
+.profile-img {
 	aspect-ratio: 1/1;
 	border-radius: 50%;
 	background-position: center;
@@ -131,7 +131,11 @@ header {
 			@include flex-box(row, space-between, center, 0);
 			width: 200px;
 
-			.profile-pic {
+			& > a {
+				@include flex-box(row, center, center, 0);
+			}
+
+			.profile-img {
 				width: 24px;
 				position: relative;
 				cursor: pointer;
@@ -193,7 +197,7 @@ header {
 			&[type='submit'] {
 				background-color: $blue;
 				color: $white;
-				font-weight: 600;
+				font-weight: 500;
 
 				&:hover {
 					cursor: pointer;
@@ -223,7 +227,7 @@ header {
 	padding-top: 1em;
 	padding-bottom: 1em;
 
-	.profile-pic {
+	.profile-img {
 		width: 30px;
 	}
 }
@@ -234,13 +238,13 @@ header {
 	border-radius: 0.3em;
 	font-size: 0.9rem;
 
-	& > div:not(.post-pic),
+	& > div:not(.post-img),
 	form {
 		padding-left: 1rem;
 		padding-right: 1rem;
 	}
 
-	.post-pic {
+	.post-img {
 		position: relative;
 
 		img {
@@ -277,7 +281,7 @@ header {
 				background-color: unset;
 				border: none;
 				cursor: pointer;
-				font-weight: 600;
+				font-weight: 500;
 				color: $blue;
 			}
 		}
@@ -339,7 +343,7 @@ header {
 		@include flex-box(row, flex-start, center, 0);
 
 		span {
-			font-weight: 600;
+			font-weight: 500;
 			cursor: pointer;
 		}
 	}
@@ -381,7 +385,7 @@ header {
 			&[type='submit'] {
 				width: fit-content;
 				color: lighten($blue, 20%);
-				font-weight: 600;
+				font-weight: 500;
 
 				&.active {
 					color: $blue;
@@ -408,7 +412,7 @@ header {
 		background-color: $white;
 		@include flex-box(column, flex-start, flex-start, 0);
 
-		.profile-pic {
+		.profile-img {
 			width: 50px;
 		}
 
@@ -487,17 +491,21 @@ header {
 			}
 
 			input[type='submit'] {
-				background-color: $blue;
+				background-color: lighten($blue, 20%);
 				border: none;
 				color: $white;
 				width: 100%;
 				padding: 1em;
 				border-radius: 10px;
-				font-weight: 600;
+				font-weight: 500;
 
-				&:hover {
-					cursor: pointer;
-					background-color: darken($blue, 5%);
+				&.active {
+					background-color: $blue;
+
+					&:hover {
+						cursor: pointer;
+						background-color: darken($blue, 5%);
+					}
 				}
 			}
 		}
@@ -526,15 +534,15 @@ header {
 		grid-template-columns: 120px 1fr;
 		grid-template-rows: repeat(3, 1f);
 		grid-template-areas:
-			'profile-pic username-and-btns'
+			'profile-img username-and-btns'
 			'bio bio'
 			'stats stats';
 
-		.profile-pic-container {
+		.profile-img-container {
 			@include flex-box(row, center, flex-start, 0);
-			grid-area: profile-pic;
+			grid-area: profile-img;
 
-			.profile-pic {
+			.profile-img {
 				width: 100%;
 				transform: scale(0.7);
 				border: 1px solid $light-grey;
@@ -587,7 +595,7 @@ header {
 			@include flex-box(column, flex-start, stretch, 5px);
 
 			.bio-name {
-				font-weight: 600;
+				font-weight: 500;
 			}
 		}
 
@@ -607,7 +615,7 @@ header {
 				}
 
 				span {
-					font-weight: 600;
+					font-weight: 500;
 				}
 			}
 		}
@@ -636,7 +644,7 @@ header {
 			grid-template-columns: repeat(3, 1fr);
 			gap: 4px;
 
-			.user-page-pic-container {
+			.user-page-img-container {
 				position: relative;
 				aspect-ratio: 1 / 1;
 				overflow: hidden;
@@ -647,7 +655,7 @@ header {
 					height: 100%;
 				}
 
-				.pic-stats {
+				.img-stats {
 					position: absolute;
 					top: 0;
 					left: 0;
@@ -666,7 +674,7 @@ header {
 				&:hover {
 					cursor: pointer;
 
-					.pic-stats {
+					.img-stats {
 						visibility: visible;
 					}
 				}
@@ -698,7 +706,7 @@ header {
 				@include flex-box(row, flex-end, center, 0);
 				height: 2em;
 
-				.profile-pic {
+				.profile-img {
 					width: 40px;
 				}
 			}
@@ -706,7 +714,7 @@ header {
 			& > div:last-child {
 				@include flex-box(column, center, flex-start, 0);
 				.username {
-					font-weight: 600;
+					font-weight: 500;
 					font-size: 1.2em;
 
 					&:hover {
@@ -714,10 +722,10 @@ header {
 					}
 				}
 
-				.change-profile-pic-btn {
+				.change-profile-img-btn {
 					color: $blue;
 					font-size: 0.9em;
-					font-weight: 600;
+					font-weight: 500;
 					cursor: pointer;
 				}
 			}
@@ -753,7 +761,7 @@ header {
 				background-color: lighten($blue, 20%);
 				color: $white;
 				padding: 0.5em 1em;
-				font-weight: 600;
+				font-weight: 500;
 				border-radius: 3px;
 
 				&.active {
@@ -794,7 +802,7 @@ header {
 			border-bottom: 1px solid $light-grey;
 			position: relative;
 			text-align: center;
-			font-weight: 600;
+			font-weight: 500;
 			padding: 1em;
 
 			.material-icons {
@@ -813,7 +821,7 @@ header {
 				@include flex-box(row, flex-start, center, 1rem);
 				padding: 0.5rem 1rem;
 
-				.profile-pic {
+				.profile-img {
 					width: 2rem;
 				}
 
@@ -829,8 +837,8 @@ header {
 	}
 }
 
-// Profile pic options
-.profile-pic-options-page {
+// Profile img options
+.profile-img-options-page {
 	background-color: $light-grey;
 	position: fixed;
 	top: 0;
@@ -840,7 +848,7 @@ header {
 	z-index: 100;
 	@include flex-box(row, center, center, 0);
 
-	.profile-pic-options-container {
+	.profile-img-options-container {
 		background-color: $white;
 		border-radius: 10px;
 		width: 100%;
@@ -851,14 +859,14 @@ header {
 
 			&:first-child {
 				font-size: 1.2rem;
-				font-weight: 600;
+				font-weight: 500;
 				padding: 2rem;
 			}
 
 			&:not(:first-child) {
 				border-top: 1px solid $light-grey;
 
-				&:not(.upload-pic-btn) {
+				&:not(.upload-img-btn) {
 					padding: 1rem;
 				}
 			}
@@ -902,11 +910,11 @@ header {
 			grid-template-columns: 1fr 2fr;
 			grid-template-rows: repeat(3, fit-content);
 			grid-template-areas:
-				'profile-pic username-and-btns'
-				'profile-pic stats'
-				'profile-pic bio';
+				'profile-img username-and-btns'
+				'profile-img stats'
+				'profile-img bio';
 
-			.profile-pic-container .profile-pic {
+			.profile-img-container .profile-img {
 				width: 200px;
 			}
 
@@ -957,7 +965,7 @@ header {
 			.content-container {
 				gap: 25px;
 
-				.user-page-pic-container .pic-stats {
+				.user-page-img-container .img-stats {
 					@include flex-box(row, center, center, 30px);
 				}
 			}
@@ -972,19 +980,19 @@ header {
 			grid-template-columns: 3fr 2fr;
 			grid-template-rows: 4em auto repeat(3, 2em) 4em;
 			grid-template-areas:
-				'pic header'
-				'pic caption-and-comments'
-				'pic interactive-btns'
-				'pic like-count'
-				'pic posted-at'
-				'pic comment-input';
+				'img header'
+				'img caption-and-comments'
+				'img interactive-btns'
+				'img like-count'
+				'img posted-at'
+				'img comment-input';
 
 			.post-header {
 				grid-area: header;
 			}
 
-			.post-pic {
-				grid-area: pic;
+			.post-img {
+				grid-area: img;
 				width: 100%;
 				height: inherit;
 				@include flex-box(row, center, center, 0);

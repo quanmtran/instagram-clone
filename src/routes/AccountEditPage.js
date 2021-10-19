@@ -5,7 +5,7 @@ import { userCollection } from 'fbase';
 
 // Import components
 import Header from 'components/Header';
-import ProfilePicOptions from 'components/ProfilePicOptions';
+import ProfileImgOptions from 'components/ProfileImgOptions';
 
 export default function AccountEdit({ isLoggedIn, currentUserObject, refreshCurrentUserObject }) {
 	const currentUserDocRef = doc(userCollection, currentUserObject.userId);
@@ -15,12 +15,12 @@ export default function AccountEdit({ isLoggedIn, currentUserObject, refreshCurr
 	const [bioEdit, setBioEdit] = useState(currentUserObject.bio);
 	const [isEditting, setIsEditting] = useState(false);
 	const [isSubmitted, setIsSubmitted] = useState(false);
-	const [isProfilePicOptionsDisplayed, setIsProfilePicOptionsDisplayed] = useState(false);
+	const [isProfileImgOptionsDisplayed, setIsProfileImgOptionsDisplayed] = useState(false);
 
 	// Handlers
-	const handleChangeProfilePicToggle = () => {
+	const handleChangeProfileImgToggle = () => {
 		document.body.classList.toggle('scroll-locked');
-		setIsProfilePicOptionsDisplayed((prev) => !prev);
+		setIsProfileImgOptionsDisplayed((prev) => !prev);
 	};
 
 	const handleEditChange = (e) => {
@@ -64,11 +64,11 @@ export default function AccountEdit({ isLoggedIn, currentUserObject, refreshCurr
 				<form onSubmit={handleEditSubmit} className="account-edit-form">
 					<div className="form-header">
 						<div>
-							<div className="profile-pic" style={{ backgroundImage: `url(${currentUserObject.profilePictureUrl})` }} />
+							<div className="profile-img" style={{ backgroundImage: `url(${currentUserObject.profileImgUrl})` }} />
 						</div>
 						<div>
 							<span className="username">{currentUserObject.username}</span>
-							<span className="change-profile-pic-btn" onClick={handleChangeProfilePicToggle}>
+							<span className="change-profile-img-btn" onClick={handleChangeProfileImgToggle}>
 								Change Profile Photo
 							</span>
 						</div>
@@ -87,9 +87,9 @@ export default function AccountEdit({ isLoggedIn, currentUserObject, refreshCurr
 					</div>
 				</form>
 			</div>
-			{isProfilePicOptionsDisplayed && (
-				<ProfilePicOptions
-					handleChangeProfilePicToggle={handleChangeProfilePicToggle}
+			{isProfileImgOptionsDisplayed && (
+				<ProfileImgOptions
+					handleChangeProfileImgToggle={handleChangeProfileImgToggle}
 					currentUserDocRef={currentUserDocRef}
 					refreshCurrentUserObject={refreshCurrentUserObject}
 					currentUserObject={currentUserObject}

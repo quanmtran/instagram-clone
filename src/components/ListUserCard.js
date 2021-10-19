@@ -16,7 +16,7 @@ export default function ListUserCard({ userId }) {
 	return isUserDataReady ? (
 		<div className="user-list-user-card">
 			<Link to={`/user/${userObject.username}`}>
-				<div className="profile-pic" style={{ backgroundImage: `url(${userObject.profilePictureUrl})` }}></div>
+				<div className="profile-img" style={{ backgroundImage: `url(${userObject.profileImgUrl})` }}></div>
 			</Link>
 			<div>
 				<Link to={`/user/${userObject.username}`}>

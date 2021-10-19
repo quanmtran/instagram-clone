@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { authService, userCollection, DEFAULT_PROFILE_PIC_URL } from 'fbase';
+import { authService, userCollection, DEFAULT_PROFILE_IMG_URL } from 'fbase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import { getDownloadURL } from 'firebase/storage';
 import { Redirect } from 'react-router-dom';
 
 export default function Auth({ isLoggedIn }) {
@@ -59,7 +58,7 @@ export default function Auth({ isLoggedIn }) {
 				const userObject = {
 					userId: userId,
 					username: usernameInput,
-					profilePictureUrl: DEFAULT_PROFILE_PIC_URL,
+					profileImgUrl: DEFAULT_PROFILE_IMG_URL,
 					name: fullnameInput,
 					bio: '',
 					followers: [],
