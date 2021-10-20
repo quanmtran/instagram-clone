@@ -711,6 +711,7 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
   border-radius: 10px;
   width: 100%;
   height: 100%;
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -727,8 +728,7 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
   gap: 0;
 }
 
-.homepage-container .current-user-card .post-upload-form .drag-and-drop-container .drag-and-drop-area:hover {
-  cursor: pointer;
+.homepage-container .current-user-card .post-upload-form .drag-and-drop-container .drag-and-drop-area:hover, .homepage-container .current-user-card .post-upload-form .drag-and-drop-container .drag-and-drop-area.dragover {
   border: 2px dashed #458eff;
   color: #458eff;
 }
@@ -739,7 +739,13 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
 }
 
 .homepage-container .current-user-card .post-upload-form .drag-and-drop-container .drag-and-drop-area input {
-  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  cursor: pointer;
 }
 
 .homepage-container .current-user-card .post-upload-form .drag-and-drop-container .image-preview {

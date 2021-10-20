@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { storageService, postCollection } from 'fbase';
 import { addDoc } from 'firebase/firestore';
 import { ref, uploadString, getDownloadURL } from 'firebase/storage';
@@ -10,6 +10,7 @@ export default function PostUpload({ currentUserObject }) {
 	// States
 	const [captionInput, setCaptionInput] = useState('');
 	const [imgUrl, setImgUrl] = useState('');
+	const dragAndDropAreaRef = useRef(null);
 
 	// Handlers
 	const handleCaptionInputChange = (e) => {
@@ -20,7 +21,7 @@ export default function PostUpload({ currentUserObject }) {
 		setImgUrl(null);
 
 		const file = e.target.files[0];
-		if (file) {
+		if (file && file.type.split('/')[0] === 'image') {
 			const reader = new FileReader();
 
 			reader.onload = () => {
@@ -78,6 +79,18 @@ export default function PostUpload({ currentUserObject }) {
 		}
 	};
 
+	const handleDragEnter = () => {
+		dragAndDropAreaRef.current.classList.add('dragover');
+	};
+
+	const handleDragLeave = () => {
+		dragAndDropAreaRef.current.classList.remove('dragover');
+	};
+
+	const handleDrop = () => {
+		dragAndDropAreaRef.current.classList.remove('dragover');
+	};
+
 	return (
 		<form onSubmit={handlePostSubmit} className="post-upload-form">
 			<div className="drag-and-drop-container">
@@ -88,11 +101,18 @@ export default function PostUpload({ currentUserObject }) {
 						</span>
 					</div>
 				) : (
-					<label className="drag-and-drop-area">
+					<div ref={dragAndDropAreaRef} className="drag-and-drop-area">
 						<span>Add a photo</span>
 						<span>or drag and drop</span>
-						<input type="file" accept="image/*" onChange={handleFileChange} />
-					</label>
+						<input
+							type="file"
+							accept="image/*"
+							onChange={handleFileChange}
+							onDragEnter={handleDragEnter}
+							onDragLeave={handleDragLeave}
+							onDrop={handleDrop}
+						/>
+					</div>
 				)}
 			</div>
 			{imgUrl && <textarea placeholder="Write a caption..." value={captionInput} onChange={handleCaptionInputChange} />}

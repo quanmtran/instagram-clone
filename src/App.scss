@@ -451,10 +451,11 @@ header {
 					border-radius: 10px;
 					width: 100%;
 					height: 100%;
+					position: relative;
 					@include flex-box(column, center, center, 0);
 
-					&:hover {
-						cursor: pointer;
+					&:hover,
+					&.dragover {
 						border: 2px dashed $blue;
 						color: $blue;
 					}
@@ -465,7 +466,13 @@ header {
 					}
 
 					input {
-						display: none;
+						position: absolute;
+						top: 0;
+						left: 0;
+						right: 0;
+						bottom: 0;
+						opacity: 0;
+						cursor: pointer;
 					}
 				}
 
