@@ -142,8 +142,8 @@ header {
 
 				.profile-options {
 					position: absolute;
-					right: 0;
-					top: 200%;
+					right: -$margin-left-right;
+					top: 37px;
 					box-shadow: 0 1px 10px $light-grey;
 					border-radius: 5px;
 					width: 12em;

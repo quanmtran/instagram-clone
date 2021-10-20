@@ -180,8 +180,8 @@ header .header-container .nav-container-header .profile-img {
 
 header .header-container .nav-container-header .profile-img .profile-options {
   position: absolute;
-  right: 0;
-  top: 200%;
+  right: -20px;
+  top: 37px;
   -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
           box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
   border-radius: 5px;

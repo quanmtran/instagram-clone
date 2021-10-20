@@ -13,7 +13,7 @@ export default function LikeList({ toggleUserListDisplayed, userList }) {
 				</div>
 				<div>
 					{userList.users.map((userId) => (
-						<ListUserCard key={userId} userId={userId} />
+						<ListUserCard key={userId} userId={userId} toggleUserListDisplayed={toggleUserListDisplayed} />
 					))}
 				</div>
 			</div>
