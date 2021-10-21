@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { doc, getDoc, deleteDoc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
 import { storageService, postCollection, userCollection } from 'fbase';
 import { ref, deleteObject } from 'firebase/storage';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 // Import functions
 import { getTimeAgo } from 'Functions';
@@ -20,6 +20,7 @@ export default function Post({ postObject, currentUserObject, toggleUserListDisp
 	const [postOwnerObject, setPostOwnerObject] = useState({});
 	const [isMoreOptionsDisplayed, setIsMoreOptionsDisplayed] = useState(false);
 	const [isDoubleTapped, setIsDoubleTapped] = useState(false);
+	const history = useHistory();
 
 	// Firebase database references
 	const postDocRef = doc(postCollection, postObject.id);
@@ -68,6 +69,8 @@ export default function Post({ postObject, currentUserObject, toggleUserListDisp
 
 	const handleDelete = async () => {
 		try {
+			history.push('/');
+
 			await deleteDoc(doc(postCollection, `${postObject.id}`));
 
 			if (imgId) {

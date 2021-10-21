@@ -77,7 +77,9 @@ export default function UserPage({ isLoggedIn, currentUserObject, userList, setU
 							</div>
 						</div>
 					</div>
-					{isUserListDisplayed && <UserList toggleUserListDisplayed={toggleUserListDisplayed} userList={userList} />}
+					{isUserListDisplayed && (
+						<UserList toggleUserListDisplayed={toggleUserListDisplayed} userList={userList} currentUserObject={currentUserObject} />
+					)}
 				</>
 			)}
 		</>

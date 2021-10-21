@@ -13,7 +13,7 @@
 }
 
 .text-bold {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .color-red {
@@ -22,6 +22,17 @@
 
 .color-blue {
   color: #458eff;
+}
+
+.follow-btn {
+  background-color: #458eff;
+  color: white;
+}
+
+.follow-btn.following {
+  background-color: white;
+  color: #3c3c3c;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .profile-img {
@@ -38,7 +49,7 @@ textarea {
 }
 
 .username {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .username:hover {
@@ -151,8 +162,7 @@ header .header-container .nav-container-header {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 0;
-  width: 200px;
+  gap: 1rem;
 }
 
 header .header-container .nav-container-header > a {
@@ -273,7 +283,7 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
 .auth-page form input[type='submit'] {
   background-color: #458eff;
   color: white;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .auth-page form input[type='submit']:hover {
@@ -291,7 +301,7 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
 .auth-page > div:last-child span {
   color: #458eff;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .post-header {
@@ -395,7 +405,7 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
   background-color: unset;
   border: none;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
   color: #458eff;
 }
 
@@ -510,7 +520,7 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
 }
 
 .post-container .post-like-count span {
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -594,7 +604,7 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
   width: -moz-fit-content;
   width: fit-content;
   color: #abccff;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .post-container .comment-input-container input[type='submit'].active {
@@ -735,7 +745,7 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
 
 .homepage-container .current-user-card .post-upload-form .drag-and-drop-container .drag-and-drop-area span:first-child {
   font-size: 1.3em;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .homepage-container .current-user-card .post-upload-form .drag-and-drop-container .drag-and-drop-area input {
@@ -775,7 +785,7 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
   width: 100%;
   padding: 1em;
   border-radius: 10px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .homepage-container .current-user-card .post-upload-form input[type='submit'].active {
@@ -896,7 +906,7 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
 .user-page-container .user-info .username-and-btns .account-interactive-btn {
   padding: 0.5em 0;
   width: 200px;
-  font-weight: 500;
+  font-weight: 600;
   border-radius: 3px;
   cursor: pointer;
   display: -webkit-box;
@@ -913,17 +923,6 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
       -ms-flex-align: center;
           align-items: center;
   gap: 0;
-}
-
-.user-page-container .user-info .username-and-btns .account-interactive-btn.follow-btn {
-  background-color: #458eff;
-  color: white;
-}
-
-.user-page-container .user-info .username-and-btns .account-interactive-btn.follow-btn.following {
-  background-color: white;
-  color: #3c3c3c;
-  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .user-page-container .user-info .username-and-btns .account-interactive-btn.edit-profile-btn {
@@ -958,7 +957,7 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
 }
 
 .user-page-container .user-info .bio .bio-name {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .user-page-container .user-info .stats {
@@ -997,7 +996,7 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
 }
 
 .user-page-container .user-info .stats > div span {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .user-page-container .content {
@@ -1205,7 +1204,7 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
 }
 
 .account-edit-container .account-edit-form .form-header > div:last-child .username {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1.2em;
 }
 
@@ -1216,7 +1215,7 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
 .account-edit-container .account-edit-form .form-header > div:last-child .change-profile-img-btn {
   color: #458eff;
   font-size: 0.9em;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -1253,7 +1252,7 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
       -ms-flex-align: center;
           align-items: center;
   gap: 0;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .account-edit-container .account-edit-form .form-control .form-input {
@@ -1290,7 +1289,7 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
   background-color: #abccff;
   color: white;
   padding: 0.5em 1em;
-  font-weight: 500;
+  font-weight: 600;
   border-radius: 3px;
 }
 
@@ -1341,7 +1340,7 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   position: relative;
   text-align: center;
-  font-weight: 500;
+  font-weight: 600;
   padding: 1em;
 }
 
@@ -1358,7 +1357,25 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
   overflow: auto;
 }
 
-.user-list-page .user-list-container > div:last-child .user-list-user-card {
+.user-list-page .user-list-container > div:last-child .user-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.user-list-page .user-list-container > div:last-child .user-card .user-card-profile-img-and-name {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1373,14 +1390,13 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
       -ms-flex-align: center;
           align-items: center;
   gap: 1rem;
-  padding: 0.5rem 1rem;
 }
 
-.user-list-page .user-list-container > div:last-child .user-list-user-card .profile-img {
+.user-list-page .user-list-container > div:last-child .user-card .user-card-profile-img-and-name .profile-img {
   width: 2rem;
 }
 
-.user-list-page .user-list-container > div:last-child .user-list-user-card > div:last-child {
+.user-list-page .user-list-container > div:last-child .user-card .user-card-profile-img-and-name > div:nth-child(2) {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1397,8 +1413,14 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
   gap: 0;
 }
 
-.user-list-page .user-list-container > div:last-child .user-list-user-card > div:last-child .name {
+.user-list-page .user-list-container > div:last-child .user-card .user-card-profile-img-and-name > div:nth-child(2) .name {
   color: #787878;
+}
+
+.user-list-page .user-list-container > div:last-child .user-card .follow-btn {
+  padding: 0.2em 1em;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .profile-img-options-page {
@@ -1438,7 +1460,7 @@ header .header-container .nav-container-header .profile-img .profile-options .lo
 
 .profile-img-options-page .profile-img-options-container > div:first-child {
   font-size: 1.2rem;
-  font-weight: 500;
+  font-weight: 600;
   padding: 2rem;
 }
 

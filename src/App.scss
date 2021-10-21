@@ -39,7 +39,7 @@ $bio-padding-left: 20px;
 }
 
 .text-bold {
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .color-red {
@@ -48,6 +48,17 @@ $bio-padding-left: 20px;
 
 .color-blue {
 	color: $blue;
+}
+
+.follow-btn {
+	background-color: $blue;
+	color: $white;
+
+	&.following {
+		background-color: $white;
+		color: $dark-grey;
+		border: 1px solid $light-grey;
+	}
 }
 
 .profile-img {
@@ -64,7 +75,7 @@ textarea {
 }
 
 .username {
-	font-weight: 500;
+	font-weight: 600;
 
 	&:hover {
 		text-decoration: underline;
@@ -128,8 +139,7 @@ header {
 		}
 
 		.nav-container-header {
-			@include flex-box(row, space-between, center, 0);
-			width: 200px;
+			@include flex-box(row, space-between, center, 1rem);
 
 			& > a {
 				@include flex-box(row, center, center, 0);
@@ -197,7 +207,7 @@ header {
 			&[type='submit'] {
 				background-color: $blue;
 				color: $white;
-				font-weight: 500;
+				font-weight: 600;
 
 				&:hover {
 					cursor: pointer;
@@ -216,7 +226,7 @@ header {
 		span {
 			color: $blue;
 			cursor: pointer;
-			font-weight: 500;
+			font-weight: 600;
 		}
 	}
 }
@@ -281,7 +291,7 @@ header {
 				background-color: unset;
 				border: none;
 				cursor: pointer;
-				font-weight: 500;
+				font-weight: 600;
 				color: $blue;
 			}
 		}
@@ -343,7 +353,7 @@ header {
 		@include flex-box(row, flex-start, center, 0);
 
 		span {
-			font-weight: 500;
+			font-weight: 600;
 			cursor: pointer;
 		}
 	}
@@ -385,7 +395,7 @@ header {
 			&[type='submit'] {
 				width: fit-content;
 				color: lighten($blue, 20%);
-				font-weight: 500;
+				font-weight: 600;
 
 				&.active {
 					color: $blue;
@@ -462,7 +472,7 @@ header {
 
 					span:first-child {
 						font-size: 1.3em;
-						font-weight: 500;
+						font-weight: 600;
 					}
 
 					input {
@@ -504,7 +514,7 @@ header {
 				width: 100%;
 				padding: 1em;
 				border-radius: 10px;
-				font-weight: 500;
+				font-weight: 600;
 
 				&.active {
 					background-color: $blue;
@@ -569,21 +579,10 @@ header {
 			.account-interactive-btn {
 				padding: 0.5em 0;
 				width: 200px;
-				font-weight: 500;
+				font-weight: 600;
 				border-radius: 3px;
 				cursor: pointer;
 				@include flex-box(row, center, center, 0);
-
-				&.follow-btn {
-					background-color: $blue;
-					color: $white;
-
-					&.following {
-						background-color: $white;
-						color: $dark-grey;
-						border: 1px solid $light-grey;
-					}
-				}
 
 				&.edit-profile-btn {
 					background-color: $white;
@@ -602,7 +601,7 @@ header {
 			@include flex-box(column, flex-start, stretch, 5px);
 
 			.bio-name {
-				font-weight: 500;
+				font-weight: 600;
 			}
 		}
 
@@ -622,7 +621,7 @@ header {
 				}
 
 				span {
-					font-weight: 500;
+					font-weight: 600;
 				}
 			}
 		}
@@ -721,7 +720,7 @@ header {
 			& > div:last-child {
 				@include flex-box(column, center, flex-start, 0);
 				.username {
-					font-weight: 500;
+					font-weight: 600;
 					font-size: 1.2em;
 
 					&:hover {
@@ -732,7 +731,7 @@ header {
 				.change-profile-img-btn {
 					color: $blue;
 					font-size: 0.9em;
-					font-weight: 500;
+					font-weight: 600;
 					cursor: pointer;
 				}
 			}
@@ -744,7 +743,7 @@ header {
 			label {
 				min-width: 5em;
 				@include flex-box(row, flex-end, center, 0);
-				font-weight: 500;
+				font-weight: 600;
 			}
 
 			.form-input {
@@ -768,7 +767,7 @@ header {
 				background-color: lighten($blue, 20%);
 				color: $white;
 				padding: 0.5em 1em;
-				font-weight: 500;
+				font-weight: 600;
 				border-radius: 3px;
 
 				&.active {
@@ -809,7 +808,7 @@ header {
 			border-bottom: 1px solid $light-grey;
 			position: relative;
 			text-align: center;
-			font-weight: 500;
+			font-weight: 600;
 			padding: 1em;
 
 			.material-icons {
@@ -824,20 +823,30 @@ header {
 			max-height: 300px;
 			overflow: auto;
 
-			.user-list-user-card {
-				@include flex-box(row, flex-start, center, 1rem);
+			.user-card {
+				@include flex-box(row, space-between, center, 1rem);
 				padding: 0.5rem 1rem;
 
-				.profile-img {
-					width: 2rem;
+				.user-card-profile-img-and-name {
+					@include flex-box(row, flex-start, center, 1rem);
+
+					.profile-img {
+						width: 2rem;
+					}
+
+					& > div:nth-child(2) {
+						@include flex-box(column, center, flex-start, 0);
+
+						.name {
+							color: $grey;
+						}
+					}
 				}
 
-				& > div:last-child {
-					@include flex-box(column, center, flex-start, 0);
-
-					.name {
-						color: $grey;
-					}
+				.follow-btn {
+					padding: 0.2em 1em;
+					border-radius: 5px;
+					cursor: pointer;
 				}
 			}
 		}
@@ -866,7 +875,7 @@ header {
 
 			&:first-child {
 				font-size: 1.2rem;
-				font-weight: 500;
+				font-weight: 600;
 				padding: 2rem;
 			}
 

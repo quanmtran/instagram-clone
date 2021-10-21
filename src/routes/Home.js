@@ -60,7 +60,9 @@ export default function Home({ isLoggedIn, currentUserObject, userList, setUserL
 							))}
 						</div>
 					</div>
-					{isUserListDisplayed && <UserList toggleUserListDisplayed={toggleUserListDisplayed} userList={userList} />}
+					{isUserListDisplayed && (
+						<UserList toggleUserListDisplayed={toggleUserListDisplayed} userList={userList} currentUserObject={currentUserObject} />
+					)}
 				</>
 			) : (
 				'Loading...'
